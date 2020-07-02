@@ -171,8 +171,10 @@ $landing-gradient-hover: linear-gradient(228deg, darken(rgba(127, 244, 222, 0.95
 //Menu
 
 .landing__menu {
-  position: absolute;
+  position: fixed;
   width: 100%;
+  z-index: 99999;
+  background-color: white;
 }
 
 .landing__menu-wrap {
@@ -198,7 +200,7 @@ $landing-gradient-hover: linear-gradient(228deg, darken(rgba(127, 244, 222, 0.95
     color: $landing-accent-color;
     padding: 0;
     @include directify($directions) {
-      #{directed('margin-right')}: 60px;
+      #{directed('margin-right')}: 30px;
     }
     font-size: 14px;
     transition: 0.3s;
@@ -1296,9 +1298,16 @@ $landing-gradient-hover: linear-gradient(228deg, darken(rgba(127, 244, 222, 0.95
     opacity: 0.8;
     font-size: 14px;
     line-height: normal;
-    padding-bottom: 50px;
-    padding-top: 120px;
+    //padding-bottom: 50px;
+   // padding-top: 120px;
   }
+  .landing__footer-text-end {
+    color: $landing-accent-color;
+    opacity: 0.8;
+    font-size: 14px;
+    line-height: normal;
+    padding-bottom: 50px;
+   }
 }
 
 .landing__footer-background {

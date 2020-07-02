@@ -6,19 +6,19 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Header from './components/Header';
 import Technologies from './components/Technologies';
-import Demos from './components/Demos';
-import Features from './components/Features';
-import Purchase from './components/Purchase';
 import Footer from './components/Footer';
-import Testimonials from './components/Testimonials';
-import FeatureRequest from './components/FeatureRequest';
-import Feedback from './components/Feedback';
-import Code from './components/Code';
-import Applications from './components/Applications';
+// import Demos from './components/Demos';
+// import Features from './components/Features';
+// import Purchase from './components/Purchase';
+//  import Testimonials from './components/Testimonials';
+// import FeatureRequest from './components/FeatureRequest';
+// import Feedback from './components/Feedback';
+// import Code from './components/Code';
+// import Applications from './components/Applications';
 import { changeThemeToDark, changeThemeToLight } from '../../redux/actions/themeActions';
 import { ThemeProps } from '../../shared/prop-types/ReducerProps';
 
-const logo = `${process.env.PUBLIC_URL}/img/landing/logo.svg`;
+const logo = `${process.env.PUBLIC_URL}/img/landing/dhpd logo.png`;
 
 class Landing extends PureComponent {
   static propTypes = {
@@ -37,24 +37,24 @@ class Landing extends PureComponent {
   };
 
   render() {
-    const { theme } = this.props;
+    //const { theme } = this.props;
 
     return (
       <div className="landing">
-        <div className="landing__menu">
+        <div className="landing__menu"  >
           <Container>
             <Row>
               <Col md={12}>
                 <div className="landing__menu-wrap">
                   <p className="landing__menu-logo">
-                    <img src={logo} alt="" />
+                    <img src={logo} alt="" style={{ width: "154px", height: "74px" }} />
                   </p>
                   <nav className="landing__menu-nav">
                     <button
                       onClick={() => scrollToComponent(this.About, { offset: -50, align: 'top', duration: 1000 })}
                       type="button"
                     >
-                      About EasyDEV
+                      Giới thiệu
                     </button>
                     <button
                       onClick={() => scrollToComponent(this.Features, {
@@ -64,13 +64,13 @@ class Landing extends PureComponent {
                       })}
                       type="button"
                     >
-                      Features
+                      Đào tạo
                     </button>
                     <button
                       onClick={() => scrollToComponent(this.Demos, { offset: -50, align: 'top', duration: 2000 })}
                       type="button"
                     >
-                      Demos
+                      Tuyển sinh
                     </button>
                     <button
                       onClick={() => scrollToComponent(this.FeatureRequest, {
@@ -80,15 +80,46 @@ class Landing extends PureComponent {
                       })}
                       type="button"
                     >
-                      Feature request <span className="landing__menu-nav-new" />
-                    </button>
+                      Đơn vị chức năng
+                     </button>
+                    <button
+                      onClick={() => scrollToComponent(this.FeatureRequest, {
+                        offset: -50,
+                        align: 'top',
+                        duration: 2500,
+                      })}
+                      type="button"
+                    >
+                      Đơn vị đào tạo
+                     </button>
+                    
+                    <button
+                      onClick={() => scrollToComponent(this.FeatureRequest, {
+                        offset: -50,
+                        align: 'top',
+                        duration: 2500,
+                      })}
+                      type="button"
+                    >
+                      Đoàn thể
+                     </button>
+                    <button
+                      onClick={() => scrollToComponent(this.FeatureRequest, {
+                        offset: -50,
+                        align: 'top',
+                        duration: 2500,
+                      })}
+                      type="button"
+                    >
+                      Văn bản
+                     </button>
                     <a
                       className="landing__btn"
                       target="_blank"
                       rel="noopener noreferrer"
-                      href="https://themeforest.net/item/easypro-developer-friendly-react-bootstrap-4-admin-template/21798550"
+                      href="http://localhost:3000/easydev/dashboard_default"
                     >
-                      Buy now for $28
+                      Đăng nhập
                     </a>
                   </nav>
                 </div>
@@ -102,7 +133,7 @@ class Landing extends PureComponent {
         }}
         />
         <Technologies />
-        <Feedback />
+        {/* <Feedback />
         <Code />
         <span ref={(section) => {
           this.Features = section;
@@ -121,7 +152,7 @@ class Landing extends PureComponent {
         />
         <FeatureRequest />
         <Testimonials />
-        <Purchase />
+        <Purchase /> */}
         <Footer />
       </div>
     );
