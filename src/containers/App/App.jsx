@@ -54,11 +54,11 @@ class App extends Component {
         <Auth0Provider
           domain={auth0Config.domain}
           client_id={auth0Config.clientId}
-          redirect_uri={`${window.location.origin}/easydev/dashboard_default`}
-          returnTo={`${window.location.origin}/easydev/dashboard_default`}
+          redirect_uri={`${window.location.origin}/dashboard`}
+          returnTo={`${window.location.origin}/dashboard`}
           onRedirectCallback={this.onRedirectCallbackAuth0}
         >
-          <BrowserRouter basename="/easydev">
+          <BrowserRouter basename="/">
             <I18nextProvider i18n={i18next}>
               <ScrollToTop>
                 <Fragment>

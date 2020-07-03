@@ -21,18 +21,15 @@ const LoginCard = ({ changeIsOpenModalFireBase }) => {
     <div className="account__wrapper">
       <div className="account__card">
         <div className="account__head">
-          <h3 className="account__title">Welcome to
-            <span className="account__logo"> Easy
-              <span className="account__logo-accent">DEV</span>
-            </span>
-          </h3>
-          <h4 className="account__subhead subhead">Start your business easily</h4>
-        </div>
+          <h3 className="account__title">Chào mừng đến với cổng thông tin trường đại học 
+          <span className="account__logo-accent">  Phương Đông</span>
+           </h3>
+         </div>
         <LogInForm
           onSubmin
           form="log_in_form"
         />
-        <div className="account__or">
+        {/* <div className="account__or">
           <p>Or Easily Using</p>
         </div>
         <div className="account__social">
@@ -46,7 +43,7 @@ const LoginCard = ({ changeIsOpenModalFireBase }) => {
           <Button className="account__social-btn account__social-btn--auth0" onClick={() => loginWithRedirect({})}>
             <img className="customizer__btn-icon" src={auth0Icon} alt="icon" />
           </Button>
-        </div>
+        </div> */}
       </div>
     </div>
   );

@@ -18,7 +18,7 @@ import Footer from './components/Footer';
 import { changeThemeToDark, changeThemeToLight } from '../../redux/actions/themeActions';
 import { ThemeProps } from '../../shared/prop-types/ReducerProps';
 
-const logo = `${process.env.PUBLIC_URL}/img/landing/dhpd logo.png`;
+const logo = `${process.env.PUBLIC_URL}/img/landing/dhpdlogo.png`;
 
 class Landing extends PureComponent {
   static propTypes = {

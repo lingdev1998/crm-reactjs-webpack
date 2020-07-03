@@ -22,7 +22,7 @@ class LogInForm extends PureComponent {
   static defaultProps = {
     errorMessage: '',
     errorMsg: '',
-    fieldUser: 'Username',
+    fieldUser: 'Tài khoản',
     typeFieldUser: 'text',
   }
 
@@ -69,7 +69,7 @@ class LogInForm extends PureComponent {
           </div>
         </div>
         <div className="form__form-group">
-          <span className="form__form-group-label">Password</span>
+          <span className="form__form-group-label">Mật khẩu</span>
           <div className="form__form-group-field">
             <div className="form__form-group-icon">
               <KeyVariantIcon />
@@ -78,7 +78,7 @@ class LogInForm extends PureComponent {
               name="password"
               component="input"
               type={showPassword ? 'text' : 'password'}
-              placeholder="Password"
+              placeholder="Mật khẩu"
             />
             <button
               type="button"
@@ -87,7 +87,7 @@ class LogInForm extends PureComponent {
             ><EyeIcon />
             </button>
             <div className="account__forgot-password">
-              <a href="/">Forgot a password?</a>
+              <a href="/">Quên mật khẩu?</a>
             </div>
           </div>
         </div>
@@ -101,10 +101,10 @@ class LogInForm extends PureComponent {
           </div>
         </div>
         <div className="account__btns">
-          <Button className="account__btn" submit="true" color="primary">Sign In</Button>
-          <Link className="btn btn-outline-primary account__btn" to="/register">Create
+          <Button className="account__btn" submit="true" color="primary">Đăng nhập</Button>
+          {/* <Link className="btn btn-outline-primary account__btn" to="/register">Create
             Account
-          </Link>
+          </Link> */}
         </div>
       </Form>
     );

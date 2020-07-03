@@ -1,7 +1,7 @@
 import React from 'react';
 import { Col, Container, Row } from 'reactstrap';
  
-const logo = `${process.env.PUBLIC_URL}/img/landing/dhpd logo.png`;
+const logo = `${process.env.PUBLIC_URL}/img/landing/dhpdlogo.png`;
 
 const Technologies = () => (
   <section className="landing__section">

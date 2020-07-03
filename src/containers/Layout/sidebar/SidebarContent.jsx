@@ -21,7 +21,65 @@ class SidebarContent extends Component {
     return (
       <div className="sidebar__content">
         <ul className="sidebar__block">
-          <SidebarLink title="Dashboard Default" icon="home" route="/dashboard_default" onClick={this.hideSidebar} />
+          <SidebarLink title="Thông báo" icon="home" route="/notification" onClick={this.hideSidebar} />
+          <SidebarLink
+            title="Khoa"
+            icon="apartment"
+            route="/department"
+            onClick={this.hideSidebar}
+          />
+          <SidebarLink
+            title="Sinh viên"
+            icon="heart-pulse"
+            route="/students"
+            onClick={this.hideSidebar}
+          />
+          <SidebarLink
+            title="Giảng viên"
+            icon="user"
+            route="/teacher"
+            onClick={this.hideSidebar}
+          />
+          <SidebarLink
+            title="Môn học"
+            icon="user"
+            route="/subject"
+            onClick={this.hideSidebar}
+          />
+          <SidebarLink
+            title="Thời khoá biểu"
+            icon="apartment"
+            newLink
+            route="/schedule"
+            onClick={this.hideSidebar}
+          />
+          <SidebarLink
+            title="Lịch thi"
+            icon="apartment"
+            newLink
+            route="/exams"
+            onClick={this.hideSidebar}
+          />
+          <SidebarLink
+            title="Kết quả học tập"
+            icon="apartment"
+            newLink
+            route="/result"
+            onClick={this.hideSidebar}
+          />
+          <SidebarLink
+            title="Hành chính - kế toán"
+            icon="apartment"
+            route="/finance"
+            onClick={this.hideSidebar}
+          />
+          <SidebarLink
+            title="Người dùng"
+            icon="apartment"
+            route="/users"
+            onClick={this.hideSidebar}
+          />
+          {/* <SidebarLink title="Dashboard Default" icon="home" route="/dashboard_default" onClick={this.hideSidebar} />
           <SidebarLink
             title="Dashboard E-commerce"
             icon="store"
@@ -165,7 +223,7 @@ class SidebarContent extends Component {
             icon="text-align-justify"
             route="/documentation/introduction"
             onClick={this.hideSidebar}
-          />
+          /> */}
         </ul>
       </div>
     );
