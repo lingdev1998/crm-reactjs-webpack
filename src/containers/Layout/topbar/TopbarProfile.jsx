@@ -1,97 +1,80 @@
-import React, { PureComponent } from 'react';
+import React, { useState } from 'react';
 import DownIcon from 'mdi-react/ChevronDownIcon';
 import { Collapse } from 'reactstrap';
-import TopbarMenuLink from './TopbarMenuLink';
-import { UserProps, AuthOProps } from '../../../shared/prop-types/ReducerProps';
-import { hookAuth0 } from '../../../shared/components/auth/withAuth0';
+import TopbarMenuLink from './TopbarMenuLink'; 
 
 const Ava = `${process.env.PUBLIC_URL}/img/ava.png`;
 
-class TopbarProfile extends PureComponent {
-  static propTypes = {
-    user: UserProps.isRequired,
-    auth0: AuthOProps.isRequired,
-  }
+const  TopbarProfile =  (props) =>   {
 
+  const [collapse, setCollapse] = useState(false);
 
-  constructor() {
-    super();
-    this.state = {
-      collapse: false,
-    };
-  }
-
-  toggle = () => {
-    this.setState(prevState => ({ collapse: !prevState.collapse }));
-  };
-
-  logout = () => {
+ 
+  const logout = () => {
     localStorage.removeItem('easydev');
   }
 
-  render() {
-    const { user, auth0 } = this.props;
-    const { collapse } = this.state;
+    const { user,isAuthenticated } = props;
 
     return (
       <div className="topbar__profile">
-        <button className="topbar__avatar" type="button" onClick={this.toggle}>
+        <button className="topbar__avatar" type="button"  onClick={  () => setCollapse(!collapse)}>
           <img
             className="topbar__avatar-img"
-            src={(auth0.user && auth0.user.picture) || user.avatar || Ava}
+            src={ user.avatar || Ava || ""}
             alt="avatar"
           />
           <p className="topbar__avatar-name">
-            { auth0.loading ? 'Loading...' : (auth0.user && auth0.user.name) || user.fullName}
+            { user.loading ? 'Loading...' :  user.fullName || ""}
           </p>
           <DownIcon className="topbar__icon" />
         </button>
-        {collapse && <button className="topbar__back" type="button" onClick={this.toggle} />}
+        {collapse && <button className="topbar__back" type="button"  onClick={  () => setCollapse(!collapse)} />}
         <Collapse isOpen={collapse} className="topbar__menu-wrap">
           <div className="topbar__menu">
             <TopbarMenuLink
               title="My Profile"
               icon="user"
               path="/account/profile"
-              onClick={this.toggle}
+              onClick={ () => setCollapse(!collapse)}
             />
             <TopbarMenuLink
               title="Calendar"
               icon="calendar-full"
               path="/default_pages/calendar"
-              onClick={this.toggle}
+              onClick={  () => setCollapse(!collapse)}
             />
             <TopbarMenuLink
               title="Tasks"
               icon="list"
               path="/todo"
-              onClick={this.toggle}
+              onClick={  () => setCollapse(!collapse)}
             />
             <TopbarMenuLink
               title="Inbox"
               icon="inbox"
               path="/mail"
-              onClick={this.toggle}
+              onClick={  () => setCollapse(!collapse)}
             />
             <div className="topbar__menu-divider" />
             <TopbarMenuLink
               title="Account Settings"
               icon="cog"
               path="/account/profile"
-              onClick={this.toggle}
+              onClick={  () => setCollapse(!collapse)}
             />
             <TopbarMenuLink
               title="Lock Screen"
               icon="lock"
               path="/lock_screen"
-              onClick={this.toggle}
+              onClick={  () => setCollapse(!collapse)}
             />
-            {auth0.isAuthenticated && (
+            {isAuthenticated && (
               <TopbarMenuLink
                 title="Log Out Auth0"
                 icon="exit"
                 path="/log_in"
-                onClick={auth0.logout}
+                onClick={logout}
               />
             )
             }
@@ -99,13 +82,13 @@ class TopbarProfile extends PureComponent {
               title="Log Out"
               icon="exit"
               path="/log_in"
-              onClick={this.logout}
+              onClick={logout}
             />
           </div>
         </Collapse>
       </div>
     );
-  }
+
 }
 
-export default hookAuth0(TopbarProfile);
+export default  TopbarProfile ;

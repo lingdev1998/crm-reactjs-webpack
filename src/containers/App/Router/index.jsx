@@ -4,8 +4,7 @@ import MainWrapper from '../MainWrapper';
 import Landing from '../../Landing/index';
 import NotFound404 from '../../DefaultPage/404/index';
 import LockScreen from '../../Account/LockScreen/index';
-import LogIn from '../../Account/LogIn/index';
-import LogInPhoto from '../../Account/log_in_photo/index';
+import LogIn from '../../Account/LogIn/index'; 
 import Register from '../../Account/Register/index';
 import RegisterPhoto from '../../Account/RegisterPhoto/index';
 import WrappedRoutes from './WrappedRoutes';
@@ -18,8 +17,7 @@ const Router = () => (
         <Route exact path="/" component={Landing} />
         <Route path="/404" component={NotFound404} />
         <Route path="/lock_screen" component={LockScreen} />
-        <Route path="/login" component={LogIn} />
-        <Route path="/log_in_photo" component={LogInPhoto} />
+        <Route path="/login" component={LogIn} /> 
         <Route path="/register" component={Register} />
         <Route path="/register_photo" component={RegisterPhoto} />
         <Route path="/" component={WrappedRoutes} />
