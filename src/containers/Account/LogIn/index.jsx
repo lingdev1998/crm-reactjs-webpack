@@ -1,10 +1,21 @@
-import React,{useEffect} from 'react';
+import React,{useEffect,useState} from 'react'; 
 import LogInForm from './LogInForm';
+import axios from 'axios';
+import { connect ,useSelector, useDispatch} from 'react-redux';
+import {userActions} from '../../../redux/actions/authActions';
  const LogIn = (props) => {
-  const handleSubmit = (params) => {
-    console.log(params)
-    alert(params);
-    console.log(params)
+  const dispatch = useDispatch();
+  const state = useSelector(state => state.authReducer);
+
+  const [ errorMessage , setErrorMessage] = useState("");
+  const [ errorMsg , setErrorMsg] = useState(""); 
+  
+  const submit = values => {
+    console.log(values);
+    var formData = new FormData();
+    formData.append("username",values.username);
+    formData.append("password",values.password);
+     userActions.login(formData) ;
   }
   return (
     <div className="account account--not-photo">
@@ -15,10 +26,8 @@ import LogInForm from './LogInForm';
           <span className="account__logo-accent">  Phương Đông</span>
            </h3>
          </div>
-        <LogInForm
-          
-          form="log_in_form"
-          handleSubmit={handleSubmit}
+        <LogInForm 
+          onSubmit={submit}
         /> 
       </div>
     </div>

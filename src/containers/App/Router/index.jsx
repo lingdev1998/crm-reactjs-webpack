@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { HashRouter,Route, Switch } from 'react-router-dom';
 import MainWrapper from '../MainWrapper';
 import Landing from '../../Landing/index';
 import NotFound404 from '../../DefaultPage/404/index';
@@ -11,9 +11,9 @@ import WrappedRoutes from './WrappedRoutes';
 
 
 const Router = () => (
-  <MainWrapper>
-    <main>
-      <Switch>
+   <MainWrapper>
+     <main>
+       <Switch>
         <Route exact path="/" component={Landing} />
         <Route path="/404" component={NotFound404} />
         <Route path="/lock_screen" component={LockScreen} />
@@ -22,8 +22,8 @@ const Router = () => (
         <Route path="/register_photo" component={RegisterPhoto} />
         <Route path="/" component={WrappedRoutes} />
       </Switch>
-    </main>
+     </main>
   </MainWrapper>
-);
+ );
 
 export default Router;
