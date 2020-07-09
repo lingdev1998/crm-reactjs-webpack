@@ -17,7 +17,7 @@ import firebaseConfig from '../../config/firebase';
 import Auth0Provider from '../../shared/components/auth/withAuth0';
 import Loading from '../../shared/components/Loading';
 import auth0Config from '../../config/auth0';
-
+import PrivateRouter from './Router/PrivateRouter';
 i18next.init(i18nextConfig);
 
 class App extends Component {
@@ -50,32 +50,51 @@ class App extends Component {
   render() {
     const { loaded, loading } = this.state;
     return (
+      // <Provider store={store}>
+      //   <Auth0Provider
+      //     domain={auth0Config.domain}
+      //     client_id={auth0Config.clientId}
+      //     redirect_uri={`${window.location.origin}/DefaultPages`}
+      //     returnTo={`${window.location.origin}/DefaultPages`}
+      //     onRedirectCallback={this.onRedirectCallbackAuth0}
+      //   >
+      //     <BrowserRouter basename="/">
+      //       <I18nextProvider i18n={i18next}>
+      //         <ScrollToTop>
+      //           <Fragment>
+      //             {!loaded
+      //               && (
+      //                 <Loading loading={loading} />
+      //               )
+      //             }
+      //             <div>
+      //               <Router />
+      //             </div>
+      //           </Fragment>
+      //         </ScrollToTop>
+      //       </I18nextProvider>
+      //     </BrowserRouter>
+      //   </Auth0Provider>
+      // </Provider>
       <Provider store={store}>
-        <Auth0Provider
-          domain={auth0Config.domain}
-          client_id={auth0Config.clientId}
-          redirect_uri={`${window.location.origin}/dashboard`}
-          returnTo={`${window.location.origin}/dashboard`}
-          onRedirectCallback={this.onRedirectCallbackAuth0}
-        >
-          <BrowserRouter basename="/">
-            <I18nextProvider i18n={i18next}>
-              <ScrollToTop>
-                <Fragment>
-                  {!loaded
-                    && (
-                      <Loading loading={loading} />
-                    )
-                  }
-                  <div>
-                    <Router />
-                  </div>
-                </Fragment>
-              </ScrollToTop>
-            </I18nextProvider>
-          </BrowserRouter>
-        </Auth0Provider>
-      </Provider>
+ 
+        <BrowserRouter basename="/">
+          <I18nextProvider i18n={i18next}>
+            <ScrollToTop>
+              <Fragment>
+                {!loaded
+                  && (
+                    <Loading loading={loading} />
+                  )
+                }
+                <div>
+                  <Router />
+                </div>
+              </Fragment>
+            </ScrollToTop>
+          </I18nextProvider>
+        </BrowserRouter>
+     </Provider>
     );
   }
 }

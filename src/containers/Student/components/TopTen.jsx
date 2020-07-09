@@ -9,10 +9,7 @@ import { withTranslation } from 'react-i18next';
 import DotsHorizontalIcon from 'mdi-react/DotsHorizontalIcon';
 import { CryptoTableProps } from '../../../shared/prop-types/TablesProps';
 import Panel from '../../../shared/components/Panel';
-import {
-  Button, ButtonGroup, ButtonToolbar, Card, CardBody, Col,
-} from 'reactstrap';
-
+ 
 const data = [
   {
     name: 'Mon',
@@ -150,24 +147,7 @@ DropDownMore.propTypes = {
 
 const TopTen = ({ cryptoTable, onDeleteCryptoTableData, t }) => (
   <Panel lg={12} title={t('Danh sách sinh viên')}>
-    {/* <div className="row">
-      <div className="col-12">
-        <div className="row">
-          <div className="col-6">
-
-          </div>
-          <div className="col-6">
-          <ButtonToolbar>
-      <ButtonGroup className="btn-group--justified" dir="ltr">
-        <Button color="primary">Left</Button>
-        <Button color="primary">Middle</Button>
-        <Button color="primary">Right</Button>
-      </ButtonGroup>
-    </ButtonToolbar>
-          </div>
-        </div>
-      </div>
-    </div> */}
+ 
     <Table responsive className="table--bordered dashboard__table-crypto">
       <thead>
         <tr>

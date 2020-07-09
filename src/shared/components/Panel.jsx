@@ -90,7 +90,7 @@ export default class AlertComponent extends PureComponent {
             <CardBody className="panel__body">
               {refresh ? <div className="panel__refresh"><LoadingIcon /></div> : ''}
               <div className="panel__btns">
-              <button className="btn-group--icons" type="button" onClick={this.onDismiss}>Thêm</button>
+              <button className="panel__btn" type="button" onClick={this.onDismiss}><PlusIcon/></button>
                 <button className="panel__btn" type="button" onClick={this.onCollapse}><MinusIcon /></button>
                 <button className="panel__btn" type="button" onClick={this.onRefresh}><AutorenewIcon /></button>
                 <button className="panel__btn" type="button" onClick={this.onDismiss}><CloseIcon /></button>

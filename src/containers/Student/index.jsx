@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { useEffect } from 'react';
 import { Col, Container, Row } from 'reactstrap';
 import { withTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
@@ -7,9 +7,9 @@ import TopTen from './components/TopTen';
 import { deleteCryptoTableData } from '../../redux/actions/cryptoTableActions';
 import { CryptoTableProps } from '../../shared/prop-types/TablesProps';
 import { ThemeProps, RTLProps } from '../../shared/prop-types/ReducerProps';
-
-class Student extends PureComponent {
-  static propTypes = {
+import axios from "axios";
+const Student = (props)=>  {
+  const  propTypes = {
     t: PropTypes.func.isRequired,
     cryptoTable: CryptoTableProps.isRequired,
     dispatch: PropTypes.func.isRequired,
@@ -17,18 +17,24 @@ class Student extends PureComponent {
     theme: ThemeProps.isRequired,
   };
 
-  onDeleteCryptoTableData = (index, e) => {
+  useEffect(()=>{
+    var formData = new FormData();
+    formData.append("page",0);
+    formData.append("pageSize",10);
+
+ 
+  },[])
+  const onDeleteCryptoTableData = (index, e) => {
     const { dispatch, cryptoTable } = this.props;
     e.preventDefault();
     const arrayCopy = [...cryptoTable];
     arrayCopy.splice(index, 1);
     dispatch(deleteCryptoTableData(arrayCopy));
   };
-
-  render() {
-    const {
-      t, cryptoTable, rtl, theme,
-    } = this.props;
+  const {
+    t, cryptoTable, rtl, theme,
+  } = props;
+ 
 
     return (
       <Container className="dashboard">
@@ -40,11 +46,11 @@ class Student extends PureComponent {
  
         <Row>
  
-          <TopTen cryptoTable={cryptoTable} onDeleteCryptoTableData={this.onDeleteCryptoTableData} />
+          <TopTen cryptoTable={cryptoTable} onDeleteCryptoTableData={onDeleteCryptoTableData} />
         </Row>
       </Container>
     );
-  }
+ 
 }
 
 export default connect(state => ({

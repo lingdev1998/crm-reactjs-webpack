@@ -117,7 +117,7 @@ class Landing extends PureComponent {
                       className="landing__btn"
                       target="_blank"
                       rel="noopener noreferrer"
-                      href="http://localhost:3000/easydev/dashboard_default"
+                      href="http://localhost:3000/dashboard_default"
                     >
                       Đăng nhập
                     </a>
