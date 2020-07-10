@@ -63,21 +63,22 @@ const TopTen = ({ cryptoTable, onDeleteCryptoTableData, t }) => {
         </thead>
         <tbody>
           {studentList.map((item, index) => (
+            item !== undefined ? 
             <tr key={index}>
-              <td>{517100032}</td>
-              <td>{"Đoàn Văn Linh"}</td>
-              <td dir="ltr">{"Nam"}</td>
-              <td dir="ltr">{"24/11/1998"}</td>
-              <td dir="ltr">{"Kinh"}</td>
-              <td dir="ltr">{"517101"}</td>
-              <td>{"Công nghệ thông tin"}</td>
-              <td className="dashboard__table-crypto-chart">
-                {"0964708429"}
-              </td>
-              <td>
-                <DropDownMore index={index} handleDeleteRow={e => onDeleteCryptoTableData(index, e)} />
-              </td>
-            </tr>
+            <td>{index}</td>
+            <td>{"Đoàn Văn Linh"}</td>
+            <td dir="ltr">{"Nam"}</td>
+            <td dir="ltr">{"24/11/1998"}</td>
+            <td dir="ltr">{"Kinh"}</td>
+            <td dir="ltr">{"517101"}</td>
+            <td>{"Công nghệ thông tin"}</td>
+            <td className="dashboard__table-crypto-chart">
+              {"0964708429"}
+            </td>
+            <td>
+              <DropDownMore index={index} handleDeleteRow={e => onDeleteCryptoTableData(index, e)} />
+            </td>
+          </tr> : ""
           ))}
         </tbody>
       </Table>

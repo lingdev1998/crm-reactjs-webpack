@@ -10,16 +10,9 @@ import Sidebar from './sidebar/Sidebar';
 import SidebarMobile from './topbar_with_navigation/sidebar_mobile/SidebarMobile';
 import Customizer from './customizer/Customizer';
 import { BasicNotification } from '../../shared/components/Notification';
-import {
-  changeDirectionToRTL, changeDirectionToLTR,
-} from '../../redux/actions/rtlActions';
-import { changeBorderRadius, toggleBoxShadow, toggleTopNavigation } from '../../redux/actions/customizerActions';
-import {
-  CustomizerProps, SidebarProps, ThemeProps, RTLProps, UserProps,
-} from '../../shared/prop-types/ReducerProps';
 
 import { useRecoilState } from 'recoil'
-import { sideBarCollapse, sideBarShow, layoutColorState } from './layoutState';
+import { sideBarCollapse, sideBarShow, layoutColorState ,customizerState, rtlState} from './layoutState';
 
 
 let notification = null;
@@ -41,8 +34,11 @@ const Layout = (props) => {
   const [sidebarcol, setSideBarCollapse] = useRecoilState(sideBarCollapse);
   const [sidebarshow, setSideBarShow] = useRecoilState(sideBarShow);
   const [theme, setLayoutColor] = useRecoilState(layoutColorState);
+  const [customizer,setCustomizer] =  useRecoilState(customizerState);
+  const [rtl,setRtl] =  useRecoilState(rtlState);
+
   useEffect(() => {
-    const { rtl } = props;
+    
     NotificationSystem.newInstance({ style: { top: 65 } }, n => notification = n);
     setTimeout(() => showNotification(rtl.direction), 700);
   }, [])
@@ -72,37 +68,28 @@ const Layout = (props) => {
   };
 
   const changeToRTL = () => {
-    
-    const { dispatch } = props;
-    dispatch(changeDirectionToRTL());
+    setRtl({...rtl, direction: "rtl"});
   };
 
   const changeToLTR = () => {
-    const { dispatch } = props;
-    dispatch(changeDirectionToLTR());
+     setRtl({...rtl, direction: "ltr"});
   };
 
   const toggleTopNavigation = () => {
-    console.log("toggleTopNavigation")
-    const { dispatch } = props;
-    dispatch(toggleTopNavigation());
+     setCustomizer({...customizer,topNavigation : !customizer.topNavigation})
   };
 
   const changeBorderRadius = () => {
-    const { dispatch } = props;
-    dispatch(changeBorderRadius());
+    setCustomizer({...customizer,squaredCorners : !customizer.squaredCorners})
   };
 
   const toggleBoxShadow = () => {
-    const { dispatch } = props;
-    dispatch(toggleBoxShadow());
+     setCustomizer({...customizer,withBoxShadow : !customizer.withBoxShadow})
   };
 
 
-  const {
-    customizer, rtl, user,
-  } = props; 
-  console.log(customizer)
+  const {  user,
+  } = props;  
   const sidebar = { show: sidebarshow, collapse: sidebarcol };
 
   const layoutClass = classNames({
@@ -164,8 +151,4 @@ const Layout = (props) => {
 
 }
 
-export default withRouter(connect(state => ({
-  customizer: state.customizer,
-  rtl: state.rtl,
-  user: state.user,
-}))(Layout));
+export default withRouter( (Layout));

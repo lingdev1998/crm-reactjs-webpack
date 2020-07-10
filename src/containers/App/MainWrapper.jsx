@@ -3,16 +3,15 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import classNames from 'classnames';
 
-
-
 import { useRecoilState } from 'recoil'
-import {layoutColorState} from '../Layout/layoutState';
+import {layoutColorState,customizerState,rtlState} from '../Layout/layoutState';
+
 const MainWrapper = (props) => { 
   const [theme, setLayoutColor] = useRecoilState(layoutColorState);
-
+  const [customizer,setCustomizer] =  useRecoilState(customizerState);
+  const [rtl,setRtl] =  useRecoilState(rtlState);
  
-    const {
-      customizer, children, rtl, location,
+    const {   children,  location,
     } =  props;
 
     const wrapperClass = classNames({
@@ -33,8 +32,4 @@ const MainWrapper = (props) => {
     );
  }
 
-export default withRouter(connect(state => ({
-  theme: state.theme,
-  rtl: state.rtl,
-  customizer: state.customizer,
-}))(MainWrapper));
+export default withRouter(MainWrapper);

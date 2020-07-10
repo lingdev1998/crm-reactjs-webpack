@@ -2,9 +2,7 @@ import React, { useEffect } from 'react';
 import { Col, Container, Row } from 'reactstrap';
 import { withTranslation } from 'react-i18next';
 import { connect } from 'react-redux'; 
-import TopTen from './components/TopTen';
-import { deleteCryptoTableData } from '../../redux/actions/cryptoTableActions'; 
-import { ThemeProps, RTLProps } from '../../shared/prop-types/ReducerProps';
+import TopTen from './components/TopTen'; 
 import axios from "axios";
 const Student = (props)=>  {
  
@@ -16,11 +14,6 @@ const Student = (props)=>  {
  
   },[])
   const onDeleteCryptoTableData = (index, e) => {
-    const { dispatch, cryptoTable } =  props;
-    e.preventDefault();
-    const arrayCopy = [...cryptoTable];
-    arrayCopy.splice(index, 1);
-    dispatch(deleteCryptoTableData(arrayCopy));
   };
   const {
     t, cryptoTable, rtl, theme,
@@ -44,7 +37,4 @@ const Student = (props)=>  {
  
 }
 
-export default connect(state => ({ 
-  rtl: state.rtl,
-  theme: state.theme,
-}))(withTranslation('common')(Student));
+export default (withTranslation('common')(Student));
