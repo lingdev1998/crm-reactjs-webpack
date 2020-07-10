@@ -129,4 +129,4 @@ class Landing extends PureComponent {
   }
 }
 
-export default connect(state => ({ theme: state.theme }))(Landing);
+export default  Landing ;

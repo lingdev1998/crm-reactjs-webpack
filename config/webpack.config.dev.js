@@ -1,5 +1,5 @@
 'use strict';
-
+//https://stackoverflow.com/questions/41486365/how-to-find-the-file-where-my-react-redux-error-is-coming-from find your error coming
 const path = require('path');
 const webpack = require('webpack');
 const PnpWebpackPlugin = require('pnp-webpack-plugin');

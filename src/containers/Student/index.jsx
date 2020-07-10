@@ -7,9 +7,6 @@ import axios from "axios";
 const Student = (props)=>  {
  
   useEffect(()=>{
-    var formData = new FormData();
-    formData.append("page",0);
-    formData.append("pageSize",10);
 
  
   },[])

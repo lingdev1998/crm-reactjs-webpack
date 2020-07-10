@@ -49,8 +49,6 @@ const Layout = (props) => {
   }, [])
 
   const changeSidebarVisibility = () => {
-
-    console.log("set")
     setSideBarCollapse(!sidebarcol)
   };
 
