@@ -9,12 +9,15 @@ import { hot } from 'react-hot-loader';
 import 'bootstrap/dist/css/bootstrap.css';
 import '../../scss/app.scss';
 import Router from './Router';
-import store from './store';
+import initStore from '../../config/store';
 import ScrollToTop from './ScrollToTop';
 import { config as i18nextConfig } from '../../translations';
 import Loading from '../../shared/components/Loading';
-i18next.init(i18nextConfig);
 
+import { RecoilRoot } from 'recoil';
+
+i18next.init(i18nextConfig);
+const store = initStore();
 const App = () => {
   const [loading, setLoading] = useState(true);
   const [loaded, setLoaded] = useState(false);
@@ -26,8 +29,9 @@ const App = () => {
     });
   }, []);
 
-
+ 
   return (
+    <RecoilRoot> 
     <Provider store={store}>
 
       <BrowserRouter basename="/">
@@ -47,6 +51,7 @@ const App = () => {
         </I18nextProvider>
       </BrowserRouter>
     </Provider>
+    </RecoilRoot>
   );
 }
 

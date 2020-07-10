@@ -2,24 +2,18 @@ import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import classNames from 'classnames';
-import PropTypes from 'prop-types';
-import { CustomizerProps, ThemeProps, RTLProps } from '../../shared/prop-types/ReducerProps';
 
-class MainWrapper extends PureComponent {
-  static propTypes = {
-    customizer: CustomizerProps.isRequired,
-    theme: ThemeProps.isRequired,
-    rtl: RTLProps.isRequired,
-    children: PropTypes.element.isRequired,
-    location: PropTypes.shape({
-      pathname: PropTypes.string,
-    }).isRequired,
-  };
 
-  render() {
+
+import { useRecoilState } from 'recoil'
+import {layoutColorState} from '../Layout/layoutState';
+const MainWrapper = (props) => { 
+  const [theme, setLayoutColor] = useRecoilState(layoutColorState);
+
+ 
     const {
-      theme, customizer, children, rtl, location,
-    } = this.props;
+      customizer, children, rtl, location,
+    } =  props;
 
     const wrapperClass = classNames({
       wrapper: true,
@@ -37,8 +31,7 @@ class MainWrapper extends PureComponent {
         </div>
       </div>
     );
-  }
-}
+ }
 
 export default withRouter(connect(state => ({
   theme: state.theme,

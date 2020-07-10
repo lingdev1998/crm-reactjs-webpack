@@ -1,22 +1,13 @@
 import React, { useEffect } from 'react';
 import { Col, Container, Row } from 'reactstrap';
 import { withTranslation } from 'react-i18next';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
+import { connect } from 'react-redux'; 
 import TopTen from './components/TopTen';
-import { deleteCryptoTableData } from '../../redux/actions/cryptoTableActions';
-import { CryptoTableProps } from '../../shared/prop-types/TablesProps';
+import { deleteCryptoTableData } from '../../redux/actions/cryptoTableActions'; 
 import { ThemeProps, RTLProps } from '../../shared/prop-types/ReducerProps';
 import axios from "axios";
 const Student = (props)=>  {
-  const  propTypes = {
-    t: PropTypes.func.isRequired,
-    cryptoTable: CryptoTableProps.isRequired,
-    dispatch: PropTypes.func.isRequired,
-    rtl: RTLProps.isRequired,
-    theme: ThemeProps.isRequired,
-  };
-
+ 
   useEffect(()=>{
     var formData = new FormData();
     formData.append("page",0);
@@ -25,7 +16,7 @@ const Student = (props)=>  {
  
   },[])
   const onDeleteCryptoTableData = (index, e) => {
-    const { dispatch, cryptoTable } = this.props;
+    const { dispatch, cryptoTable } =  props;
     e.preventDefault();
     const arrayCopy = [...cryptoTable];
     arrayCopy.splice(index, 1);
@@ -53,8 +44,7 @@ const Student = (props)=>  {
  
 }
 
-export default connect(state => ({
-  cryptoTable: state.cryptoTable.items,
+export default connect(state => ({ 
   rtl: state.rtl,
   theme: state.theme,
 }))(withTranslation('common')(Student));

@@ -1,21 +1,23 @@
 import React,{useEffect,useState} from 'react'; 
 import LogInForm from './LogInForm';
 import axios from 'axios';
-import { connect ,useSelector, useDispatch} from 'react-redux';
-import {userActions} from '../../../redux/actions/authActions';
+
+import { selector } from 'recoil'
+
+
+const login = selector({
+  key: 'login',
+  get: async (formData) => {
+      const rs = await axios.post("/authenticate", formData).then(res => res.data);
+      return rs;
+  }
+});
  const LogIn = (props) => {
-  const dispatch = useDispatch();
-  const state = useSelector(state => state.authReducer);
 
   const [ errorMessage , setErrorMessage] = useState("");
   const [ errorMsg , setErrorMsg] = useState(""); 
   
-  const submit = values => {
-    console.log(values);
-    var formData = new FormData();
-    formData.append("username",values.username);
-    formData.append("password",values.password);
-     userActions.login(formData) ;
+  const submit = values => { 
   }
   return (
     <div className="account account--not-photo">

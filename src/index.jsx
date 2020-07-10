@@ -3,7 +3,7 @@ import { render } from 'react-dom';
 import App from './containers/App/App';
 import setupAxiosInterceptors from './config/axios-interceptor.js';
 
-setupAxiosInterceptors(() => console.log('error'));
+//setupAxiosInterceptors(() => console.log('error'));
 render(
   <App />,
   document.getElementById('root'),

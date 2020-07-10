@@ -14,8 +14,7 @@ import Footer from './components/Footer';
 // import FeatureRequest from './components/FeatureRequest';
 // import Feedback from './components/Feedback';
 // import Code from './components/Code';
-// import Applications from './components/Applications';
-import { changeThemeToDark, changeThemeToLight } from '../../redux/actions/themeActions';
+// import Applications from './components/Applications'; 
 import { ThemeProps } from '../../shared/prop-types/ReducerProps';
 
 const logo = `${process.env.PUBLIC_URL}/img/landing/dhpdlogo.png`;
@@ -25,16 +24,7 @@ class Landing extends PureComponent {
     dispatch: PropTypes.func.isRequired,
     theme: ThemeProps.isRequired,
   };
-
-  changeToDark = () => {
-    const { dispatch } = this.props;
-    dispatch(changeThemeToDark());
-  };
-
-  changeToLight = () => {
-    const { dispatch } = this.props;
-    dispatch(changeThemeToLight());
-  };
+ 
 
   render() {
     //const { theme } = this.props;
@@ -132,27 +122,7 @@ class Landing extends PureComponent {
           this.About = section;
         }}
         />
-        <Technologies />
-        {/* <Feedback />
-        <Code />
-        <span ref={(section) => {
-          this.Features = section;
-        }}
-        />
-        <Features />
-        <span ref={(section) => {
-          this.Demos = section;
-        }}
-        />
-        <Demos theme={theme} changeToDark={this.changeToDark} changeToLight={this.changeToLight} />
-        <Applications />
-        <span ref={(section) => {
-          this.FeatureRequest = section;
-        }}
-        />
-        <FeatureRequest />
-        <Testimonials />
-        <Purchase /> */}
+        <Technologies /> 
         <Footer />
       </div>
     );

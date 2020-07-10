@@ -10,7 +10,7 @@ export default () => (
     <div className="container__wrap"> 
       <Switch>
  
-       <PrivateRouter path="/students" component={Student} /> 
+       <Route path="/students" component={Student} /> 
 
       <Redirect from="/" to="/students" />
       </Switch>
