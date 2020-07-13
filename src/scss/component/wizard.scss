@@ -51,6 +51,13 @@
       color: #ffffff;
     }
   }
+  &.wizard__step--nextStep{
+    background: $color-green;
+    border-color: $color-green;
+    p {
+      color: #ffffff;
+    }
+  }
 }
 
 .wizard__form-wrapper {

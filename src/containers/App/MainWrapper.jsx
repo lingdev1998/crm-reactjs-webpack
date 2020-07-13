@@ -1,10 +1,8 @@
-import React, { PureComponent } from 'react';
-import { connect } from 'react-redux';
+import React  from 'react'; 
 import { withRouter } from 'react-router-dom';
 import classNames from 'classnames';
-
 import { useRecoilState } from 'recoil'
-import {layoutColorState,customizerState,rtlState} from '../Layout/layoutState';
+import {layoutColorState,customizerState,rtlState} from '../../localState/layoutState';
 
 const MainWrapper = (props) => { 
   const [theme, setLayoutColor] = useRecoilState(layoutColorState);

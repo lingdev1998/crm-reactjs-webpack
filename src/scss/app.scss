@@ -81,3 +81,51 @@
 //objects...
 @import 'objects/layout.scss';        // layout settings
 
+ //importtant
+svg {
+    overflow: hidden;
+    vertical-align: baseline !important;
+  }
+.ant-cascader-menu{
+  height: 400px !important;
+}
+.ant-back-top{
+  right:0 !important;
+}
+::-webkit-input-placeholder { /* Edge */
+  color: red;
+}
+
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+  color: red;
+}
+
+::placeholder {
+  color: red !important;
+  font-size: small;
+}
+input{
+  height: 35px !important;
+  border-right-width: 1px !important;
+  border-top-right-radius: 2px !important;
+  border-bottom-right-radius: 2px !important;
+  border-top-left-radius: 2px !important;
+  border-bottom-left-radius: 2px !important; 
+  border: 1px solid #d9d9d9 !important;
+}
+button{
+  font-size: small !important;
+  
+}
+select{
+  height: 35px !important;
+  border-right-width: 1px !important;
+  border-top-right-radius: 2px !important;
+  border-bottom-right-radius: 2px !important;
+  border-top-left-radius: 2px !important;
+  border-bottom-left-radius: 2px !important; 
+  border: 1px solid #d9d9d9 !important;
+}
+.wizard_button{
+  width: 100px !important;
+}

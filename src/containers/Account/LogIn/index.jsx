@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react';
 import LogInForm from './LogInForm';
 import axios from 'axios';
 
-import { selector } from 'recoil'
-
-
+import { selector,useRecoilState } from 'recoil'
+import { authenticationState} from '../../../localState/authenticationState';
+import {AUTH_TOKEN_KEY} from '../../../config/constants';
 const login = selector({
   key: 'login',
   get: async (formData) => {
@@ -16,7 +16,24 @@ const LogIn = (props) => {
 
   const [errorMessage, setErrorMessage] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
+  const [authentication, setAuthentication] = useRecoilState(authenticationState);
 
+  useEffect(() => {
+    handleRedirect();
+  }, [authentication.authenticated])
+  const handleRedirect = () => {
+    if (authentication.authenticated) {
+      props.history.push('/students');
+    } else {
+      // if (state.errorMessage) {
+      //   setEnableToast(false);
+      //   setToastError(state.errorMessage);
+      //   setTimeout(() => {
+      //     setEnableToast(true);
+      //   }, 2000);
+      // }
+    }
+  }
   const submit = values => {
     console.log(values);
     let data = new FormData();
@@ -25,10 +42,12 @@ const LogIn = (props) => {
     console.log(values);
     axios.post("/authenticate", data).then(res => {
       const jwt = res.data.jwttoken;
-      localStorage.setItem("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", jwt);
-      console.log("login oke")
-    })
+      localStorage.setItem(AUTH_TOKEN_KEY, jwt);
+      console.log("login oke");
+      setAuthentication({...authentication,authenticated : true})
+    }).catch(err=>console.log(err));
   }
+
   return (
     <div className="account account--not-photo">
       <div className="account__wrapper">

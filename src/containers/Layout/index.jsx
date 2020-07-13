@@ -1,18 +1,16 @@
 /* eslint-disable no-return-assign */
 import React, {  useEffect } from 'react';
-import { withRouter } from 'react-router-dom';
-import { connect } from 'react-redux'; 
+import { withRouter } from 'react-router-dom'; 
 import classNames from 'classnames';
 import NotificationSystem from 'rc-notification';
 import Topbar from './topbar/Topbar';
 import TopbarWithNavigation from './topbar_with_navigation/TopbarWithNavigation';
 import Sidebar from './sidebar/Sidebar';
 import SidebarMobile from './topbar_with_navigation/sidebar_mobile/SidebarMobile';
-import Customizer from './customizer/Customizer';
 import { BasicNotification } from '../../shared/components/Notification';
 
 import { useRecoilState } from 'recoil'
-import { sideBarCollapse, sideBarShow, layoutColorState ,customizerState, rtlState} from './layoutState';
+import { sideBarCollapse, sideBarShow, layoutColorState ,customizerState, rtlState} from '../../localState/layoutState';
 
 
 let notification = null;
@@ -63,27 +61,7 @@ const Layout = (props) => {
   const changeToLight = () => { 
 
     setLayoutColor({ ...theme,  classNames: "theme-light" })
-  };
-
-  const changeToRTL = () => {
-    setRtl({...rtl, direction: "rtl"});
-  };
-
-  const changeToLTR = () => {
-     setRtl({...rtl, direction: "ltr"});
-  };
-
-  const toggleTopNavigation = () => {
-     setCustomizer({...customizer,topNavigation : !customizer.topNavigation})
-  };
-
-  const changeBorderRadius = () => {
-    setCustomizer({...customizer,squaredCorners : !customizer.squaredCorners})
-  };
-
-  const toggleBoxShadow = () => {
-     setCustomizer({...customizer,withBoxShadow : !customizer.withBoxShadow})
-  };
+  };  
 
 
   const {  user,
@@ -98,20 +76,7 @@ const Layout = (props) => {
 
   return (
     <div className={layoutClass}>
-      <Customizer
-        customizer={customizer}
-        sidebar={sidebar}
-        theme={theme}
-        rtl={rtl}
-        changeSidebarVisibility={changeSidebarVisibility}
-        toggleTopNavigation={toggleTopNavigation}
-        changeToDark={changeToDark}
-        changeToLight={changeToLight}
-        changeToRTL={changeToRTL}
-        changeToLTR={changeToLTR}
-        changeBorderRadius={changeBorderRadius}
-        toggleBoxShadow={toggleBoxShadow}
-      />
+ 
       {customizer.topNavigation
         ? (
           <TopbarWithNavigation
@@ -149,4 +114,4 @@ const Layout = (props) => {
 
 }
 
-export default withRouter( (Layout));
+export default Layout;

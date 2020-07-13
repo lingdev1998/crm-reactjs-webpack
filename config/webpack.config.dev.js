@@ -1,5 +1,5 @@
 'use strict';
-//https://stackoverflow.com/questions/41486365/how-to-find-the-file-where-my-react-redux-error-is-coming-from find your error coming
+//https://stackoverflow.com/questions/41486365/how-to-find-the-file-where-my-react-redux-error-is-coming-from find your error
 const path = require('path');
 const webpack = require('webpack');
 const PnpWebpackPlugin = require('pnp-webpack-plugin');
@@ -74,7 +74,7 @@ module.exports = {
   // You may want 'eval' instead if you prefer to see the compiled output in DevTools.
   // See the discussion in https://github.com/facebook/create-react-app/issues/343
   devtool: 'cheap-module-source-map',
-  //devtool: 'eval',
+  devtool: 'eval',
   // These are the "entry points" to our application.
   // This means they will be the "root" imports that are included in JS bundle.
   entry: [

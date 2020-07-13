@@ -1,11 +1,28 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Route, Redirect } from 'react-router-dom';
+import { useRecoilState } from 'recoil'
+import { authenticationState } from '../../../localState/authenticationState';
+import {SERVER_API_URL} from '../../../config/constants';
+export const PrivateRoute = ({ component: Component, ...rest }) => {
+    const [authentication, setAuthentication] = useRecoilState(authenticationState);
+    useEffect(() => {
+        if(localStorage.getItem(SERVER_API_URL)){
+            setAuthentication({...authentication,authenticated:true})
+        }
+        else{
+            setAuthentication({...authentication,authenticated:false});
+            window.location.replace("localhost:3000/login")
+        }
 
-export const PrivateRoute = ({ component: Component, ...rest }) => (
-    <Route {...rest} render={props => (
-        localStorage.getItem('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')
-            ? <Component {...props} />
-            : <Redirect to={{ pathname: '/login', state: { from: props.location } }} />
-    )} />
-)
+    }, []);
+
+    return (
+        <Route {...rest} render={props => (
+             authentication.authenticated
+                ? <Component {...props} />
+                :""
+                // <Redirect to={{ pathname: '/login'  }} />
+        )} />
+    )
+}
 export default PrivateRoute;

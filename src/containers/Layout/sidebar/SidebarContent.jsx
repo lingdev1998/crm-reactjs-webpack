@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import SidebarLink from './SidebarLink';
-import SidebarCategory from './SidebarCategory';
+import SidebarLink from './SidebarLink'; 
 
 class SidebarContent extends Component {
   static propTypes = {

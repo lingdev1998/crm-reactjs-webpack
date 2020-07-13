@@ -1038,7 +1038,7 @@
       position: absolute;
       height: 80px;
       width: 80px;
-      top: calc(50% - 40px);
+      //top: calc(50% - 40px);
       opacity: 0.3;
       @include directify($directions) {
         #{directed('right')}: -23px;
@@ -1441,7 +1441,7 @@
       .dashboard__current-users-label {
         margin: 0;
         position: absolute;
-        top: calc(50% + 10px);
+        top: calc(50% );
         text-align: center;
         @include directify($directions) {
           #{directed('left')}: calc(50% - 30px);
@@ -1532,7 +1532,7 @@
         position: absolute;
         height: 80px;
         width: 80px;
-        top: calc(50% - 40px);
+        top: calc(50%  );
         opacity: 0.3;
         @include directify($directions) {
           #{directed('right')}: -20px;

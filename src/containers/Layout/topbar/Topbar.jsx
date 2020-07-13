@@ -29,8 +29,7 @@ import { UserProps } from '../../../shared/prop-types/ReducerProps';
             <Link className="topbar__logo" style={{backgroundImage: `url(${logo})`}} to="/dashboard_default" />
           </div>
           <div className="topbar__right">
-            <TopbarSearch />
-            <TopbarNotification />
+             <TopbarNotification />
             <TopbarMail new />
             <TopbarProfile user={user} />
             <TopbarLanguage />

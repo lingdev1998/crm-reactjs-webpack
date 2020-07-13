@@ -1,8 +1,7 @@
 /* eslint-disable max-len */
 import React, { PureComponent } from 'react';
 import { Col, Row, Container } from 'reactstrap';
-import scrollToComponent from 'react-scroll-to-component';
-import { connect } from 'react-redux';
+import scrollToComponent from 'react-scroll-to-component'; 
 import PropTypes from 'prop-types';
 import Header from './components/Header';
 import Technologies from './components/Technologies';
@@ -26,8 +25,7 @@ class Landing extends PureComponent {
   };
  
 
-  render() {
-    //const { theme } = this.props;
+  render() { 
 
     return (
       <div className="landing">
@@ -107,7 +105,7 @@ class Landing extends PureComponent {
                       className="landing__btn"
                       target="_self"
                       rel="noopener noreferrer"
-                      href="http://localhost:3000/student"
+                      href="http://localhost:3000/students"
                     >
                       Đăng nhập
                     </a>

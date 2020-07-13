@@ -11,7 +11,8 @@ const rtlState = atom({
   default:{
     direction: 'ltr'
   }
-});const customizerState = atom({
+});
+const customizerState = atom({
   key: CUSTOMMIZER,
   default:{
     squaredCorners: false,
