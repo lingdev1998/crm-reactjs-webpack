@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import LogInForm from './LogInForm';
 import axios from 'axios';
-
-import { selector,useRecoilState } from 'recoil'
-import { authenticationState} from '../../../localState/authenticationState';
-import {AUTH_TOKEN_KEY} from '../../../config/constants';
+import { Redirect } from 'react-router-dom'
+import { selector, useRecoilState } from 'recoil'
+import { authenticationState } from '../../../localState/authenticationState';
+import { AUTH_TOKEN_KEY } from '../../../config/constants';
 const login = selector({
   key: 'login',
   get: async (formData) => {
@@ -19,10 +19,19 @@ const LogIn = (props) => {
   const [authentication, setAuthentication] = useRecoilState(authenticationState);
 
   useEffect(() => {
+    if (localStorage.getItem(AUTH_TOKEN_KEY)) {
+        setAuthentication({ ...authentication, authenticated: true })
+    }
+    else {
+        setAuthentication({ ...authentication, authenticated: false })
+
+    }
     handleRedirect();
-  }, [authentication.authenticated])
+    console.log("authe from login", authentication);
+
+}, [authentication.authenticated])
   const handleRedirect = () => {
-    if (authentication.authenticated) {
+    if (authentication.authenticated === true) {
       props.history.push('/students');
     } else {
       // if (state.errorMessage) {
@@ -44,12 +53,15 @@ const LogIn = (props) => {
       const jwt = res.data.jwttoken;
       localStorage.setItem(AUTH_TOKEN_KEY, jwt);
       console.log("login oke");
-      setAuthentication({...authentication,authenticated : true})
-    }).catch(err=>console.log(err));
+      setAuthentication({ ...authentication, authenticated: true })
+    }).catch(err => console.log(err));
   }
-
+  console.log("authentication",authentication.authenticated);
   return (
-    <div className="account account--not-photo">
+    <>
+    {
+      authentication.authenticated === false ?
+      <div className="account account--not-photo">
       <div className="account__wrapper">
         <div className="account__card">
           <div className="account__head">
@@ -62,7 +74,9 @@ const LogIn = (props) => {
           />
         </div>
       </div>
-    </div>
+    </div> : <Redirect path="/students" />
+    }
+    </>
   );
 };
 

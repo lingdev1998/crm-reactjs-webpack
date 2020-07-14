@@ -12,25 +12,22 @@ export const MainWrapper = (props) => {
     if (localStorage.getItem(AUTH_TOKEN_KEY)) {
       setAuthentication({ ...authentication, authenticated: true })
     }
+    else {
+      setAuthentication({ ...authentication, authenticated: false })
+
+    }
 
 
   }, [authentication.authenticated]);
   return (
-    <div>
-      {
-        authentication.authenticated === true ? 
-        <>
-          <Layout />
-          <div className="container__wrap">
-            <Switch>
-              <Route path="/students" component={Student} />
+    <div> 
+    
+        <Switch>
+          <PrivateRouter path="/students" component={Student} />
 
-              <Redirect from="/" to="/students" />
-            </Switch>
-          </div>
-        </> : <Redirect   to="/login" />
-      }
-    </div>
+          <Redirect from="/" to="/students" />
+        </Switch>
+     </div>
   )
 }
 export default MainWrapper;
