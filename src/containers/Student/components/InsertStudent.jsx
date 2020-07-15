@@ -1,5 +1,5 @@
 /* eslint-disable react/no-array-index-key,react/no-typos */
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import {
     Col, Card, Row, CardBody,
 } from 'reactstrap';
@@ -19,6 +19,7 @@ const InsertStudent = (props) => {
     const previousPage = () => {
         setPage(page - 1);
     };
+
 
     return (
         <>
@@ -45,11 +46,10 @@ const InsertStudent = (props) => {
                                                 nextPage={nextPage}
                                                 setToInsertPage={props.setToInsertPage}
                                                 prepareDepartmentList={props.prepareDepartmentList}
-
                                                 departmentId={props.departmentId}
                                                 courseNumber={props.courseNumber}
                                                 classId={props.classId}
-                                                setClassId={props.setClassId}
+                                                setClassId={props.setClassId} 
                                             />
                                         </div>
                                     )}

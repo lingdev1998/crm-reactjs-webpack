@@ -1,11 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import { ButtonToolbar,   Col,  Form, FormFeedback, FormGroup, Label, Input, Row  } from 'reactstrap';
+import { ButtonToolbar, Col, Form, FormFeedback, FormGroup, Label, Input, Row } from 'reactstrap';
 import { Cascader, Button } from 'antd';
 import { LeftOutlined, RightOutlined } from '@ant-design/icons';
 import * as Yup from "yup";
-import { Formik  } from "formik";
+import { Formik } from "formik";
 import 'antd/dist/antd.css';
+import { Typeahead } from 'react-bootstrap-typeahead';
+
+import { useRecoilState } from 'recoil';
+import { studentGlobalState } from '../../../../localState/studentState';
+import axios from 'axios';
+
 const nameRegExp = /^(?=.{0,40}$)[a-zA-Z]+(?:[-'\s][a-zA-Z]+)*$/;
+
 const SignupSchema = Yup.object().shape({
   fullName: Yup.string()
     .min(3, `Ít nhất 3 ký tự`)
@@ -16,21 +23,37 @@ const SignupSchema = Yup.object().shape({
   sex: Yup.number()
     .required('Không được để trống'),
 });
+
 const StudentInsertStepOne = (props) => {
   // const onSubmit = (values, { setSubmitting, setErrors }) => {
   //   console.log(values);
   // };
+
+  const [studentState, setStudentState] = useRecoilState(studentGlobalState);
+
+
   const [departmentValues, setDepartmentValue] = useState({ value: "", label: "", children: {} });
-  const {setToInsertPage} =props;
+
+  const { setToInsertPage } = props;
+
   useEffect(() => {
-    console.log(!"aasd")
-    console.log(props.courseNumber);
     setDepartmentValue({ ...props.prepareDepartmentList[props.prepareDepartmentList.findIndex(i => i.value === props.departmentId)] });
-  }, [props.departmentId])
+  }, [props.departmentId]);
+
+  useEffect(() => {
+     return ()=>{
+      console.log("cancel");
+      let defaultGlobalState = {
+        cityList : [],
+        districtList: [],
+        communeList : [],
+        ethnicList : []
+      }
+      setStudentState(Object.assign(studentState,defaultGlobalState));
+    }
+  }, [])
   return (
-
     <div>
-
       <Cascader style={{ width: '100%' }}
         defaultValue={props.classId !== '' && props.departmentId !== '' && props.courseNumber !== '' ? [props.departmentId, props.courseNumber, props.classId] : []}
         options={props.prepareDepartmentList}
@@ -114,93 +137,142 @@ const StudentInsertStepOne = (props) => {
 
                 <FormGroup>
                   <Label for="nation">Quốc tịch<span className="text-danger">*</span></Label>
-                  <Input
-                    type="select"
-                    name="nation"
-                    id="nation"
-                  // onBlur={handleBlur}
-                  // invalid={touched.status && !!errors.status}
-                  // required value={status}
-                  // onChange={e => setStatus(e.target.value)}>
-                  // {
-                  //   PROJECT_STATUS.map((status) =>
-                  //     <option key={status.key} value={status.key}>{status.value}</option>)
-                  // }
-                  >
-                  </Input>
+                  <Typeahead
+                    id="basic-typeahead-single"
+                    labelKey="label"
+                    onChange={(selected) => {
+
+                      console.log("selected", selected);
+                      if (Array.isArray(selected) && selected.length) {
+                        axios.get("/ethnic/findByCountryId?keySearch=" + selected[0].id).then(response => {
+                          let update = {
+                            ethnicList: response.data
+                          }
+                          setStudentState(Object.assign(studentState, update));
+                          console.log(studentState);
+                        }).catch(err => {
+                          console.log(err);
+                          setStudentState(Object.assign(studentState, {}));
+                        });
+                      }
+                    }
+                    }
+                    options={studentState.nationalityList}
+                  />
                 </FormGroup>
+                {
+                  studentState.ethnicList.length !== 0 ?
+
+                    <FormGroup>
+                      <Label for="ethnic">Dân tộc<span className="text-danger">*</span></Label>
+                      <Typeahead
+                        id="basic-typeahead-single"
+                        labelKey="label"
+                        onChange={(selected) => {
+
+                          console.log("selected", selected);
+
+
+                        }
+                        }
+                        options={studentState.ethnicList}
+                      />
+                    </FormGroup> : ""
+                }
 
                 <FormGroup>
-                  <Label for="religion">Dân tộc<span className="text-danger">*</span></Label>
-                  <Input
-                    type="select"
-                    name="religion"
-                    id="religion"
-                  // onBlur={handleBlur}
-                  // invalid={touched.status && !!errors.status}
-                  // required value={status}
-                  // onChange={e => setStatus(e.target.value)}>
-                  // {
-                  //   PROJECT_STATUS.map((status) =>
-                  //     <option key={status.key} value={status.key}>{status.value}</option>)
-                  // }
-                  >
-                  </Input>
+                  <Label for="country">Quốc gia<span className="text-danger">*</span></Label>
+                  <Typeahead
+                    id="basic-typeahead-single"
+                    labelKey="label"
+                    onChange={(selected) => {
+                      console.log("selected", selected);
+                      if (Array.isArray(selected) && selected.length) {
+                        axios.get("/provinceCity/findByCountry?keySearch=" + selected[0].id).then(response => {
+                          let update = {
+                            cityList: response.data
+                          }
+                          setStudentState(Object.assign(studentState, update));
+                          console.log(studentState);
+                        }).catch(err => {
+                          console.log(err);
+                          setStudentState(Object.assign(studentState, {}));
+                        });
+                      }
+                    }}
+                    options={studentState.countryList}
+                  />
                 </FormGroup>
 
-                <FormGroup>
-                  <Label for="nation">Thành phố/Tỉnh<span className="text-danger">*</span></Label>
-                  <Input
-                    type="select"
-                    name="nation"
-                    id="nation"
-                  // onBlur={handleBlur}
-                  // invalid={touched.status && !!errors.status}
-                  // required value={status}
-                  // onChange={e => setStatus(e.target.value)}>
-                  // {
-                  //   PROJECT_STATUS.map((status) =>
-                  //     <option key={status.key} value={status.key}>{status.value}</option>)
-                  // }
-                  >
-                  </Input>
-                </FormGroup>
+                {studentState.cityList.length > 0 ?
 
-                <FormGroup>
-                  <Label for="nation">Quận/Huyện<span className="text-danger">*</span></Label>
-                  <Input
-                    type="select"
-                    name="nation"
-                    id="nation"
-                  // onBlur={handleBlur}
-                  // invalid={touched.status && !!errors.status}
-                  // required value={status}
-                  // onChange={e => setStatus(e.target.value)}>
-                  // {
-                  //   PROJECT_STATUS.map((status) =>
-                  //     <option key={status.key} value={status.key}>{status.value}</option>)
-                  // }
-                  >
-                  </Input>
-                </FormGroup>
+                  <FormGroup>
+                    <Label for="city">Thành phố/Tỉnh<span className="text-danger">*</span></Label>
+                    <Typeahead
+                      id="basic-typeahead-single"
+                      labelKey="label"
+                      onChange={(selected) => {
+                        console.log("selected", selected);
+                        if (Array.isArray(selected) && selected.length) {
+                          axios.get("/district/findByProvinceCityId?keySearch=" + selected[0].id).then(response => {
+                            let update = {
+                              districtList: response.data
+                            }
+                            setStudentState(Object.assign(studentState, update));
+                            console.log(studentState);
+                          }).catch(err => {
+                            console.log(err);
+                            setStudentState(Object.assign(studentState, {}));
+                          });
+                        }
+                      }}
+                      options={studentState.cityList}
+                    />
+                  </FormGroup> : ""
+                }
 
-                <FormGroup>
-                  <Label for="nation">Phường/Xã<span className="text-danger">*</span></Label>
-                  <Input
-                    type="select"
-                    name="nation"
-                    id="nation"
-                  // onBlur={handleBlur}
-                  // invalid={touched.status && !!errors.status}
-                  // required value={status}
-                  // onChange={e => setStatus(e.target.value)}>
-                  // {
-                  //   PROJECT_STATUS.map((status) =>
-                  //     <option key={status.key} value={status.key}>{status.value}</option>)
-                  // }
-                  >
-                  </Input>
-                </FormGroup>
+                {
+                  studentState.districtList.length > 0 ?
+                    <FormGroup>
+                      <Label for="district">Quận/Huyện<span className="text-danger">*</span></Label>
+                      <Typeahead
+                        id="basic-typeahead-single"
+                        labelKey="label"
+                        onChange={(selected) => {
+                          console.log("selected", selected);
+                          if (Array.isArray(selected) && selected.length) {
+                            axios.get("/commune/findByDistrictId?keySearch=" + selected[0].id).then(response => {
+                              let update = {
+                                communeList: response.data
+                              }
+                              setStudentState(Object.assign(studentState, update));
+                              console.log(studentState);
+                            }).catch(err => {
+                              console.log(err);
+                              setStudentState(Object.assign(studentState, {}));
+                            });
+                          }
+                        }}
+                        options={studentState.districtList}
+                      />
+                    </FormGroup> : ""
+                }
+
+                {
+                  studentState.communeList.length > 0 ?
+                  <FormGroup>
+                  <Label for="commune">Phường/Xã<span className="text-danger">*</span></Label>
+                  <Typeahead
+                        id="basic-typeahead-single"
+                        labelKey="label"
+                        onChange={(selected) => {
+                          console.log("selected", selected);
+                           
+                        }}
+                        options={studentState.communeList}
+                      />
+                </FormGroup> : ""
+                }
                 <FormGroup>
                   <Label for="">Thôn/Tổ<span className="text-danger">*</span> </Label>
                   <Input
@@ -414,11 +486,8 @@ const StudentInsertStepOne = (props) => {
           </Form>
         )}
       </Formik>
-
     </div >
-
   );
-
 };
 
 export default StudentInsertStepOne;

@@ -4,11 +4,9 @@ import {
 } from 'reactstrap';
 import { withTranslation } from 'react-i18next';
 import Panel from '../../../shared/components/Panel';
-// import { useRecoilValue, useRecoilValueLoadable, selector } from 'recoil';
-// import { studentListState } from '../../../localState/studentState';
-import { Table, Button, Popconfirm } from 'antd';
+import { Table, Button, Popconfirm ,Tooltip} from 'antd';
 import { Input, Cascader } from 'antd';
-import { DeleteOutlined, EditOutlined, SearchOutlined } from '@ant-design/icons';
+import { DeleteOutlined, EditOutlined, SearchOutlined, DownloadOutlined, PlusSquareOutlined } from '@ant-design/icons';
 import 'antd/dist/antd.css';
 
 const columns = [
@@ -17,7 +15,9 @@ const columns = [
     width: 80,
     dataIndex: 'studentId',
     key: 'studentId',
-    render: text => <a href="">{text}</a>,
+    render: text => <Tooltip placement="topLeft" title="Click để xem thông tin">
+      <a href="">{text}</a>
+    </Tooltip>,
     fixed: 'left',
   },
   {
@@ -59,32 +59,18 @@ const columns = [
   },
 ];
 
-// const rowSelection = {
-//   onChange: (selectedRowKeys, selectedRows) => {
-//     console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
-//   },
-//   getCheckboxProps: record => ({
-//     disabled: record.name === 'Disabled User',
-//     // Column configuration not to be checked
-//     name: record.name,
-//   }),
-// };
-
-const rowSelection = { 
+const rowSelection = {
   onChange: (selectedRowKeys, selectedRows) => {
-    console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', {...selectedRows});
+    console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', { ...selectedRows });
   },
 }
+
 const StudentList = ({ t, studentList, departmentList, totalElements, current, setCurrent, setPageSize, setKeySearch1, setKeySearch2, setKeySearch3, setKeySearch4, setKeySearch5, setToInsertPage, setPrepareDepartmentList }) => {
-  //const studentList = useRecoilValue(studentListState);
-  //const studentList = useRecoilValueLoadable(fetchListStudent);
-  //   if (studentList.state === 'hasError') {
-  //     return <div> There is some problem! </div>
-  // }
 
   const [departmentOptions, setDepartmentOptions] = useState([]);
+
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
-  
+
   useEffect(() => {
     if (departmentList.length > 0) {
       console.log("preparing departmentList....", departmentList);
@@ -121,27 +107,21 @@ const StudentList = ({ t, studentList, departmentList, totalElements, current, s
       console.log("Prepare done!", options);
       setDepartmentOptions(options);
       setPrepareDepartmentList(options)
-
     }
   }, [JSON.stringify(departmentList)])
 
-    
-  
   function onCascaderChange(value) {
     value[0] === undefined ? setKeySearch3('') : setKeySearch3(value[0]);
     value[1] === undefined ? setKeySearch5('') : setKeySearch5(value[1]);
     value[2] === undefined ? setKeySearch4('') : setKeySearch4(value[2]);
-
   }
-
 
   return (
     <>
-
       <Panel lg={12} title={t('Danh sách sinh viên')}>
         <Row style={{ paddingLeft: "0px", paddingRight: "35px" }}>
 
-          <Col md={11} sm={8}>
+          <Col md={10} sm={8}>
             <div className="site-input-group-wrapper">
               <Input.Group compact>
                 <Cascader style={{ width: '50%' }} options={departmentOptions} onChange={e => onCascaderChange(e)} placeholder="Tuỳ chọn tìm kiếm..." />
@@ -151,7 +131,21 @@ const StudentList = ({ t, studentList, departmentList, totalElements, current, s
               </Input.Group>
             </div>
           </Col>
-          <Col md={1} sm={5}>
+          <Col md={1} className="button_toolbar_list" sm={5}>
+            <Button
+              onClick={() => { setToInsertPage(true) }}
+              type="primary"
+              style={{
+                marginBottom: 16,
+                backgroundColor: "#52c41a",
+                borderColor: "#87e8de"
+              }}
+
+            >
+              <DownloadOutlined />Lưu
+          </Button>
+          </Col>
+          <Col md={1} className="button_toolbar_list" sm={5}>
             <Button
               onClick={() => { setToInsertPage(true) }}
               type="primary"
@@ -160,7 +154,7 @@ const StudentList = ({ t, studentList, departmentList, totalElements, current, s
               }}
 
             >
-              Thêm mới
+              <PlusSquareOutlined />Thêm
           </Button>
           </Col>
         </Row>
