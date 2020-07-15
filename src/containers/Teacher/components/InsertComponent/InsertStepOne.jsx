@@ -1,10 +1,26 @@
 import React, { useState, useEffect } from 'react';
-import { ButtonToolbar, Card, CardHeader, CardBody, Col, CustomInput, Form, FormFeedback, FormGroup, Label, Input, Row, Badge } from 'reactstrap';
+import { ButtonToolbar, Col, Form, FormFeedback, FormGroup, Label, Input, Row } from 'reactstrap';
 import { Cascader, Button } from 'antd';
 import { LeftOutlined, RightOutlined } from '@ant-design/icons';
 import * as Yup from "yup";
-import { Formik, withFormik } from "formik";
+import { Formik } from "formik";
 import 'antd/dist/antd.css';
+import Select from 'react-select';
+
+
+const colourOptions = [
+  { value: 'ocean', label: 'Ocean', color: '#00B8D9', isFixed: true },
+  { value: 'blue', label: 'Blue', color: '#0052CC', isDisabled: true },
+  { value: 'purple', label: 'Purple', color: '#5243AA' },
+  { value: 'red', label: 'Red', color: '#FF5630', isFixed: true },
+  { value: 'orange', label: 'Orange', color: '#FF8B00' },
+  { value: 'yellow', label: 'Yellow', color: '#FFC400' },
+  { value: 'green', label: 'Green', color: '#36B37E' },
+  { value: 'forest', label: 'Forest', color: '#00875A' },
+  { value: 'slate', label: 'Slate', color: '#253858' },
+  { value: 'silver', label: 'Silver', color: '#666666' },
+];
+
 const nameRegExp = /^(?=.{0,40}$)[a-zA-Z]+(?:[-'\s][a-zA-Z]+)*$/;
 const SignupSchema = Yup.object().shape({
   fullName: Yup.string()
@@ -21,7 +37,7 @@ const WizardFormTwo = (props) => {
   //   console.log(values);
   // };
   const [departmentValues, setDepartmentValue] = useState({ value: "", label: "", children: {} });
-  const {setToInsertPage} =props;
+  const { setToInsertPage } = props;
   useEffect(() => {
     console.log(!"aasd")
     console.log(props.courseNumber);
@@ -114,20 +130,15 @@ const WizardFormTwo = (props) => {
 
                 <FormGroup>
                   <Label for="nation">Quốc tịch<span className="text-danger">*</span></Label>
-                  <Input
-                    type="select"
+                  <Select
+                    className="basic-single"
+                    classNamePrefix="select"
+                    defaultValue={colourOptions[0]}
+                     isClearable={true}
+                    isSearchable={true}
                     name="nation"
-                    id="nation"
-                  // onBlur={handleBlur}
-                  // invalid={touched.status && !!errors.status}
-                  // required value={status}
-                  // onChange={e => setStatus(e.target.value)}>
-                  // {
-                  //   PROJECT_STATUS.map((status) =>
-                  //     <option key={status.key} value={status.key}>{status.value}</option>)
-                  // }
-                  >
-                  </Input>
+                    options={colourOptions}
+                  />
                 </FormGroup>
 
                 <FormGroup>
@@ -149,11 +160,11 @@ const WizardFormTwo = (props) => {
                 </FormGroup>
 
                 <FormGroup>
-                  <Label for="nation">Thành phố/Tỉnh<span className="text-danger">*</span></Label>
+                  <Label for="city">Thành phố/Tỉnh<span className="text-danger">*</span></Label>
                   <Input
                     type="select"
-                    name="nation"
-                    id="nation"
+                    name="city"
+                    id="city"
                   // onBlur={handleBlur}
                   // invalid={touched.status && !!errors.status}
                   // required value={status}
@@ -167,11 +178,11 @@ const WizardFormTwo = (props) => {
                 </FormGroup>
 
                 <FormGroup>
-                  <Label for="nation">Quận/Huyện<span className="text-danger">*</span></Label>
+                  <Label for="district">Quận/Huyện<span className="text-danger">*</span></Label>
                   <Input
                     type="select"
-                    name="nation"
-                    id="nation"
+                    name="district"
+                    id="district"
                   // onBlur={handleBlur}
                   // invalid={touched.status && !!errors.status}
                   // required value={status}
@@ -185,11 +196,11 @@ const WizardFormTwo = (props) => {
                 </FormGroup>
 
                 <FormGroup>
-                  <Label for="nation">Phường/Xã<span className="text-danger">*</span></Label>
+                  <Label for="commune">Phường/Xã<span className="text-danger">*</span></Label>
                   <Input
                     type="select"
-                    name="nation"
-                    id="nation"
+                    name="commune"
+                    id="commune"
                   // onBlur={handleBlur}
                   // invalid={touched.status && !!errors.status}
                   // required value={status}

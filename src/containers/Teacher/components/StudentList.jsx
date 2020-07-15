@@ -140,7 +140,7 @@ const StudentList = ({ t, studentList, departmentList, totalElements, current, s
   return (
     <>
 
-      <Panel lg={12} title={t('Danh sách sinh viên')}>
+      <Panel lg={12} title={t('Danh sách giảng viên')}>
         <Row style={{ paddingLeft: "0px", paddingRight: "35px" }}>
 
           <Col md={11} sm={8}>

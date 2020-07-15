@@ -2,7 +2,11 @@
   "name": "linkdoan",
   "version": "2.4.0",
   "private": true,
-  "homepage": "lingdev1998.github.io",
+  "homepage": "https://universitymanagement-frontend.herokuapp.com",
+  "engines": {
+    "node" : "12.16.1",
+    "npm" : "6.14.5"
+  },
   "dependencies": {
     "@auth0/auth0-spa-js": "^1.2.3",
     "@material-ui/core": "^3.9.2",
@@ -84,7 +88,7 @@
     "react-router-dom": "^4.3.1",
     "react-router-redux": "^4.0.8",
     "react-scroll-to-component": "^1.0.2",
-    "react-select": "^2.3.0",
+    "react-select": "^2.4.4",
     "react-slick": "^0.23.2",
     "react-smooth-scrollbar": "^8.0.6",
     "react-sticky": "^6.0.3",

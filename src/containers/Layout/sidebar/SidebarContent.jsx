@@ -36,7 +36,7 @@ class SidebarContent extends Component {
           <SidebarLink
             title="Giảng viên"
             icon="user"
-            route="/teacher"
+            route="/teachers"
             onClick={this.hideSidebar}
           />
           <SidebarLink

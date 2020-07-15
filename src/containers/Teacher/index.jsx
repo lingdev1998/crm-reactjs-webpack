@@ -20,7 +20,7 @@ const style = {
   right:"0px"
 };
 
-const Student = (props) => {
+const Teacher = (props) => {
 
   const [studentList, setStudentList] = useState([]);
   const [departmentList, setDepartmentList] = useState([]);
@@ -147,4 +147,4 @@ const Student = (props) => {
 
 }
 
-export default (withTranslation('common')(Student));
+export default (withTranslation('common')(Teacher));

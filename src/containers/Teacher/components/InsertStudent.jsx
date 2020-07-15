@@ -5,9 +5,12 @@ import {
 } from 'reactstrap';
 import { withTranslation } from 'react-i18next';
 import Panel from '../../../shared/components/Panel'; 
-import WizardFormTwo from './InsertComponent/WizardFormTwo';
-import WizardFormThree from './InsertComponent/WizardFormThree';
+import WizardFormTwo from './InsertComponent/InsertStepOne';
+import WizardFormThree from './InsertComponent/InsertStepTwo';
 import 'antd/dist/antd.css';
+
+
+
 const InsertStudent = (props) => {
 
     const [page, setPage] = useState(1);
