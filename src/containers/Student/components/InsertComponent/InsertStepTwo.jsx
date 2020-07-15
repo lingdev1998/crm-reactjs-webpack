@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import renderToggleButtonField from '../../../../shared/components/form/ToggleButton';
 import renderSelectField from '../../../../shared/components/form/Select';
 
-const WizardFormOne = ({ handleSubmit, previousPage }) => (
+const StudentInsertStepTwo = ({ handleSubmit, previousPage }) => (
   <form className="form form--horizontal wizard__form" onSubmit={handleSubmit}>
     <h3 className="wizard__title">Set the preferences</h3>
     <div className="form__form-group">
@@ -54,14 +54,10 @@ const WizardFormOne = ({ handleSubmit, previousPage }) => (
     </ButtonToolbar>
   </form>
 );
-
-WizardFormOne.propTypes = {
-  handleSubmit: PropTypes.func.isRequired,
-  previousPage: PropTypes.func.isRequired,
-};
+ 
 
 export default reduxForm({
   form: 'wizard', //                 <------ same form name
   destroyOnUnmount: false, //        <------ preserve form data
   forceUnregisterOnUnmount: true, // <------ unregister fields on unmount
-})(WizardFormOne);
+})(StudentInsertStepTwo);

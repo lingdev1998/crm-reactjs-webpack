@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { ButtonToolbar, Card, CardHeader, CardBody, Col, CustomInput, Form, FormFeedback, FormGroup, Label, Input, Row, Badge } from 'reactstrap';
+import { ButtonToolbar,   Col,  Form, FormFeedback, FormGroup, Label, Input, Row  } from 'reactstrap';
 import { Cascader, Button } from 'antd';
 import { LeftOutlined, RightOutlined } from '@ant-design/icons';
 import * as Yup from "yup";
-import { Formik, withFormik } from "formik";
+import { Formik  } from "formik";
 import 'antd/dist/antd.css';
 const nameRegExp = /^(?=.{0,40}$)[a-zA-Z]+(?:[-'\s][a-zA-Z]+)*$/;
 const SignupSchema = Yup.object().shape({
@@ -16,7 +16,7 @@ const SignupSchema = Yup.object().shape({
   sex: Yup.number()
     .required('Không được để trống'),
 });
-const WizardFormTwo = (props) => {
+const StudentInsertStepOne = (props) => {
   // const onSubmit = (values, { setSubmitting, setErrors }) => {
   //   console.log(values);
   // };
@@ -421,4 +421,4 @@ const WizardFormTwo = (props) => {
 
 };
 
-export default WizardFormTwo;
+export default StudentInsertStepOne;

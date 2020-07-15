@@ -82,11 +82,9 @@ const StudentList = ({ t, studentList, departmentList, totalElements, current, s
   //     return <div> There is some problem! </div>
   // }
 
- 
-
-
   const [departmentOptions, setDepartmentOptions] = useState([]);
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
+  
   useEffect(() => {
     if (departmentList.length > 0) {
       console.log("preparing departmentList....", departmentList);

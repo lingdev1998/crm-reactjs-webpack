@@ -14,8 +14,7 @@ class SidebarContent extends Component {
     onClick();
   };
 
-  render() {
-    const { changeToLight, changeToDark } = this.props;
+  render() { 
 
     return (
       <div className="sidebar__content">

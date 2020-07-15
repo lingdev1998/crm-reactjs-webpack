@@ -4,14 +4,13 @@ import {
     Col, Card, Row, CardBody,
 } from 'reactstrap';
 import { withTranslation } from 'react-i18next';
-import Panel from '../../../shared/components/Panel'; 
-import WizardFormTwo from './InsertComponent/WizardFormTwo';
-import WizardFormThree from './InsertComponent/WizardFormThree';
+import Panel from '../../../shared/components/Panel';
+import WizardFormTwo from './InsertComponent/InsertStepOne';
+import WizardFormThree from './InsertComponent/InsertStepTwo';
 import 'antd/dist/antd.css';
 const InsertStudent = (props) => {
 
     const [page, setPage] = useState(1);
-    const [isNextStep, setIsNextStep] = useState(false);
 
     const nextPage = () => {
         setPage(page + 1);
@@ -27,7 +26,7 @@ const InsertStudent = (props) => {
 
                 <Row style={{ marginLeft: "20px", marginRight: "20px" }}>
                     <div className="wizard__steps" style={{ width: "100%" }}>
-                         <div className={`wizard__step${page === 1 ? ' wizard__step--active' : ''}`}><p>Thông tin sinh viên</p></div>
+                        <div className={`wizard__step${page === 1 ? ' wizard__step--active' : ''}`}><p>Thông tin sinh viên</p></div>
                         <div className={`wizard__step${page === 2 ? ' wizard__step--active' : ''}`}><p>Ảnh</p></div>
                     </div>
 
@@ -37,7 +36,7 @@ const InsertStudent = (props) => {
                     <Col md={12} lg={12}>
                         <Card>
                             <CardBody className="wizard">
- 
+
                                 {page === 1
                                     && (
                                         <div className=""  >
@@ -59,7 +58,7 @@ const InsertStudent = (props) => {
                                         <div className="wizard__form-wrapper"  >
 
                                             <WizardFormThree
-
+                                                previousPage={previousPage}
 
                                             />
                                         </div>

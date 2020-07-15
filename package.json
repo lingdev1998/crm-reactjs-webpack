@@ -2,7 +2,7 @@
   "name": "linkdoan",
   "version": "2.4.0",
   "private": true,
-  "homepage": "https://universitymanagement-frontend.herokuapp.com",
+  "homepage": "https://universitymanagement-frontend.herokuapp.com", 
   "engines": {
     "node" : "12.16.1",
     "npm" : "6.14.5"

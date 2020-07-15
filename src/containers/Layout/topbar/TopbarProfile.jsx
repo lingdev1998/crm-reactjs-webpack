@@ -3,7 +3,7 @@ import DownIcon from 'mdi-react/ChevronDownIcon';
 import { Collapse } from 'reactstrap';
 import TopbarMenuLink from './TopbarMenuLink';
 import ButtonMenu from './TopbarMenuButton';
-import { selector, useRecoilState } from 'recoil'
+import {  useRecoilState } from 'recoil'
 import { authenticationState } from '../../../localState/authenticationState';
 import { AUTH_TOKEN_KEY } from '../../../config/constants';
 const Ava = `${process.env.PUBLIC_URL}/img/ava.png`;

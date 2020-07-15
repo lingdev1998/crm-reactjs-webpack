@@ -4,9 +4,7 @@ import PropTypes from 'prop-types';
 import TopbarSidebarButton from './TopbarSidebarButton';
 import TopbarProfile from './TopbarProfile';
 import TopbarMail from './TopbarMail';
-import TopbarNotification from './TopbarNotification';
-import TopbarSearch from './TopbarSearch';
-import TopbarLanguage from './TopbarLanguage';
+import TopbarNotification from './TopbarNotification';  
 import { UserProps } from '../../../shared/prop-types/ReducerProps';
  class Topbar extends PureComponent {
   static propTypes = {
@@ -31,8 +29,7 @@ import { UserProps } from '../../../shared/prop-types/ReducerProps';
           <div className="topbar__right">
              <TopbarNotification />
             <TopbarMail new />
-            <TopbarProfile user={user} />
-            <TopbarLanguage />
+            <TopbarProfile user={user} /> 
           </div>
         </div>
       </div>

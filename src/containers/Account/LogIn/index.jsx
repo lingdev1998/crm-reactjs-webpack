@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import LogInForm from './LogInForm';
 import axios from 'axios';
 import { Redirect } from 'react-router-dom'
@@ -18,9 +18,7 @@ const login = selector({
 });
  
 const LogIn = (props) => {
-
-  const [errorMessage, setErrorMessage] = useState("");
-  const [errorMsg, setErrorMsg] = useState("");
+ 
   const [authentication, setAuthentication] = useRecoilState(authenticationState);
 
   const notify = () => toast.error('🦄 Tên đăng nhập hoặc mật khẩu không đúng!', {
@@ -49,15 +47,7 @@ const LogIn = (props) => {
   const handleRedirect = () => {
     if (authentication.authenticated === true) {
       props.history.push('/students');
-    } else {
-      // if (state.errorMessage) {
-      //   setEnableToast(false);
-      //   setToastError(state.errorMessage);
-      //   setTimeout(() => {
-      //     setEnableToast(true);
-      //   }, 2000);
-      // }
-    }
+    } 
   }
   const submit = values => {
     console.log(values);

@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
-import { Route, Switch, Redirect } from 'react-router-dom';
-import Layout from '../../../Layout/index';
+import {  Switch, Redirect } from 'react-router-dom'; 
 import PrivateRouter from '../PrivateRouter';
 import Student from '../../../Student/index';
 import Teacher from '../../../Teacher/index'

@@ -9,8 +9,7 @@ import Register from '../../Account/Register/index';
 import RegisterPhoto from '../../Account/RegisterPhoto/index';
 import WrappedRoutes from './WrappedRoutes';
 
-import { selector, useRecoilState } from 'recoil'
-import {AUTH_TOKEN_KEY} from '../../../config/constants';
+import {  useRecoilState } from 'recoil' 
 import {authenticationState} from '../../../localState/authenticationState';
 
 const Router = () => {
