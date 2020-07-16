@@ -16,9 +16,9 @@ const login = selector({
     return rs;
   }
 });
- 
+
 const LogIn = (props) => {
- 
+
   const [authentication, setAuthentication] = useRecoilState(authenticationState);
 
   const notify = () => toast.error('🦄 Tên đăng nhập hoặc mật khẩu không đúng!', {
@@ -40,31 +40,26 @@ const LogIn = (props) => {
 
     }
     handleRedirect();
-    console.log("authe from login", authentication);
 
   }, [authentication.authenticated])
 
   const handleRedirect = () => {
     if (authentication.authenticated === true) {
       props.history.push('/students');
-    } 
+    }
   }
   const submit = values => {
-    console.log(values);
     let data = new FormData();
     data.append('username', values.username);
     data.append('password', values.password);
-    console.log(values);
     axios.post("/authenticate", data).then(res => {
       const jwt = res.data.jwttoken;
       localStorage.setItem(AUTH_TOKEN_KEY, jwt);
-      console.log("login oke");
       setAuthentication({ ...authentication, authenticated: true })
     }).catch(err => {
       notify();
     });
   }
-  console.log("authentication", authentication.authenticated);
   return (
     <>
       {

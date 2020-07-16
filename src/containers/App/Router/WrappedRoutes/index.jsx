@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import {  Switch, Redirect } from 'react-router-dom'; 
+import { Switch, Redirect } from 'react-router-dom';
 import PrivateRouter from '../PrivateRouter';
 import Student from '../../../Student/index';
 import Teacher from '../../../Teacher/index'
@@ -22,15 +22,15 @@ export const MainWrapper = (props) => {
 
   }, [authentication.authenticated]);
   return (
-    <div> 
-    
-        <Switch>
-          <PrivateRouter path="/students" component={Student} />
-          <PrivateRouter path="/teachers" component={Teacher} />
+    <div>
 
-          <Redirect from="/" to="/students" />
-        </Switch>
-     </div>
+      <Switch>
+        <PrivateRouter path="/students" component={Student} />
+        <PrivateRouter path="/teachers" component={Teacher} />
+
+        <Redirect from="/" to="/students" />
+      </Switch>
+    </div>
   )
 }
 export default MainWrapper;

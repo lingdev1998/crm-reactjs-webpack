@@ -71,7 +71,6 @@ const Student = (props) => {
       response => {
         setStudentList(response.data.content);
         setTotalElements(response.data.totalElements);
-        console.log(response.data.totalElements);
         setCurrent(response.data.number + 1);
       }
     ).catch(
@@ -79,30 +78,51 @@ const Student = (props) => {
     );
     axios.get("/department/getAll").then(response => setDepartmentList(response.data)).catch(err => console.log(err));
 
-  }, [pageSize, current, keySearch1, keySearch2, keySearch3, keySearch4, keySearch5]);
+  }, [pageSize, current]);
+
+  useEffect(() => {
+    let data = new FormData();
+    data.append('page', 0);
+    data.append('pageSize', 10);
+    data.append('keySearch1', keySearch1);
+    data.append('keySearch2', keySearch2);
+    data.append('keySearch3', keySearch3);
+    data.append('keySearch4', keySearch4);
+    data.append('keySearch5', keySearch5);
+
+    axios.post("/student/getAll", data).then(
+      response => {
+        setStudentList(response.data.content);
+        setTotalElements(response.data.totalElements);
+        setCurrent(response.data.number + 1);
+      }
+    ).catch(
+      err => console.log(err)
+    );
+    axios.get("/department/getAll").then(response => setDepartmentList(response.data)).catch(err => console.log(err));
+
+  }, [keySearch1, keySearch2, keySearch3, keySearch4, keySearch5]);
 
   useEffect(() => {
 
     axios.get("/country/findAll")
-    .then(response => {
-      let update = {
-        countryList : response.data
-      }
-      setStudentState(Object.assign(studentState,update));
-    })
-    .catch(err => console.log(err));
-    console.log("lan 1: ", studentState)
+      .then(response => {
+        let update = {
+          countryList: response.data
+        }
+        setStudentState(Object.assign(studentState, update));
+      })
+      .catch(err => console.log(err));
 
-     axios.get("/nationality/findAll")
-    .then(response => {
-      let update = {
-        nationalityList : response.data
-      }
-      setStudentState(Object.assign(studentState,update));
-    })
-    .catch(err => console.log(err));
+    axios.get("/nationality/findAll")
+      .then(response => {
+        let update = {
+          nationalityList: response.data
+        }
+        setStudentState(Object.assign(studentState, update));
+      })
+      .catch(err => console.log(err));
 
-     console.log("after", studentState)
   }, []);
 
 
@@ -132,12 +152,6 @@ const Student = (props) => {
             setToInsertPage={setToInsertPage}
             departmentList={departmentList}
             prepareDepartmentList={prepareDepartmentList}
-            setDepartmentId={setDepartmentId}
-            departmentId={departmentId}
-            setCourseNumber={setCourseNumber}
-            courseNumber={courseNumber}
-            setClassId={setClassId}
-            classId={classId}
           />
         }
 

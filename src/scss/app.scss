@@ -101,7 +101,7 @@ svg {
 }
 
 ::placeholder {
-  color: red !important;
+  color: #6C757D !important;
   font-size: small;
 }
 input{
@@ -133,4 +133,17 @@ select{
   button{
     width: 100px !important;
    }
+}
+.ant-input-affix-wrapper{
+  height: 35px !important;
+  padding-top:0px !important;
+  padding-bottom:0px !important;
+  border:1px solid #d9d9d9 !important;
+  border-radius: 2px !important;
+  z-index: 999 !important;
+   input{
+    border:none !important;
+    z-index: -1 !important;
+    height: 33px !important;
+  }
 }

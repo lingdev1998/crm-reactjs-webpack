@@ -4,6 +4,7 @@ const authenticationState = atom({
     key: AUTHENTICATION_STATE,
     default:{
       authenticated : false
-    }
+    },
+    dangerouslyAllowMutability:true,
   });
 export {authenticationState};

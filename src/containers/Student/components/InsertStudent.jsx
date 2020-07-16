@@ -46,10 +46,6 @@ const InsertStudent = (props) => {
                                                 nextPage={nextPage}
                                                 setToInsertPage={props.setToInsertPage}
                                                 prepareDepartmentList={props.prepareDepartmentList}
-                                                departmentId={props.departmentId}
-                                                courseNumber={props.courseNumber}
-                                                classId={props.classId}
-                                                setClassId={props.setClassId} 
                                             />
                                         </div>
                                     )}

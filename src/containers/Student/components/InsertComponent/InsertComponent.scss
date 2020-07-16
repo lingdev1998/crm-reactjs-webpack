@@ -1,0 +1,44 @@
+.form-control[readonly] {
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.toggle-button {
+  background: transparent;
+  border: 0;
+  bottom: 0;
+  padding: 0 12px;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.form-group {
+  margin-bottom: 0.3em;
+
+  label {
+    margin-bottom: 0.1em;
+  }
+
+  .invalid-feedback {
+     display: block !important;
+    height: 17px;
+  }
+  .is-valid {
+    border-color: #28a745 !important;
+    background-position: right calc(0.375em + 0.75rem) center;
+    z-index: 1;
+  }
+  .is-invalid{
+    border-color: #dc3545 !important;
+    background-position: right calc(0.375em + 0.75rem) center;
+    z-index: 1;
+
+  }
+  .rbt-input-hint{
+    border:none;  
+  }
+  .menu-options{
+    z-index: 9999;
+  }
+}

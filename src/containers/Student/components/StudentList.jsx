@@ -4,9 +4,9 @@ import {
 } from 'reactstrap';
 import { withTranslation } from 'react-i18next';
 import Panel from '../../../shared/components/Panel';
-import { Table, Button, Popconfirm ,Tooltip} from 'antd';
+import { Table, Button, Popconfirm, Tooltip } from 'antd';
 import { Input, Cascader } from 'antd';
-import { DeleteOutlined, EditOutlined, SearchOutlined, DownloadOutlined, PlusSquareOutlined } from '@ant-design/icons';
+import { DeleteOutlined, EditOutlined, SearchOutlined, DownloadOutlined, PlusSquareOutlined, CloseOutlined } from '@ant-design/icons';
 import 'antd/dist/antd.css';
 
 const columns = [
@@ -73,7 +73,6 @@ const StudentList = ({ t, studentList, departmentList, totalElements, current, s
 
   useEffect(() => {
     if (departmentList.length > 0) {
-      console.log("preparing departmentList....", departmentList);
       var d = new Date();
       var n = d.getFullYear();
       var options = [];
@@ -104,7 +103,6 @@ const StudentList = ({ t, studentList, departmentList, totalElements, current, s
           options.push(x)
         }
       }
-      console.log("Prepare done!", options);
       setDepartmentOptions(options);
       setPrepareDepartmentList(options)
     }
@@ -124,14 +122,35 @@ const StudentList = ({ t, studentList, departmentList, totalElements, current, s
           <Col md={10} sm={8}>
             <div className="site-input-group-wrapper">
               <Input.Group compact>
-                <Cascader style={{ width: '50%' }} options={departmentOptions} onChange={e => onCascaderChange(e)} placeholder="Tuỳ chọn tìm kiếm..." />
-                <Input style={{ width: '20%' }} defaultValue="" onChange={e => setKeySearch1(e.target.value)} placeholder="Mã sinh viên..." />
-                <Input style={{ width: '30%' }} addonAfter={<SearchOutlined />} defaultValue="" placeholder="Tên sinh viên..." onChange={e => setKeySearch2(e.target.value)} />
+
+                <Cascader
+                  style={{ width: '50%' }}
+                  options={departmentOptions}
+                  onChange={e => onCascaderChange(e)}
+                  placeholder="Tuỳ chọn tìm kiếm..."
+                />
+
+                <Input
+                  style={{ width: '20%' }}
+                  defaultValue=""
+                  onChange={e => setKeySearch1(e.target.value)}
+                  placeholder="Mã sinh viên..."
+                  allowClear
+                />
+
+                <Input
+                  style={{ width: '30%' }}
+                  defaultValue=""
+                  placeholder="Tên sinh viên..."
+                  onChange={e => setKeySearch2(e.target.value)}
+                  allowClear
+                />
 
               </Input.Group>
             </div>
           </Col>
           <Col md={1} className="button_toolbar_list" sm={5}>
+
             <Button
               onClick={() => { setToInsertPage(true) }}
               type="primary"
@@ -144,8 +163,11 @@ const StudentList = ({ t, studentList, departmentList, totalElements, current, s
             >
               <DownloadOutlined />Lưu
           </Button>
+
           </Col>
+
           <Col md={1} className="button_toolbar_list" sm={5}>
+
             <Button
               onClick={() => { setToInsertPage(true) }}
               type="primary"
@@ -155,9 +177,12 @@ const StudentList = ({ t, studentList, departmentList, totalElements, current, s
 
             >
               <PlusSquareOutlined />Thêm
-          </Button>
+            </Button>
+
           </Col>
+
         </Row>
+
         <Table
           columns={columns}
           dataSource={studentList}
@@ -173,12 +198,12 @@ const StudentList = ({ t, studentList, departmentList, totalElements, current, s
             total: totalElements,
             current: current,
             onChange: (page, pageSize) => {
-              console.log(page)
               setCurrent(page);
               setPageSize(pageSize);
             }
           }}
         />
+
       </Panel>
     </>
   );
