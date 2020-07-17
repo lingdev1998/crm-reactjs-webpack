@@ -13,7 +13,7 @@ import { config as i18nextConfig } from '../../translations';
 import Loading from '../../shared/components/Loading';
 
 import { RecoilRoot } from 'recoil';
- 
+
 i18next.init(i18nextConfig);
 const App = () => {
   const [loading, setLoading] = useState(true);
@@ -21,14 +21,16 @@ const App = () => {
 
   useEffect(() => {
     window.addEventListener('load', () => {
-      setLoading(false);
-      setTimeout(() => setLoaded(true), 500);
+      setTimeout(() => {
+        setLoading(false);
+        setLoaded(true)
+      }, 500);
     });
   }, []);
 
- 
+
   return (
-    <RecoilRoot> 
+    <RecoilRoot>
       <BrowserRouter basename="/">
         <I18nextProvider i18n={i18next}>
           <ScrollToTop>
@@ -38,9 +40,7 @@ const App = () => {
                   <Loading loading={loading} />
                 )
               }
-              <div>
                 <Router />
-              </div>
             </Fragment>
           </ScrollToTop>
         </I18nextProvider>

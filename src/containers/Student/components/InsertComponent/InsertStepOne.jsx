@@ -13,7 +13,9 @@ import axios from 'axios';
 import './InsertComponent.scss';
 
 const nameRegExp = /^(?=.{0,40}$)[a-zA-Z]+(?:[-'\s][a-zA-Z]+)*$/;
+
 const sexRegExp = /^(0|1)$/;
+
 const SignupSchema = Yup.object().shape({
   fullName: Yup.string()
     .min(3, `Ít nhất 3 ký tự`)
@@ -34,16 +36,11 @@ const SignupSchema = Yup.object().shape({
     .required("Không bỏ trống trường này"),
   commune: Yup.string()
     .required("Không bỏ trống trường này"),
-});
-
-const schema = Yup.object().shape({
   departmentId: Yup.string()
     .required("Không bỏ trống trường này"),
   classId: Yup.string()
     .required("Không bỏ trống trường này"),
-  courseNumber: Yup.string()
-    .required("Không bỏ trống trường này"),
-})
+});
 
 const StudentInsertStepOne = (props) => {
   // const onSubmit = (values, { setSubmitting, setErrors }) => {
@@ -54,10 +51,10 @@ const StudentInsertStepOne = (props) => {
 
   const { setToInsertPage } = props;
 
-  const [classDepartmentErr, setClassDepartmentErr] = useState(null);
-  const [classDepartmentTouched, setClassDepartmentTouched] = useState(false);
+  const [classList, setClassList] = useState([]);
+
   useEffect(() => {
-    console.log('render');
+    console.log(props.prepareDepartmentList);
     return () => {
       let defaultGlobalState = {
         cityList: [],
@@ -76,7 +73,7 @@ const StudentInsertStepOne = (props) => {
       <Formik
         initialValues={{
           fullName: '',
-          sex: '-1',
+          sex: '',
           dateBirth: '',
           nationality: '',
           ethnic: '',
@@ -94,12 +91,11 @@ const StudentInsertStepOne = (props) => {
           phoneNumber: '',
           familyPhoneNumber: '',
           email: '',
-          classDepartment: {
-            classId: '',
-            departmentId: '',
-            courseNumber: ''
+          classId: '',
+          departmentId: '',
+          courseNumber: '',
+          religion:''
 
-          },
         }}
         initialErrors={
           {
@@ -133,51 +129,77 @@ const StudentInsertStepOne = (props) => {
               <Col md={6}>
 
                 <FormGroup>
-                  <Label for="classDepartment">Khoa/Khoá/Lớp<Tooltip placement="topLeft" title="Không được để trống trường này"><span className="text-danger">*</span></Tooltip></Label>
-                  <Cascader
-                    onBlur={() => setClassDepartmentTouched(true)}
-                    style={{ width: '100%' }}
-                    defaultValue={formProps.values.classDepartment.departmentId && formProps.values.classDepartment.courseNumber && formProps.values.classDepartment.classId ? [formProps.values.classDepartment.departmentId, formProps.values.classDepartment.courseNumber, formProps.values.classDepartment.classId] : []}
-                    options={props.prepareDepartmentList}
-                    placeholder="Khoa/Khoá/Lớp..."
-                    name="classDepartment"
-                    className={classDepartmentErr !== null ? (classDepartmentErr === '' ? " form-control form-cascader is-valid" : " form-control form-cascader is-invalid") : ""}
-                    onChange={(selected) => {
-                      if (Array.isArray(selected) && selected.length > 1) {
-                        let object = {
-                          classDepartment: {
-                            departmentId: selected[0],
-                            courseNumber: selected[1],
-                            classId: selected[2]
-                          },
-                          courseNumber: selected[1],
-                        }
-                        formProps.setValues(Object.assign(formProps.values, object))
-                        schema.validate(formProps.values.classDepartment)
-                          .then(res => setClassDepartmentErr(""))
-                          .catch(err => setClassDepartmentErr("Không hợp lệ."));
-                        console.log(classDepartmentErr);
+                  <Label for="departmentId">Khoa<Tooltip placement="topLeft" title="Không được để trống trường này"><span className="text-danger">*</span></Tooltip></Label>
+                  <Input
+                    type="select"
+                    name="departmentId"
+                    id="departmentId"
+                    onBlur={formProps.handleBlur}
+                    invalid={formProps.touched.departmentId && !!formProps.errors.departmentId}
+                    valid={formProps.touched.departmentId && !formProps.errors.departmentId}
+                    required value={formProps.values.departmentId}
+                    onChange={(e) => {
+                      console.log(e.target.value);
+                      if (e.target.value !== '') {
+                        let values = {
+                          departmentId: e.target.value,
+                        };
+                        formProps.setValues(Object.assign(formProps.values, values));
+                        var formData = new FormData();
+                        formData.append("departmentId", e.target.value);
+                        axios.post("/class/getAll", formData)
+                          .then(res =>
+                            setClassList(res.data.content)
+                          )
+                          .catch(setClassList([]));
                       }
                       else {
-                        let object = {
-                          classDepartment: {
-                            departmentId: '',
-                            courseNumber: '',
-                            classId: ''
-                          },
-                        }
-                        formProps.setValues(Object.assign(formProps.values, object))
-                        schema.validate(formProps.values.classDepartment)
-                          .then(res => setClassDepartmentErr(""))
-                          .catch((err) => {
-                            setClassDepartmentErr("Không hợp lệ.")
-                          });
-                        console.log(classDepartmentErr);
+                        let values = {
+                          departmentId: '',
+                          classId: ''
+                        };
+                        formProps.setValues(Object.assign(formProps.values, values));
                       }
                     }}
-                  />
-                  <div className="invalid-feedback">{classDepartmentErr}</div>
+                  >
+                    <option key={"departmentIdNan"} value={''}>{"Chọn khoa..."}</option>)
+                    {
+                      props.prepareDepartmentList.map(item =>
+                        item !== undefined ?
+                          <option
+                            key={"departmentId" + item.value}
+                            value={item.value}>
+                            {item.label}
+                          </option> : ""
+                      )}
+                  </Input>
+                  <FormFeedback >{formProps.touched.departmentId === true ? formProps.errors.departmentId : ""}</FormFeedback>
                 </FormGroup>
+
+                {
+                  formProps.values.departmentId !== '' ?
+                    <FormGroup>
+                      <Label for="classId">Lớp<Tooltip placement="topLeft" title="Không được để trống trường này"><span className="text-danger">*</span></Tooltip></Label>
+                      <Input
+                        type="select"
+                        name="classId"
+                        id="classId"
+                        onBlur={formProps.handleBlur}
+                        invalid={formProps.touched.classId && !!formProps.errors.classId}
+                        valid={formProps.touched.classId && !formProps.errors.classId}
+                        required value={formProps.values.classId}
+                        onChange={formProps.handleChange}
+                      >
+                        <option key={"classIdNaN"} value={''}>{"Chọn lớp..."}</option>)
+                        {
+                          classList.map(item =>
+                            item !== undefined ? <option key={"classId" + item.classId} value={item.classId}>{item.classId + " " + item.className}</option> : ""
+                          )
+                        }
+                      </Input>
+                      <FormFeedback >{formProps.touched.fullName === true ? formProps.errors.fullName : ""}</FormFeedback>
+                    </FormGroup> : ""
+                }
 
                 <FormGroup>
                   <Label for="fullName">Họ và tên<Tooltip placement="topLeft" title="Không được để trống trường này"><span className="text-danger">*</span></Tooltip></Label>
@@ -208,10 +230,10 @@ const StudentInsertStepOne = (props) => {
                     required value={formProps.values.sex}
                     onChange={formProps.handleChange}
                   >
-                    <option key={"NaN"} value={-1}>{"Giới tính"}</option>)
+                    <option key={"sexNaN"} value={''}>{"Giới tính"}</option>)
                         <option key={"sex0"} value={0}>{"Nam"}</option>)
                         <option key={"sex1"} value={1}>{"Nữ"}</option>)
-                      </Input>
+                  </Input>
                   <FormFeedback>{formProps.touched.sex === true ? formProps.errors.sex : ""}</FormFeedback>
                 </FormGroup>
 
@@ -528,6 +550,22 @@ const StudentInsertStepOne = (props) => {
                     onBlur={formProps.handleBlur}
                     value={formProps.values.otherAddress}
                   />
+                  <FormFeedback>{""}</FormFeedback>
+                </FormGroup>
+
+                <FormGroup>
+                  <Label for="religion">Tôn giáo</Label>
+                      <Input
+                        type="text"
+                        name="religion"
+                        id="religion"
+                        placeholder="Nhập tôn giáo..."
+                        onChange={formProps.handleChange}
+                        value={formProps.values.religion}
+                        invalid={formProps.touched.religion && !!formProps.errors.religion}
+                        valid={formProps.touched.religion && !formProps.errors.religion}
+                        onBlur={formProps.handleBlur}
+                      />
                   <FormFeedback>{""}</FormFeedback>
                 </FormGroup>
 

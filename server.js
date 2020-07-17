@@ -7,7 +7,7 @@ const app = new Koa();
 const router = new Router();
 
 // or use absolute paths
-app.use(serve(`${__dirntame}/build`));
+app.use(serve(`${__dirname}/build`));
 router.get('/*', async (ctx) => {
   await send(ctx, 'build/index.html');
 });

@@ -84,6 +84,7 @@
     "react-i18next": "^10.2.0",
     "react-images": "^0.5.19",
     "react-input-mask": "^2.0.4",
+    "react-loadingg": "^1.7.2",
     "react-redux": "^7.1.0-rc.1",
     "react-redux-loading-bar": "^4.6.0",
     "react-router": "^4.3.1",
