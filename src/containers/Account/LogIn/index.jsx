@@ -6,30 +6,11 @@ import { selector, useRecoilState } from 'recoil'
 import { authenticationState } from '../../../localState/authenticationState';
 import { AUTH_TOKEN_KEY } from '../../../config/constants';
 import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-
-
-const login = selector({
-  key: 'login',
-  get: async (formData) => {
-    const rs = await axios.post("/authenticate", formData).then(res => res.data);
-    return rs;
-  }
-});
+import {notifyError} from '../../../shared/components/Notifications';
 
 const LogIn = (props) => {
 
   const [authentication, setAuthentication] = useRecoilState(authenticationState);
-
-  const notify = () => toast.error('🦄 Tên đăng nhập hoặc mật khẩu không đúng!', {
-    position: "top-center",
-    autoClose: 3000,
-    hideProgressBar: false,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: true,
-    progress: undefined,
-  });
 
   useEffect(() => {
     if (localStorage.getItem(AUTH_TOKEN_KEY)) {
@@ -57,7 +38,7 @@ const LogIn = (props) => {
       localStorage.setItem(AUTH_TOKEN_KEY, jwt);
       setAuthentication({ ...authentication, authenticated: true })
     }).catch(err => {
-      notify();
+      notifyError("Tên đăng nhập hoặc mật khẩu không đúng!");
     });
   }
   return (

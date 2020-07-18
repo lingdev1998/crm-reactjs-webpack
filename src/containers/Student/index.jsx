@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Container, Row, } from 'reactstrap';
 import { withTranslation } from 'react-i18next';
 import StudentList from './components/StudentList';
-import InsertStudent from './components/InsertStudent.jsx';
+import InsertStudent from './components/InsertStudent';
 import axios from "axios";
 import 'antd/dist/antd.css';
 import { ArrowUpOutlined } from '@ant-design/icons';
@@ -51,11 +51,7 @@ const Student = (props) => {
 
   const [prepareDepartmentList, setPrepareDepartmentList] = useState([]);
 
-  const [departmentId, setDepartmentId] = useState('');
-
-  const [courseNumber, setCourseNumber] = useState('');
-
-  const [classId, setClassId] = useState('');
+  const [forceRerender, setForceRerender] = useState(false);
 
   useEffect(() => {
     let data = new FormData();
@@ -78,7 +74,7 @@ const Student = (props) => {
     );
     axios.get("/department/getAll").then(response => setDepartmentList(response.data)).catch(err => console.log(err));
 
-  }, [pageSize, current]);
+  }, [pageSize, current,forceRerender]);
 
   useEffect(() => {
     let data = new FormData();
@@ -152,6 +148,7 @@ const Student = (props) => {
             setToInsertPage={setToInsertPage}
             departmentList={departmentList}
             prepareDepartmentList={prepareDepartmentList}
+            setForceRerender={setForceRerender}
           />
         }
 

@@ -12,7 +12,7 @@ import 'antd/dist/antd.css';
 const columns = [
   {
     title: 'Mã sinh viên',
-    width: 80,
+    width: 70,
     dataIndex: 'studentId',
     key: 'studentId',
     render: text => <Tooltip placement="topLeft" title="Click để xem thông tin">
@@ -22,21 +22,21 @@ const columns = [
   },
   {
     title: 'Họ và tên',
-    width: 150,
+    width: 110,
     dataIndex: 'fullName',
     key: 'fullName',
     fixed: 'left',
   },
 
-  { title: 'Ngày sinh', dataIndex: 'dateBirth', width: 110, key: 'dateBirth' },
+  { title: 'Ngày sinh', dataIndex: 'dateBirth', width: 60, key: 'dateBirth' },
   {
     title: 'Giới tính',
     dataIndex: 'sex',
-    width: 110,
+    width: 50,
     key: 'sex',
     render: text => <>{text !== null ? (text === '1' ? "Nữ" : "Nam") : ""}</>,
   },
-  { title: 'Quê quán', dataIndex: 'homeAddress', width: 110, key: 'homeAddress' },
+  { title: 'Quê quán', dataIndex: 'homeAddress', width: 150, key: 'homeAddress' },
   { title: 'Số điện thoại', dataIndex: 'phoneNumber', width: 110, key: 'phoneNumber' },
   {
     title: '',
@@ -47,9 +47,8 @@ const columns = [
       <>
         <Button type="primary" icon={<EditOutlined />}  >
           Sửa
-        </Button>
+        </Button>{" "}
         <Popconfirm title="Chắc chắn xoá？" okText="OK" cancelText="Huỷ">
-
           <Button type="dashed" icon={<DeleteOutlined />} danger>
             Xoá
           </Button>
@@ -191,7 +190,7 @@ const StudentList = ({ t, studentList, departmentList, totalElements, current, s
           rowKey="studentId"
           rowSelection={{ ...rowSelection }}
           pagination={{
-            showTotal: total => `Tổng cộng ${total} bản ghi`,
+            showTotal: total => `Tổng cộng ${total} học sinh`,
             defaultPageSize: 10,
             showSizeChanger: true,
             pageSizeOptions: ['10', '20', '30', '50', '100'],

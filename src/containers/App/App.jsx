@@ -11,8 +11,9 @@ import Router from './Router';
 import ScrollToTop from './ScrollToTop';
 import { config as i18nextConfig } from '../../translations';
 import Loading from '../../shared/components/Loading';
-
 import { RecoilRoot } from 'recoil';
+import { ToastContainer} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 i18next.init(i18nextConfig);
 const App = () => {
@@ -41,6 +42,7 @@ const App = () => {
                 )
               }
                 <Router />
+                <ToastContainer/>
             </Fragment>
           </ScrollToTop>
         </I18nextProvider>

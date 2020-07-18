@@ -8,6 +8,7 @@ import 'antd/dist/antd.css';
 import { Typeahead } from 'react-bootstrap-typeahead';
 import { useRecoilState } from 'recoil';
 import { studentGlobalState } from '../../../../localState/studentState';
+import {notifyError,notifySuccess} from '../../../../shared/components/Notifications';
 import axios from 'axios';
 
 import './InsertComponent.scss';
@@ -42,10 +43,7 @@ const SignupSchema = Yup.object().shape({
     .required("Không bỏ trống trường này"),
 });
 
-const StudentInsertStepOne = (props) => {
-  // const onSubmit = (values, { setSubmitting, setErrors }) => {
-  //   console.log(values);
-  // };
+const StudentInsertStepOne = (props) => { 
 
   const [studentState, setStudentState] = useRecoilState(studentGlobalState);
 
@@ -69,9 +67,10 @@ const StudentInsertStepOne = (props) => {
 
   return (
     <div>
-      <hr />
       <Formik
         initialValues={{
+          classId: '',
+          departmentId: '',
           fullName: '',
           sex: '',
           dateBirth: '',
@@ -91,8 +90,6 @@ const StudentInsertStepOne = (props) => {
           phoneNumber: '',
           familyPhoneNumber: '',
           email: '',
-          classId: '',
-          departmentId: '',
           courseNumber: '',
           religion:''
 
@@ -117,7 +114,37 @@ const StudentInsertStepOne = (props) => {
           }
         }
         onSubmit={(values, actions) => {
-          console.log(values)
+          let formData = new FormData();
+          formData.append("departmentId",values.departmentId );
+          formData.append("classId", values.classId);
+          formData.append("fullName", values.fullName);
+          formData.append("sex", values.sex);
+          formData.append("dateBirth", values.dateBirth);
+          formData.append("nationality", values.nationality);
+          formData.append("ethnic",values.ethnic);
+          formData.append("homeAddress", values.otherAddress + " " +  values.commune + " " + values.district + " " + values.city + " " + values.country);
+          formData.append("fatherName", values.fatherName);
+          formData.append("fatherWork", values.fatherWork);
+          formData.append("fatherDateBirth", values.fatherDateBirth);
+          formData.append("motherName", values.motherName);
+          formData.append("motherWork", values.motherWork);
+          formData.append("motherDateBirth", values.motherDateBirth);
+          formData.append("phoneNumber", values.phoneNumber);
+          formData.append("familyPhoneNumber", values.familyPhoneNumber);
+          formData.append("email", values.email);
+          formData.append("religion", values.religion);
+          console.log(formData);
+          axios.post("/student/insert", formData)
+          .then(res =>{
+            notifySuccess("Tạo mới thành công !!!")
+            props.setToInsertPage(false);
+            props.setForceRerender(values => values = !values)
+          })
+          .catch(err => {
+            notifyError("Tạo mới thất bại")
+            props.setToInsertPage(false);
+            props.setToInsertPage(false);
+          })
         }}
         validationSchema={SignupSchema}
         validateOnChange={true}
@@ -197,7 +224,7 @@ const StudentInsertStepOne = (props) => {
                           )
                         }
                       </Input>
-                      <FormFeedback >{formProps.touched.fullName === true ? formProps.errors.fullName : ""}</FormFeedback>
+                      <FormFeedback >{formProps.touched.classId === true ? formProps.errors.classId : ""}</FormFeedback>
                     </FormGroup> : ""
                 }
 
@@ -339,7 +366,7 @@ const StudentInsertStepOne = (props) => {
                     onChange={(selected) => {
                       if (Array.isArray(selected) && selected.length) {
                         let object = {
-                          country: selected[0].id
+                          country: selected[0].label
                         }
                         if (selected[0].id === 'VNM') {
                           object.city = ''
@@ -358,7 +385,7 @@ const StudentInsertStepOne = (props) => {
                         let object = {
                           country: ''
                         }
-                        if (formProps.values.country === 'VNM') {
+                        if (formProps.values.country === 'Việt Nam') {
                           object.city = ''
                         }
                         formProps.setValues(Object.assign(formProps.values, object))
@@ -373,7 +400,7 @@ const StudentInsertStepOne = (props) => {
                 <FormGroup>
                   <Label for="city">Thành phố/Tỉnh<Tooltip placement="topLeft" title="Không được để trống trường này"><span className="text-danger">*</span></Tooltip></Label>
                   {
-                    formProps.values.country === 'VNM'
+                    formProps.values.country === 'Việt Nam'
                       ?
                       <Typeahead
                         id="basic-typeahead-single"
@@ -390,7 +417,7 @@ const StudentInsertStepOne = (props) => {
                         onChange={(selected) => {
                           if (Array.isArray(selected) && selected.length) {
                             let object = {
-                              city: selected[0].id
+                              city: selected[0].label
                             }
                             formProps.setValues(Object.assign(formProps.values, object))
                             axios.get("/district/findByProvinceCityId?keySearch=" + selected[0].id).then(response => {
@@ -431,7 +458,7 @@ const StudentInsertStepOne = (props) => {
                 <FormGroup>
                   <Label for="district">Quận/Huyện<Tooltip placement="topLeft" title="Không được để trống trường này"><span className="text-danger">*</span></Tooltip></Label>
                   {
-                    formProps.values.country === "VNM" ?
+                    formProps.values.country === "Việt Nam" ?
                       <Typeahead
                         id="basic-typeahead-single"
                         labelKey="label"
@@ -447,7 +474,7 @@ const StudentInsertStepOne = (props) => {
                         onChange={(selected) => {
                           if (Array.isArray(selected) && selected.length) {
                             let object = {
-                              district: selected[0].id
+                              district: selected[0].label
                             }
                             formProps.setValues(Object.assign(formProps.values, object))
                             axios.get("/commune/findByDistrictId?keySearch=" + selected[0].id).then(response => {
@@ -488,7 +515,7 @@ const StudentInsertStepOne = (props) => {
                 <FormGroup>
                   <Label for="commune">Phường/Xã<Tooltip placement="topLeft" title="Không được để trống trường này"><span className="text-danger">*</span></Tooltip></Label>
                   {
-                    formProps.values.country === 'VNM' ?
+                    formProps.values.country === 'Việt Nam' ?
                       <Typeahead
                         id="basic-typeahead-single"
                         labelKey="label"
@@ -504,7 +531,7 @@ const StudentInsertStepOne = (props) => {
                         onChange={(selected) => {
                           if (Array.isArray(selected) && selected.length) {
                             let object = {
-                              commune: selected[0].id
+                              commune: selected[0].label
                             }
                             formProps.setValues(Object.assign(formProps.values, object))
                           }
@@ -562,8 +589,6 @@ const StudentInsertStepOne = (props) => {
                         placeholder="Nhập tôn giáo..."
                         onChange={formProps.handleChange}
                         value={formProps.values.religion}
-                        invalid={formProps.touched.religion && !!formProps.errors.religion}
-                        valid={formProps.touched.religion && !formProps.errors.religion}
                         onBlur={formProps.handleBlur}
                       />
                   <FormFeedback>{""}</FormFeedback>
@@ -669,7 +694,7 @@ const StudentInsertStepOne = (props) => {
                 </FormGroup>
 
                 <FormGroup>
-                  <Label for="familyPhoneNumber">Số điện thoại gia đình<span className="text-danger">*</span>  </Label>
+                  <Label for="familyPhoneNumber">Số điện thoại gia đình</Label>
                   <Input
                     type="text"
                     name="familyPhoneNumber"
@@ -700,14 +725,14 @@ const StudentInsertStepOne = (props) => {
             </Row>
 
             <ButtonToolbar className="form__button-toolbar wizard__toolbar" style={{ display: "flex", justifyContent: "center" }}>
-              <Button type="primary" className="wizard_button" onClick={() => setToInsertPage(false)}><LeftOutlined />Quay lại</Button>
+              <Button type="primary" className="wizard_button" onClick={() => setToInsertPage(value => value = false)}><LeftOutlined />Quay lại</Button>
               <Button
                 className="wizard_button"
                 type="primary"
                 htmlType="submit"
-                disabled={!(formProps.classId !== '' && formProps.setDepartmentId !== '' && formProps.courseNumber !== '')}
-              >
-                Tiếp
+                disabled={formProps.isSubmitting}
+                >
+                {formProps.isSubmitting ? "Xử lý..." : "Lưu"}
                 <RightOutlined />
               </Button>
             </ButtonToolbar>
