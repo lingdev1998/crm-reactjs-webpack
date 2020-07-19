@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { Container, Row, Col } from 'reactstrap';
 import { withTranslation } from 'react-i18next';
-import axios from "axios";
 import 'antd/dist/antd.css';
 import { ArrowUpOutlined } from '@ant-design/icons';
 import { BackTop } from 'antd';
 import Panel from '../../shared/components/Panel';
-import ProfileMain from './components/ProfileMain'; 
-import { Button, Input } from "antd"; 
+import ClassList from './components/ClassList';
+import axios from 'axios';
+
+import { useRecoilState } from 'recoil';
+import { departmentGlobalState } from '../../localState/departmentState';
 
 const style = {
   height: 40,
@@ -23,8 +25,27 @@ const style = {
 
 const Department = (props) => {
 
-  useEffect(() => {
+  const [departmentState, setDepartmentState] = useRecoilState(departmentGlobalState);
 
+  useEffect(() => {
+    axios.get("/department/getAll")
+      .then(
+        res => {
+          let departmentArray = [];
+          res.data.map(item => {
+            let object = {
+              departmentId: item.departmentId,
+              departmentName: item.departmentName
+            };
+            departmentArray.push(object);
+          });
+          let objectAssign = {
+            departmentList : departmentArray
+          };
+          setDepartmentState(Object.assign(departmentState,objectAssign));
+        }
+      )
+      .catch(err => console.log(err));
 
   }, []);
 
@@ -36,11 +57,11 @@ const Department = (props) => {
             <Col
               md={9}
               style={{
-                border: "2px solid",
-                minHeight: "680px"
+                minHeight: "680px",
               }}
             >
- 
+              <ClassList />
+
             </Col>
             <Col
               md={3}

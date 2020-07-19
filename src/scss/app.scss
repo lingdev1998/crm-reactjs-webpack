@@ -1,4 +1,4 @@
-@import 'settings/variable';  //themes' colors
+@import 'settings/variable'; //themes' colors
 
 //vendor...
 @import './vendor';
@@ -6,165 +6,200 @@
 //base...
 @import 'generic/normalize.scss';
 @import 'generic/box-sizing.scss';
-@import './base/scaffolding';         // styles of base elements
-@import './base/typography';          // base styles of h1-h6, p, span
+@import './base/scaffolding'; // styles of base elements
+@import './base/typography'; // base styles of h1-h6, p, span
 
 //components...
-@import './component/alert';                    // components/Alert.js ('reactstrap')
-@import './component/btn';                      // Button from 'reactstrap'
-@import './component/calendar';               // components/Calendar.js  ('react-big-calendar')
-@import './component/card';                   // Card, CardBody from 'reactstrap'
-@import './component/carousel';               // components/carousel/* ('react-slick')
-@import './component/catalog_item';           // components/catalog/CatalogItems.js
-@import './component/chat';                   // components/chat/*
-@import './component/check-box';              // components/form/Checkbox.js and other components with checkboxes
-@import './component/collapse';               // components/Collapse.js ('reactstrap')
-@import './component/color-picker';           // components/form/*ColorPicker.js ('react-color')
-@import './component/date-picker';            // components/form/*Date*Picker.js ('react-datepicker')
-@import './component/dropdown';               //
-@import './component/dropzone';               // components/form/DropZone*.js ('react-dropzone')
-@import './component/edit-table';             // components/table/EditableTable.js ('react-data-grid')
-@import './component/form';                   // <form> and all types of inputs
-@import './component/gallery';                // components/Gallery.js
-@import './component/grid';                   // useless. using for grid presentation
-@import './component/inbox';                  // components/inbox/*
+@import './component/alert'; // components/Alert.js ('reactstrap')
+@import './component/btn'; // Button from 'reactstrap'
+@import './component/calendar'; // components/Calendar.js  ('react-big-calendar')
+@import './component/card'; // Card, CardBody from 'reactstrap'
+@import './component/carousel'; // components/carousel/* ('react-slick')
+@import './component/catalog_item'; // components/catalog/CatalogItems.js
+@import './component/chat'; // components/chat/*
+@import './component/check-box'; // components/form/Checkbox.js and other components with checkboxes
+@import './component/collapse'; // components/Collapse.js ('reactstrap')
+@import './component/color-picker'; // components/form/*ColorPicker.js ('react-color')
+@import './component/date-picker'; // components/form/*Date*Picker.js ('react-datepicker')
+@import './component/dropdown'; //
+@import './component/dropzone'; // components/form/DropZone*.js ('react-dropzone')
+@import './component/edit-table'; // components/table/EditableTable.js ('react-data-grid')
+@import './component/form'; // <form> and all types of inputs
+@import './component/gallery'; // components/Gallery.js
+@import './component/grid'; // useless. using for grid presentation
+@import './component/inbox'; // components/inbox/*
 @import './component/list';
-@import './component/map';                    // GoogleMap from 'react-google-maps'
-@import './component/material-form';          // for 'material-ui'
-@import './component/modal';                  // components/Modal.js ('reactstrap')
-@import './component/notification';           // components/Notification.js ('reactstrap')
-@import './component/pagination';             // components/Pagination.js ('reactstrap')
-@import './component/panel';                  // components/Panel.js
-@import './component/popover';                // Popover from 'reactstrap'
+@import './component/map'; // GoogleMap from 'react-google-maps'
+@import './component/material-form'; // for 'material-ui'
+@import './component/modal'; // components/Modal.js ('reactstrap')
+@import './component/notification'; // components/Notification.js ('reactstrap')
+@import './component/pagination'; // components/Pagination.js ('reactstrap')
+@import './component/panel'; // components/Panel.js
+@import './component/popover'; // Popover from 'reactstrap'
 @import './component/pricing-card';
-@import './component/product-gallery';        // components/catalog/ProductGallery.js
-@import './component/progress-bar';           // ProgressBar from 'reactstrap'
-@import './component/project-member';         // components/ProjectMember.js
-@import './component/radio-btn';              // components/form/RadioButton.js
+@import './component/product-gallery'; // components/catalog/ProductGallery.js
+@import './component/progress-bar'; // ProgressBar from 'reactstrap'
+@import './component/project-member'; // components/ProjectMember.js
+@import './component/radio-btn'; // components/form/RadioButton.js
 @import './component/react-select';
 @import './component/scroll';
-@import './component/search-result';          // components/SearchResult.js
-@import './component/select-options';         // <select> and <option>
-@import './component/sidebar';                // components/sidebar/*
-@import './component/slider';                 // components/range_slider/* ('rc-slider')
-@import './component/table';                  // components/Table.js ('reactstrap')
-@import './component/tabs';                   // Nav, NavItem, NavLink, TabContent, TabPane from 'reactstrap'
-@import './component/text-editor';            // components/text-editor/TextEditor.js ('react-draft-wysiwyg')
-@import './component/time-picker';            // components/form/TimePicker.js ('react-times')
-@import './component/timeline';               // components/TimeLineItem.js
-@import './component/todo';                   // components/ToDo.js
-@import './component/toggle-btn';             // components/form/ToggleButton.js
-@import './component/tooltip';                // Tooltip from 'reactstrap'
-@import './component/topbar';                 // components/topbar/*
-@import './component/wizard';                 // pages/form/wizard_form/*
-@import './component/email-confirmation';     // pages/form/wizard_form/*
-@import './component/material-table';         // pages/tables/material_table/*
+@import './component/search-result'; // components/SearchResult.js
+@import './component/select-options'; // <select> and <option>
+@import './component/sidebar'; // components/sidebar/*
+@import './component/slider'; // components/range_slider/* ('rc-slider')
+@import './component/table'; // components/Table.js ('reactstrap')
+@import './component/tabs'; // Nav, NavItem, NavLink, TabContent, TabPane from 'reactstrap'
+@import './component/text-editor'; // components/text-editor/TextEditor.js ('react-draft-wysiwyg')
+@import './component/time-picker'; // components/form/TimePicker.js ('react-times')
+@import './component/timeline'; // components/TimeLineItem.js
+@import './component/todo'; // components/ToDo.js
+@import './component/toggle-btn'; // components/form/ToggleButton.js
+@import './component/tooltip'; // Tooltip from 'reactstrap'
+@import './component/topbar'; // components/topbar/*
+@import './component/wizard'; // pages/form/wizard_form/*
+@import './component/email-confirmation'; // pages/form/wizard_form/*
+@import './component/material-table'; // pages/tables/material_table/*
 @import './component/load';
 @import './component/customizer';
 @import './component/input.scss';
 
 //pages...
-@import 'containers/account';              // pages/account/* (except profile)
-@import 'containers/cart';                 // pages/e-commerce/cart/*
-@import 'containers/dashboard';            // pages/dashboards/*
-@import 'containers/invoice';              // pages/default_page/invoice_template
-@import 'containers/not-found';            // pages/default_page/404/*
-@import 'containers/payment';              // pages/e-commerce/payment/*
-@import 'containers/product-card';         // pages/e-commerce/product-page/components/ProductCard.js
-@import 'containers/product-edit';         // pages/e-commerce/product_edit/*
-@import 'containers/products-list';        // pages/e-commerce/product_list/*
-@import 'containers/profile';              // pages/account/profile/*
-@import 'containers/project-summary';      // pages/default_pages/project_summary/*
+@import 'containers/account'; // pages/account/* (except profile)
+@import 'containers/cart'; // pages/e-commerce/cart/*
+@import 'containers/dashboard'; // pages/dashboards/*
+@import 'containers/invoice'; // pages/default_page/invoice_template
+@import 'containers/not-found'; // pages/default_page/404/*
+@import 'containers/payment'; // pages/e-commerce/payment/*
+@import 'containers/product-card'; // pages/e-commerce/product-page/components/ProductCard.js
+@import 'containers/product-edit'; // pages/e-commerce/product_edit/*
+@import 'containers/products-list'; // pages/e-commerce/product_list/*
+@import 'containers/profile'; // pages/account/profile/*
+@import 'containers/project-summary'; // pages/default_pages/project_summary/*
 @import 'containers/documentation';
 @import 'containers/landing';
 
 //objects...
-@import 'objects/layout.scss';        // layout settings
+@import 'objects/layout.scss'; // layout settings
 
- //importtant
+//importtant
 svg {
-    overflow: hidden;
-    vertical-align: baseline !important;
-  }
-.ant-cascader-menu{
+  overflow: hidden;
+  vertical-align: baseline !important;
+}
+
+.ant-cascader-menu {
   height: 400px !important;
 }
-.ant-back-top{
-  right:0 !important;
-}
-::-webkit-input-placeholder { /* Edge */
-  color: red;
+
+.ant-back-top {
+  right: 0 !important;
 }
 
-:-ms-input-placeholder { /* Internet Explorer 10-11 */
-  color: red;
+::-webkit-input-placeholder {
+  /* Edge */
+  color: #6C757D !important;
+  font-size: small;
+}
+
+:-ms-input-placeholder {
+  /* Internet Explorer 10-11 */
+  color: #6C757D !important;
+  font-size: small;
 }
 
 ::placeholder {
   color: #6C757D !important;
   font-size: small;
 }
-input{
+
+//tat ca input
+input {
   height: 35px !important;
   border-right-width: 1px !important;
   border-top-right-radius: 2px !important;
   border-bottom-right-radius: 2px !important;
   border-top-left-radius: 2px !important;
-  border-bottom-left-radius: 2px !important; 
+  border-bottom-left-radius: 2px !important;
   border: 1px solid #d9d9d9 !important;
-  font-size :small !important;
+  font-size: small !important;
 }
-button{
+
+button {
   font-size: small !important;
   height: 35px !important;
-  
+
 }
-select{
+
+//select cua restrap
+select {
   height: 35px !important;
-  font-size :small !important;
+  font-size: small !important;
   border-right-width: 1px !important;
   border-top-right-radius: 2px !important;
   border-bottom-right-radius: 2px !important;
   border-top-left-radius: 2px !important;
-  border-bottom-left-radius: 2px !important; 
+  border-bottom-left-radius: 2px !important;
   border: 1px solid #d9d9d9 !important;
-  option{
-    font-size :small !important;
+
+  option {
+    font-size: small !important;
   }
 }
-.wizard_button{
+
+.wizard_button {
   width: 100px !important;
 }
-.button_toolbar_list{
-  button{
+
+.button_toolbar_list {
+  button {
     width: 100px !important;
-   }
+  }
 }
-.ant-input-affix-wrapper{
+
+.ant-input-affix-wrapper {
   height: 35px !important;
-  padding-top:0px !important;
-  padding-bottom:0px !important;
-  border:1px solid #d9d9d9 !important;
+  padding-top: 0px !important;
+  padding-bottom: 0px !important;
+  border: 1px solid #d9d9d9 !important;
   border-radius: 2px !important;
   z-index: 999 !important;
-   input{
-    border:none !important;
+
+  input {
+    border: none !important;
     z-index: -1 !important;
     height: 33px !important;
   }
 }
 
-.panel__body{
+//select cua antdesign
+.ant-select-selector {
+  height: 35px !important;
+
+  .ant-select-selection-item {
+    font-size: small;
+    line-height: 33px;
+  }
+
+  .ant-select-selection-placeholder {
+    color: red !important;
+    font-size: small;
+    line-height: 33px;
+  }
+}
+
+.panel__body {
   min-height: 850px !important;
   background-color: #F0F3F5 !important;
   padding: 0px !important;
+
   .panel__btns {
     top: 0px !important;
     right: 0px !important;
+  }
 }
-}
-.wizard{
-  form{
+
+.wizard {
+  form {
     background-color: white;
   }
 }
