@@ -23,7 +23,7 @@ class SidebarContent extends Component {
           <SidebarLink
             title="Khoa"
             icon="apartment"
-            route="/department"
+            route="/departments"
             onClick={this.hideSidebar}
           />
           <SidebarLink

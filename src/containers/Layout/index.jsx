@@ -75,7 +75,9 @@ const Layout = (props) => {
   });
 
   return (
-    <div className={layoutClass}>
+    <div
+     className={layoutClass}
+    >
  
       {customizer.topNavigation
         ? (

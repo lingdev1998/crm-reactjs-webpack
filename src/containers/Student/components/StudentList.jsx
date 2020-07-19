@@ -116,21 +116,21 @@ const StudentList = ({ t, studentList, departmentList, totalElements, current, s
   return (
     <>
       <Panel lg={12} title={t('Danh sách sinh viên')}>
-        <Row style={{ paddingLeft: "0px", paddingRight: "35px" }}>
+        <Row style={{ paddingLeft: "0px" }}>
 
-          <Col md={10} sm={8}>
+          <Col md={9} sm={12} xs={12} >
             <div className="site-input-group-wrapper">
               <Input.Group compact>
 
                 <Cascader
-                  style={{ width: '50%' }}
+                  style={{ width: '60%' }}
                   options={departmentOptions}
                   onChange={e => onCascaderChange(e)}
                   placeholder="Tuỳ chọn tìm kiếm..."
                 />
 
                 <Input
-                  style={{ width: '20%' }}
+                  style={{ width: '15%' }}
                   defaultValue=""
                   onChange={e => setKeySearch1(e.target.value)}
                   placeholder="Mã sinh viên..."
@@ -138,7 +138,7 @@ const StudentList = ({ t, studentList, departmentList, totalElements, current, s
                 />
 
                 <Input
-                  style={{ width: '30%' }}
+                  style={{ width: '25%' }}
                   defaultValue=""
                   placeholder="Tên sinh viên..."
                   onChange={e => setKeySearch2(e.target.value)}
@@ -148,36 +148,37 @@ const StudentList = ({ t, studentList, departmentList, totalElements, current, s
               </Input.Group>
             </div>
           </Col>
-          <Col md={1} className="button_toolbar_list" sm={5}>
+          <Col md={3} className="button_toolbar_list" style={{ position: "relative", display: "flex", justifyContent: "flex-end" }} sm={12} xs={12}>
+            <Row style={{ padding: "0px", paddingRight: "15px", width: "100%", display: "flex", justifyContent: "flex-end" }}>
+              <Button
+                onClick={() => { setToInsertPage(true) }}
+                type="primary"
+                style={{
+                  marginBottom: 16,
+                  backgroundColor: "#52c41a",
+                  borderColor: "#87e8de",
+                  float: "right",
+                  right: "0px",
+                  marginRight:"15px"
+                }}
 
-            <Button
-              onClick={() => { setToInsertPage(true) }}
-              type="primary"
-              style={{
-                marginBottom: 16,
-                backgroundColor: "#52c41a",
-                borderColor: "#87e8de"
-              }}
+              >
+                <DownloadOutlined />Lưu
+              </Button>
+              {""}
+              <Button
+                onClick={() => { setToInsertPage(true) }}
+                type="primary"
+                style={{
+                  marginBottom: 16,
+                  float: "right !important",
+                  right: "0"
+                }}
 
-            >
-              <DownloadOutlined />Lưu
-          </Button>
-
-          </Col>
-
-          <Col md={1} className="button_toolbar_list" sm={5}>
-
-            <Button
-              onClick={() => { setToInsertPage(true) }}
-              type="primary"
-              style={{
-                marginBottom: 16,
-              }}
-
-            >
-              <PlusSquareOutlined />Thêm
-            </Button>
-
+              >
+                <PlusSquareOutlined />Thêm
+              </Button>
+            </Row>
           </Col>
 
         </Row>

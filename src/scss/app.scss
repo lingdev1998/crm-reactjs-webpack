@@ -112,19 +112,25 @@ input{
   border-top-left-radius: 2px !important;
   border-bottom-left-radius: 2px !important; 
   border: 1px solid #d9d9d9 !important;
+  font-size :small !important;
 }
 button{
   font-size: small !important;
+  height: 35px !important;
   
 }
 select{
   height: 35px !important;
+  font-size :small !important;
   border-right-width: 1px !important;
   border-top-right-radius: 2px !important;
   border-bottom-right-radius: 2px !important;
   border-top-left-radius: 2px !important;
   border-bottom-left-radius: 2px !important; 
   border: 1px solid #d9d9d9 !important;
+  option{
+    font-size :small !important;
+  }
 }
 .wizard_button{
   width: 100px !important;
@@ -147,6 +153,18 @@ select{
     height: 33px !important;
   }
 }
+
 .panel__body{
   min-height: 850px !important;
+  background-color: #F0F3F5 !important;
+  padding: 0px !important;
+  .panel__btns {
+    top: 0px !important;
+    right: 0px !important;
+}
+}
+.wizard{
+  form{
+    background-color: white;
+  }
 }

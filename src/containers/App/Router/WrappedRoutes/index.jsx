@@ -3,7 +3,7 @@ import { Switch, Redirect } from 'react-router-dom';
 import PrivateRouter from '../PrivateRouter';
 import Student from '../../../Student/index';
 import Teacher from '../../../Teacher/index'
-
+import Department from '../../../Department/index';
 import { authenticationState } from '../../../../localState/authenticationState';
 import { AUTH_TOKEN_KEY } from '../../../../config/constants';
 import { useRecoilState } from 'recoil'
@@ -27,8 +27,8 @@ export const MainWrapper = (props) => {
       <Switch>
         <PrivateRouter path="/students" component={Student} />
         <PrivateRouter path="/teachers" component={Teacher} />
-
-        <Redirect from="/" to="/students" />
+        <PrivateRouter path="/departments" component={Department} />
+        <Redirect from="/" to="/departments" />
       </Switch>
     </div>
   )
