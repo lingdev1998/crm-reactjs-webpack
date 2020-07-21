@@ -1,7 +1,6 @@
 /* eslint-disable react/no-children-prop */
 import React, { PureComponent } from 'react';
 import { Button, ButtonToolbar } from 'reactstrap';
-import { Field, reduxForm } from 'redux-form';
 import TextField from '@material-ui/core/TextField';
 import PropTypes from 'prop-types';
 
@@ -102,6 +101,6 @@ class ProfileSettings extends PureComponent {
   }
 }
 
-export default reduxForm({
+export default ({
   form: 'profile_settings_form', // a unique identifier for this form
 })(ProfileSettings);

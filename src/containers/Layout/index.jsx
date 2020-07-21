@@ -12,39 +12,12 @@ import { BasicNotification } from '../../shared/components/Notification';
 import { useRecoilState } from 'recoil'
 import { sideBarCollapse, sideBarShow, layoutColorState ,customizerState, rtlState} from '../../localState/layoutState';
 
-
-let notification = null;
-
-const showNotification = (rtl) => {
-  notification.notice({
-    content: <BasicNotification
-      title="👋 Chào bạn!"
-      message="Chúc bạn có những giây phút làm việc vui vẻ"
-    />,
-    duration: 5,
-    closable: true,
-    style: { top: 0, left: 'calc(100vw - 100%)' },
-    className: `right-up ${rtl}-support`,
-  });
-};
-
 const Layout = (props) => {
   const [sidebarcol, setSideBarCollapse] = useRecoilState(sideBarCollapse);
   const [sidebarshow, setSideBarShow] = useRecoilState(sideBarShow);
   const [theme, setLayoutColor] = useRecoilState(layoutColorState);
   const [customizer,setCustomizer] =  useRecoilState(customizerState);
   const [rtl,setRtl] =  useRecoilState(rtlState);
-
-  useEffect(() => {
-    
-    NotificationSystem.newInstance({ style: { top: 65 } }, n => notification = n);
-    setTimeout(() => showNotification(rtl.direction), 700);
-  }, [])
-  useEffect(() => {
-    return () => {
-      notification.destroy();
-    }
-  }, [])
 
   const changeSidebarVisibility = () => {
     setSideBarCollapse(!sidebarcol)

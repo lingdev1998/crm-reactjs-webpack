@@ -8,7 +8,7 @@ import 'antd/dist/antd.css';
 import { Typeahead } from 'react-bootstrap-typeahead';
 import { useRecoilState } from 'recoil';
 import { studentGlobalState } from '../../../../localState/studentState';
-import {notifyError,notifySuccess} from '../../../../shared/components/Notifications';
+import { notifyError, notifySuccess } from '../../../../shared/components/Notifications';
 import axios from 'axios';
 
 import './InsertComponent.scss';
@@ -43,7 +43,7 @@ const SignupSchema = Yup.object().shape({
     .required("Không bỏ trống trường này"),
 });
 
-const StudentInsertStepOne = (props) => { 
+const StudentInsertStepOne = (props) => {
 
   const [studentState, setStudentState] = useRecoilState(studentGlobalState);
 
@@ -91,7 +91,7 @@ const StudentInsertStepOne = (props) => {
           familyPhoneNumber: '',
           email: '',
           courseNumber: '',
-          religion:''
+          religion: ''
 
         }}
         initialErrors={
@@ -115,14 +115,14 @@ const StudentInsertStepOne = (props) => {
         }
         onSubmit={(values, actions) => {
           let formData = new FormData();
-          formData.append("departmentId",values.departmentId );
+          formData.append("departmentId", values.departmentId);
           formData.append("classId", values.classId);
           formData.append("fullName", values.fullName);
           formData.append("sex", values.sex);
           formData.append("dateBirth", values.dateBirth);
           formData.append("nationality", values.nationality);
-          formData.append("ethnic",values.ethnic);
-          formData.append("homeAddress", values.otherAddress + " " +  values.commune + " " + values.district + " " + values.city + " " + values.country);
+          formData.append("ethnic", values.ethnic);
+          formData.append("homeAddress", values.otherAddress + " " + values.commune + " " + values.district + " " + values.city + " " + values.country);
           formData.append("fatherName", values.fatherName);
           formData.append("fatherWork", values.fatherWork);
           formData.append("fatherDateBirth", values.fatherDateBirth);
@@ -135,16 +135,16 @@ const StudentInsertStepOne = (props) => {
           formData.append("religion", values.religion);
           console.log(formData);
           axios.post("/student/insert", formData)
-          .then(res =>{
-            notifySuccess("Tạo mới thành công !!!")
-            props.setToInsertPage(false);
-            props.setForceRerender(values => values = !values)
-          })
-          .catch(err => {
-            notifyError("Tạo mới thất bại")
-            props.setToInsertPage(false);
-            props.setToInsertPage(false);
-          })
+            .then(res => {
+              notifySuccess("Tạo mới thành công !!!")
+              props.setToInsertPage(false);
+              props.setForceRerender(values => values = !values)
+            })
+            .catch(err => {
+              notifyError("Tạo mới thất bại")
+              props.setToInsertPage(false);
+              props.setToInsertPage(false);
+            })
         }}
         validationSchema={SignupSchema}
         validateOnChange={true}
@@ -154,275 +154,168 @@ const StudentInsertStepOne = (props) => {
           <Form style={{ paddingLeft: "40px", paddingRight: "40px" }} onSubmit={formProps.handleSubmit} noValidate name="simpleForm">
             <Row>
               <Col md={6}>
-
-                <FormGroup>
-                  <Label for="departmentId">Khoa<Tooltip placement="topLeft" title="Không được để trống trường này"><span className="text-danger">*</span></Tooltip></Label>
-                  <Input
-                    type="select"
-                    name="departmentId"
-                    id="departmentId"
-                    onBlur={formProps.handleBlur}
-                    invalid={formProps.touched.departmentId && !!formProps.errors.departmentId}
-                    valid={formProps.touched.departmentId && !formProps.errors.departmentId}
-                    required value={formProps.values.departmentId}
-                    onChange={(e) => {
-                      console.log(e.target.value);
-                      if (e.target.value !== '') {
-                        let values = {
-                          departmentId: e.target.value,
-                        };
-                        formProps.setValues(Object.assign(formProps.values, values));
-                        var formData = new FormData();
-                        formData.append("departmentId", e.target.value);
-                        axios.post("/class/getAll", formData)
-                          .then(res =>
-                            setClassList(res.data.content)
-                          )
-                          .catch(setClassList([]));
-                      }
-                      else {
-                        let values = {
-                          departmentId: '',
-                          classId: ''
-                        };
-                        formProps.setValues(Object.assign(formProps.values, values));
-                      }
-                    }}
-                  >
-                    <option key={"departmentIdNan"} value={''}>{"Chọn khoa..."}</option>)
-                    {
-                      props.prepareDepartmentList.map(item =>
-                        item !== undefined ?
-                          <option
-                            key={"departmentId" + item.value}
-                            value={item.value}>
-                            {item.label}
-                          </option> : ""
-                      )}
-                  </Input>
-                  <FormFeedback >{formProps.touched.departmentId === true ? formProps.errors.departmentId : ""}</FormFeedback>
-                </FormGroup>
-
-                {
-                  formProps.values.departmentId !== '' ?
+                <Row>
+                  <Col md={6} xs={12} sm={12}>
                     <FormGroup>
-                      <Label for="classId">Lớp<Tooltip placement="topLeft" title="Không được để trống trường này"><span className="text-danger">*</span></Tooltip></Label>
+                      <Label for="departmentId">Khoa<Tooltip placement="topLeft" title="Không được để trống trường này"><span className="text-danger">*</span></Tooltip></Label>
                       <Input
                         type="select"
-                        name="classId"
-                        id="classId"
+                        name="departmentId"
+                        id="departmentId"
                         onBlur={formProps.handleBlur}
-                        invalid={formProps.touched.classId && !!formProps.errors.classId}
-                        valid={formProps.touched.classId && !formProps.errors.classId}
-                        required value={formProps.values.classId}
+                        invalid={formProps.touched.departmentId && !!formProps.errors.departmentId}
+                        valid={formProps.touched.departmentId && !formProps.errors.departmentId}
+                        required value={formProps.values.departmentId}
+                        onChange={(e) => {
+                          console.log(e.target.value);
+                          if (e.target.value !== '') {
+                            let values = {
+                              departmentId: e.target.value,
+                            };
+                            formProps.setValues(Object.assign(formProps.values, values));
+                            var formData = new FormData();
+                            formData.append("departmentId", e.target.value);
+                            axios.post("/class/getAll", formData)
+                              .then(res =>
+                                setClassList(res.data.content)
+                              )
+                              .catch(setClassList([]));
+                          }
+                          else {
+                            let values = {
+                              departmentId: '',
+                              classId: ''
+                            };
+                            formProps.setValues(Object.assign(formProps.values, values));
+                          }
+                        }}
+                      >
+                        <option key={"departmentIdNan"} value={''}>{"Chọn khoa..."}</option>)
+                    {
+                          props.prepareDepartmentList.map(item =>
+                            item !== undefined ?
+                              <option
+                                key={"departmentId" + item.value}
+                                value={item.value}>
+                                {item.label}
+                              </option> : ""
+                          )}
+                      </Input>
+                      <FormFeedback >{formProps.touched.departmentId === true ? formProps.errors.departmentId : ""}</FormFeedback>
+                    </FormGroup>
+                  </Col>
+                  <Col md={6} xs={12} sm={12}>
+                    {
+                      formProps.values.departmentId !== '' ?
+                        <FormGroup>
+                          <Label for="classId">Lớp<Tooltip placement="topLeft" title="Không được để trống trường này"><span className="text-danger">*</span></Tooltip></Label>
+                          <Input
+                            type="select"
+                            name="classId"
+                            id="classId"
+                            onBlur={formProps.handleBlur}
+                            invalid={formProps.touched.classId && !!formProps.errors.classId}
+                            valid={formProps.touched.classId && !formProps.errors.classId}
+                            required value={formProps.values.classId}
+                            onChange={formProps.handleChange}
+                          >
+                            <option key={"classIdNaN"} value={''}>{"Chọn lớp..."}</option>)
+                        {
+                              classList.map(item =>
+                                item !== undefined ? <option key={"classId" + item.classId} value={item.classId}>{item.classId + " " + item.className}</option> : ""
+                              )
+                            }
+                          </Input>
+                          <FormFeedback >{formProps.touched.classId === true ? formProps.errors.classId : ""}</FormFeedback>
+                        </FormGroup> : ""
+                    }
+                  </Col>
+                </Row>
+
+                <Row>
+                  <Col md={6} xs={12} sm={12}>
+                    <FormGroup>
+                      <Label for="fullName">Họ và tên<Tooltip placement="topLeft" title="Không được để trống trường này"><span className="text-danger">*</span></Tooltip></Label>
+                      <Input
+                        type="text"
+                        name="fullName"
+                        id="fullName"
+                        placeholder="Họ và tên..."
+                        required
+                        onChange={formProps.handleChange}
+                        value={formProps.values.fullName}
+                        invalid={formProps.touched.fullName && !!formProps.errors.fullName}
+                        valid={formProps.touched.fullName && !formProps.errors.fullName}
+                        onBlur={formProps.handleBlur}
+                      />
+                      <FormFeedback >{formProps.touched.fullName === true ? formProps.errors.fullName : ""}</FormFeedback>
+                    </FormGroup>
+                  </Col>
+                  <Col md={6} xs={12} sm={12}>
+                    <FormGroup>
+                      <Label for="sex">Giới tính<Tooltip placement="topLeft" title="Không được để trống trường này"><span className="text-danger">*</span></Tooltip></Label>
+                      <Input
+                        type="select"
+                        name="sex"
+                        id="sex"
+                        onBlur={formProps.handleBlur}
+                        invalid={formProps.touched.sex && !!formProps.errors.sex}
+                        valid={formProps.touched.sex && !formProps.errors.sex}
+                        required value={formProps.values.sex}
                         onChange={formProps.handleChange}
                       >
-                        <option key={"classIdNaN"} value={''}>{"Chọn lớp..."}</option>)
-                        {
-                          classList.map(item =>
-                            item !== undefined ? <option key={"classId" + item.classId} value={item.classId}>{item.classId + " " + item.className}</option> : ""
-                          )
-                        }
-                      </Input>
-                      <FormFeedback >{formProps.touched.classId === true ? formProps.errors.classId : ""}</FormFeedback>
-                    </FormGroup> : ""
-                }
-
-                <FormGroup>
-                  <Label for="fullName">Họ và tên<Tooltip placement="topLeft" title="Không được để trống trường này"><span className="text-danger">*</span></Tooltip></Label>
-                  <Input
-                    type="text"
-                    name="fullName"
-                    id="fullName"
-                    placeholder="Họ và tên..."
-                    required
-                    onChange={formProps.handleChange}
-                    value={formProps.values.fullName}
-                    invalid={formProps.touched.fullName && !!formProps.errors.fullName}
-                    valid={formProps.touched.fullName && !formProps.errors.fullName}
-                    onBlur={formProps.handleBlur}
-                  />
-                  <FormFeedback >{formProps.touched.fullName === true ? formProps.errors.fullName : ""}</FormFeedback>
-                </FormGroup>
-
-                <FormGroup>
-                  <Label for="sex">Giới tính<Tooltip placement="topLeft" title="Không được để trống trường này"><span className="text-danger">*</span></Tooltip></Label>
-                  <Input
-                    type="select"
-                    name="sex"
-                    id="sex"
-                    onBlur={formProps.handleBlur}
-                    invalid={formProps.touched.sex && !!formProps.errors.sex}
-                    valid={formProps.touched.sex && !formProps.errors.sex}
-                    required value={formProps.values.sex}
-                    onChange={formProps.handleChange}
-                  >
-                    <option key={"sexNaN"} value={''}>{"Giới tính"}</option>)
+                        <option key={"sexNaN"} value={''}>{"Giới tính"}</option>)
                         <option key={"sex0"} value={0}>{"Nam"}</option>)
                         <option key={"sex1"} value={1}>{"Nữ"}</option>)
                   </Input>
-                  <FormFeedback>{formProps.touched.sex === true ? formProps.errors.sex : ""}</FormFeedback>
-                </FormGroup>
+                      <FormFeedback>{formProps.touched.sex === true ? formProps.errors.sex : ""}</FormFeedback>
+                    </FormGroup>
+                  </Col>
+                </Row>
 
-                <FormGroup>
-                  <Label htmlFor="dateBirth">Ngày sinh<Tooltip placement="topLeft" title="Không được để trống trường này"><span className="text-danger">*</span></Tooltip></Label>
-                  <Input
-                    type="date"
-                    name="dateBirth"
-                    id="dateBirth"
-                    placeholder="Ngày sinh..."
-                    required
-                    onChange={formProps.handleChange}
-                    value={formProps.values.dateBirth}
-                    invalid={formProps.touched.dateBirth && !!formProps.errors.dateBirth}
-                    valid={formProps.touched.dateBirth && !formProps.errors.dateBirth}
-                    onBlur={formProps.handleBlur}
-                  />
-                  <FormFeedback>{formProps.touched.dateBirth === true ? formProps.errors.dateBirth : ""}</FormFeedback>
-                </FormGroup>
-
-                <FormGroup>
-                  <Label for="nationality">Quốc tịch<Tooltip placement="topLeft" title="Không được để trống trường này"><span className="text-danger">*</span></Tooltip></Label>
-                  <Typeahead
-                    id="basic-typeahead-single"
-                    labelKey="label"
-                    name="nationality"
-                    onBlur={() => {
-                      let touched = {
-                        nationality: true
-                      }
-                      formProps.setTouched(Object.assign(formProps.touched, touched))
-                    }}
-                    isInvalid={formProps.touched.nationality && !!formProps.errors.nationality}
-                    isValid={formProps.touched.nationality && !formProps.errors.nationality}
-                    onChange={(selected) => {
-                      if (Array.isArray(selected) && selected.length) {
-                        let object = {
-                          nationality: selected[0].id
-                        }
-                        formProps.setValues(Object.assign(formProps.values, object))
-                        axios.get("/ethnic/findByCountryId?keySearch=" + selected[0].id).then(response => {
-                          let update = {
-                            ethnicList: response.data
-                          }
-                          setStudentState(Object.assign(studentState, update));
-                        }).catch(err => {
-                          setStudentState(Object.assign(studentState, {}));
-                        });
-                      }
-                      else {
-                        let object = {
-                          nationality: ''
-                        }
-                        formProps.setValues(Object.assign(formProps.values, object))
-                      }
-                    }}
-                    options={studentState.nationalityList}
-                    placeholder="Chọn quốc tịch..."
-                  />
-                  <FormFeedback>{formProps.touched.nationality === true ? formProps.errors.nationality : ""}</FormFeedback>
-                </FormGroup>
-
-                <FormGroup>
-                  <Label for="ethnic">Dân tộc</Label>
-                  <Typeahead
-                    id="basic-typeahead-single"
-                    labelKey="label"
-                    name="ethnic"
-                    onChange={(selected) => {
-                      if (Array.isArray(selected) && selected.length) {
-                        let object = {
-                          ethnic: selected[0].id
-                        }
-                        formProps.setValues(Object.assign(formProps.values, object))
-                      }
-                      else {
-                        let object = {
-                          ethnic: ''
-                        }
-                        formProps.setValues(Object.assign(formProps.values, object))
-                      }
-                    }}
-                    options={studentState.ethnicList}
-                    placeholder="Chọn dân tộc..."
-                  />
-                  <FormFeedback>{formProps.touched.ethnic === true ? formProps.errors.ethnic : ""}</FormFeedback>
-                </FormGroup>
-
-                <FormGroup>
-                  <Label for="country">Quốc gia<Tooltip placement="topLeft" title="Không được để trống trường này"><span className="text-danger">*</span></Tooltip></Label>
-                  <Typeahead
-                    id="basic-typeahead-single"
-                    labelKey="label"
-                    name="country"
-                    onBlur={() => {
-                      let touched = {
-                        country: true
-                      }
-                      formProps.setTouched(Object.assign(formProps.touched, touched))
-                    }}
-                    isInvalid={formProps.touched.country && !!formProps.errors.country}
-                    isValid={formProps.touched.country && !formProps.errors.country}
-                    onChange={(selected) => {
-                      if (Array.isArray(selected) && selected.length) {
-                        let object = {
-                          country: selected[0].label
-                        }
-                        if (selected[0].id === 'VNM') {
-                          object.city = ''
-                        }
-                        formProps.setValues(Object.assign(formProps.values, object))
-                        axios.get("/provinceCity/findByCountry?keySearch=" + selected[0].id).then(response => {
-                          let update = {
-                            cityList: response.data
-                          }
-                          setStudentState(Object.assign(studentState, update));
-                        }).catch(err => {
-                          setStudentState(Object.assign(studentState, {}));
-                        });
-                      }
-                      else {
-                        let object = {
-                          country: ''
-                        }
-                        if (formProps.values.country === 'Việt Nam') {
-                          object.city = ''
-                        }
-                        formProps.setValues(Object.assign(formProps.values, object))
-                      }
-                    }}
-                    options={studentState.countryList}
-                    placeholder="Chọn quốc gia sinh sống..."
-                  />
-                  <FormFeedback>{formProps.touched.country === true ? formProps.errors.country : ""}</FormFeedback>
-                </FormGroup>
-
-                <FormGroup>
-                  <Label for="city">Thành phố/Tỉnh<Tooltip placement="topLeft" title="Không được để trống trường này"><span className="text-danger">*</span></Tooltip></Label>
-                  {
-                    formProps.values.country === 'Việt Nam'
-                      ?
+                <Row>
+                  <Col md={6} xs={12} sm={12}>
+                    <FormGroup>
+                      <Label htmlFor="dateBirth">Ngày sinh<Tooltip placement="topLeft" title="Không được để trống trường này"><span className="text-danger">*</span></Tooltip></Label>
+                      <Input
+                        type="date"
+                        name="dateBirth"
+                        id="dateBirth"
+                        placeholder="Ngày sinh..."
+                        required
+                        onChange={formProps.handleChange}
+                        value={formProps.values.dateBirth}
+                        invalid={formProps.touched.dateBirth && !!formProps.errors.dateBirth}
+                        valid={formProps.touched.dateBirth && !formProps.errors.dateBirth}
+                        onBlur={formProps.handleBlur}
+                      />
+                      <FormFeedback>{formProps.touched.dateBirth === true ? formProps.errors.dateBirth : ""}</FormFeedback>
+                    </FormGroup>
+                  </Col>
+                  <Col md={6} xs={12} sm={12}>
+                    <FormGroup>
+                      <Label for="nationality">Quốc tịch<Tooltip placement="topLeft" title="Không được để trống trường này"><span className="text-danger">*</span></Tooltip></Label>
                       <Typeahead
                         id="basic-typeahead-single"
                         labelKey="label"
-                        name="city"
+                        name="nationality"
                         onBlur={() => {
                           let touched = {
-                            city: true
+                            nationality: true
                           }
                           formProps.setTouched(Object.assign(formProps.touched, touched))
                         }}
-                        isInvalid={formProps.touched.city && !!formProps.errors.city}
-                        isValid={formProps.touched.city && !formProps.errors.city}
+                        isInvalid={formProps.touched.nationality && !!formProps.errors.nationality}
+                        isValid={formProps.touched.nationality && !formProps.errors.nationality}
                         onChange={(selected) => {
                           if (Array.isArray(selected) && selected.length) {
                             let object = {
-                              city: selected[0].label
+                              nationality: selected[0].id
                             }
                             formProps.setValues(Object.assign(formProps.values, object))
-                            axios.get("/district/findByProvinceCityId?keySearch=" + selected[0].id).then(response => {
+                            axios.get("/ethnic/findByCountryId?keySearch=" + selected[0].id).then(response => {
                               let update = {
-                                districtList: response.data
+                                ethnicList: response.data
                               }
                               setStudentState(Object.assign(studentState, update));
                             }).catch(err => {
@@ -431,55 +324,91 @@ const StudentInsertStepOne = (props) => {
                           }
                           else {
                             let object = {
-                              city: ''
+                              nationality: ''
                             }
                             formProps.setValues(Object.assign(formProps.values, object))
                           }
                         }}
-                        options={studentState.cityList}
-                        placeholder="Chọn thành phố..."
-                      /> :
-                      <Input
-                        type="text"
-                        name="city"
-                        id="city"
-                        placeholder="Nhập tên thành phố..."
-                        required
-                        onChange={formProps.handleChange}
-                        value={formProps.values.city}
-                        invalid={formProps.touched.city && !!formProps.errors.city}
-                        valid={formProps.touched.city && !formProps.errors.city}
-                        onBlur={formProps.handleBlur}
+                        options={studentState.nationalityList}
+                        placeholder="Chọn quốc tịch..."
                       />
-                  }
-                  <FormFeedback>{formProps.touched.city === true ? formProps.errors.city : ""}</FormFeedback>
-                </FormGroup>
-
-                <FormGroup>
-                  <Label for="district">Quận/Huyện<Tooltip placement="topLeft" title="Không được để trống trường này"><span className="text-danger">*</span></Tooltip></Label>
-                  {
-                    formProps.values.country === "Việt Nam" ?
+                      <FormFeedback>{formProps.touched.nationality === true ? formProps.errors.nationality : ""}</FormFeedback>
+                    </FormGroup>
+                  </Col>
+                </Row>
+                <Row>
+                  <Col md={6} sm={12} xs={12}>
+                    <FormGroup>
+                      <Label for="ethnic">Dân tộc</Label>
                       <Typeahead
                         id="basic-typeahead-single"
                         labelKey="label"
-                        name="district"
-                        onBlur={() => {
-                          let touched = {
-                            district: true
-                          }
-                          formProps.setTouched(Object.assign(formProps.touched, touched))
-                        }}
-                        isInvalid={formProps.touched.district && !!formProps.errors.district}
-                        isValid={formProps.touched.district && !formProps.errors.district}
+                        name="ethnic"
                         onChange={(selected) => {
                           if (Array.isArray(selected) && selected.length) {
                             let object = {
-                              district: selected[0].label
+                              ethnic: selected[0].id
                             }
                             formProps.setValues(Object.assign(formProps.values, object))
-                            axios.get("/commune/findByDistrictId?keySearch=" + selected[0].id).then(response => {
+                          }
+                          else {
+                            let object = {
+                              ethnic: ''
+                            }
+                            formProps.setValues(Object.assign(formProps.values, object))
+                          }
+                        }}
+                        options={studentState.ethnicList}
+                        placeholder="Chọn dân tộc..."
+                      />
+                      <FormFeedback>{formProps.touched.ethnic === true ? formProps.errors.ethnic : ""}</FormFeedback>
+                    </FormGroup>
+                  </Col>
+                  <Col md={6} sm={12} xs={12}>
+                    <FormGroup>
+                      <Label for="religion">Tôn giáo</Label>
+                      <Input
+                        type="text"
+                        name="religion"
+                        id="religion"
+                        placeholder="Nhập tôn giáo..."
+                        onChange={formProps.handleChange}
+                        value={formProps.values.religion}
+                        onBlur={formProps.handleBlur}
+                      />
+                      <FormFeedback>{""}</FormFeedback>
+                    </FormGroup>
+                  </Col>
+                </Row>
+
+                <Row>
+                  <Col md={6} xs={12} sm={12}>
+                    <FormGroup>
+                      <Label for="country">Quốc gia (Nguyên Quán)<Tooltip placement="topLeft" title="Không được để trống trường này"><span className="text-danger">*</span></Tooltip></Label>
+                      <Typeahead
+                        id="basic-typeahead-single"
+                        labelKey="label"
+                        name="country"
+                        onBlur={() => {
+                          let touched = {
+                            country: true
+                          }
+                          formProps.setTouched(Object.assign(formProps.touched, touched))
+                        }}
+                        isInvalid={formProps.touched.country && !!formProps.errors.country}
+                        isValid={formProps.touched.country && !formProps.errors.country}
+                        onChange={(selected) => {
+                          if (Array.isArray(selected) && selected.length) {
+                            let object = {
+                              country: selected[0].label
+                            }
+                            if (selected[0].id === 'VNM') {
+                              object.city = ''
+                            }
+                            formProps.setValues(Object.assign(formProps.values, object))
+                            axios.get("/provinceCity/findByCountry?keySearch=" + selected[0].id).then(response => {
                               let update = {
-                                communeList: response.data
+                                cityList: response.data
                               }
                               setStudentState(Object.assign(studentState, update));
                             }).catch(err => {
@@ -488,86 +417,417 @@ const StudentInsertStepOne = (props) => {
                           }
                           else {
                             let object = {
-                              district: ''
+                              country: ''
+                            }
+                            if (formProps.values.country === 'Việt Nam') {
+                              object.city = ''
                             }
                             formProps.setValues(Object.assign(formProps.values, object))
                           }
                         }}
-                        options={studentState.districtList}
-                        placeholder="Chọn quận/huyện..."
-                      /> :
-                      <Input
-                        type="text"
-                        name="district"
-                        id="district"
-                        placeholder="Nhập tên quận/huyện..."
-                        required
-                        onChange={formProps.handleChange}
-                        value={formProps.values.district}
-                        invalid={formProps.touched.district && !!formProps.errors.district}
-                        valid={formProps.touched.district && !formProps.errors.district}
-                        onBlur={formProps.handleBlur}
+                        options={studentState.countryList}
+                        placeholder="Chọn quốc gia sinh sống..."
                       />
-                  }
-                  <FormFeedback>{formProps.touched.district === true ? formProps.errors.district : ""}</FormFeedback>
-                </FormGroup>
+                      <FormFeedback>{formProps.touched.country === true ? formProps.errors.country : ""}</FormFeedback>
+                    </FormGroup>
+                  </Col>
+                  <Col md={6} xs={12} sm={12}>
+                    <FormGroup>
+                      <Label for="city">Thành phố/Tỉnh (Nguyên Quán)<Tooltip placement="topLeft" title="Không được để trống trường này"><span className="text-danger">*</span></Tooltip></Label>
+                      {
+                        formProps.values.country === 'Việt Nam'
+                          ?
+                          <Typeahead
+                            id="basic-typeahead-single"
+                            labelKey="label"
+                            name="city"
+                            onBlur={() => {
+                              let touched = {
+                                city: true
+                              }
+                              formProps.setTouched(Object.assign(formProps.touched, touched))
+                            }}
+                            isInvalid={formProps.touched.city && !!formProps.errors.city}
+                            isValid={formProps.touched.city && !formProps.errors.city}
+                            onChange={(selected) => {
+                              if (Array.isArray(selected) && selected.length) {
+                                let object = {
+                                  city: selected[0].label
+                                }
+                                formProps.setValues(Object.assign(formProps.values, object))
+                                axios.get("/district/findByProvinceCityId?keySearch=" + selected[0].id).then(response => {
+                                  let update = {
+                                    districtList: response.data
+                                  }
+                                  setStudentState(Object.assign(studentState, update));
+                                }).catch(err => {
+                                  setStudentState(Object.assign(studentState, {}));
+                                });
+                              }
+                              else {
+                                let object = {
+                                  city: ''
+                                }
+                                formProps.setValues(Object.assign(formProps.values, object))
+                              }
+                            }}
+                            options={studentState.cityList}
+                            placeholder="Chọn thành phố..."
+                          /> :
+                          <Input
+                            type="text"
+                            name="city"
+                            id="city"
+                            placeholder="Nhập tên thành phố..."
+                            required
+                            onChange={formProps.handleChange}
+                            value={formProps.values.city}
+                            invalid={formProps.touched.city && !!formProps.errors.city}
+                            valid={formProps.touched.city && !formProps.errors.city}
+                            onBlur={formProps.handleBlur}
+                          />
+                      }
+                      <FormFeedback>{formProps.touched.city === true ? formProps.errors.city : ""}</FormFeedback>
+                    </FormGroup>
+                  </Col>
+                </Row>
+                <Row>
+                  <Col md={6} xs={12} sm={12}>
+                    <FormGroup>
+                      <Label for="district">Quận/Huyện(Nguyên Quán)<Tooltip placement="topLeft" title="Không được để trống trường này"><span className="text-danger">*</span></Tooltip></Label>
+                      {
+                        formProps.values.country === "Việt Nam" ?
+                          <Typeahead
+                            id="basic-typeahead-single"
+                            labelKey="label"
+                            name="district"
+                            onBlur={() => {
+                              let touched = {
+                                district: true
+                              }
+                              formProps.setTouched(Object.assign(formProps.touched, touched))
+                            }}
+                            isInvalid={formProps.touched.district && !!formProps.errors.district}
+                            isValid={formProps.touched.district && !formProps.errors.district}
+                            onChange={(selected) => {
+                              if (Array.isArray(selected) && selected.length) {
+                                let object = {
+                                  district: selected[0].label
+                                }
+                                formProps.setValues(Object.assign(formProps.values, object))
+                                axios.get("/commune/findByDistrictId?keySearch=" + selected[0].id).then(response => {
+                                  let update = {
+                                    communeList: response.data
+                                  }
+                                  setStudentState(Object.assign(studentState, update));
+                                }).catch(err => {
+                                  setStudentState(Object.assign(studentState, {}));
+                                });
+                              }
+                              else {
+                                let object = {
+                                  district: ''
+                                }
+                                formProps.setValues(Object.assign(formProps.values, object))
+                              }
+                            }}
+                            options={studentState.districtList}
+                            placeholder="Chọn quận/huyện..."
+                          /> :
+                          <Input
+                            type="text"
+                            name="district"
+                            id="district"
+                            placeholder="Nhập tên quận/huyện..."
+                            required
+                            onChange={formProps.handleChange}
+                            value={formProps.values.district}
+                            invalid={formProps.touched.district && !!formProps.errors.district}
+                            valid={formProps.touched.district && !formProps.errors.district}
+                            onBlur={formProps.handleBlur}
+                          />
+                      }
+                      <FormFeedback>{formProps.touched.district === true ? formProps.errors.district : ""}</FormFeedback>
+                    </FormGroup>
+                  </Col>
+                  <Col md={6} xs={12} sm={12}>
+                    <FormGroup>
+                      <Label for="commune">Phường/Xã (Nguyên Quán)<Tooltip placement="topLeft" title="Không được để trống trường này"><span className="text-danger">*</span></Tooltip></Label>
+                      {
+                        formProps.values.country === 'Việt Nam' ?
+                          <Typeahead
+                            id="basic-typeahead-single"
+                            labelKey="label"
+                            name="commune"
+                            onBlur={() => {
+                              let touched = {
+                                commune: true
+                              }
+                              formProps.setTouched(Object.assign(formProps.touched, touched))
+                            }}
+                            isInvalid={formProps.touched.commune && !!formProps.errors.commune}
+                            isValid={formProps.touched.commune && !formProps.errors.commune}
+                            onChange={(selected) => {
+                              if (Array.isArray(selected) && selected.length) {
+                                let object = {
+                                  commune: selected[0].label
+                                }
+                                formProps.setValues(Object.assign(formProps.values, object))
+                              }
+                              else {
+                                let object = {
+                                  commune: ''
+                                }
+                                formProps.setValues(Object.assign(formProps.values, object))
+                              }
 
-                <FormGroup>
-                  <Label for="commune">Phường/Xã<Tooltip placement="topLeft" title="Không được để trống trường này"><span className="text-danger">*</span></Tooltip></Label>
-                  {
-                    formProps.values.country === 'Việt Nam' ?
-                      <Typeahead
-                        id="basic-typeahead-single"
-                        labelKey="label"
-                        name="commune"
-                        onBlur={() => {
-                          let touched = {
-                            commune: true
-                          }
-                          formProps.setTouched(Object.assign(formProps.touched, touched))
-                        }}
-                        isInvalid={formProps.touched.commune && !!formProps.errors.commune}
-                        isValid={formProps.touched.commune && !formProps.errors.commune}
-                        onChange={(selected) => {
-                          if (Array.isArray(selected) && selected.length) {
-                            let object = {
-                              commune: selected[0].label
-                            }
-                            formProps.setValues(Object.assign(formProps.values, object))
-                          }
-                          else {
-                            let object = {
-                              commune: ''
-                            }
-                            formProps.setValues(Object.assign(formProps.values, object))
-                          }
-
-                        }}
-                        options={studentState.communeList}
-                        placeholder="Chọn phường/xã..."
-                      /> :
-                      <Input
-                        type="text"
-                        name="commune"
-                        id="commune"
-                        placeholder="Nhập tên phường/xã..."
-                        required
-                        onChange={formProps.handleChange}
-                        value={formProps.values.commune}
-                        invalid={formProps.touched.commune && !!formProps.errors.commune}
-                        valid={formProps.touched.commune && !formProps.errors.commune}
-                        onBlur={formProps.handleBlur}
-                      />
-                  }
-                  <FormFeedback>{formProps.touched.commune === true ? formProps.errors.commune : ""}</FormFeedback>
-                </FormGroup>
-
+                            }}
+                            options={studentState.communeList}
+                            placeholder="Chọn phường/xã..."
+                          /> :
+                          <Input
+                            type="text"
+                            name="commune"
+                            id="commune"
+                            placeholder="Nhập tên phường/xã..."
+                            required
+                            onChange={formProps.handleChange}
+                            value={formProps.values.commune}
+                            invalid={formProps.touched.commune && !!formProps.errors.commune}
+                            valid={formProps.touched.commune && !formProps.errors.commune}
+                            onBlur={formProps.handleBlur}
+                          />
+                      }
+                      <FormFeedback>{formProps.touched.commune === true ? formProps.errors.commune : ""}</FormFeedback>
+                    </FormGroup>
+                  </Col>
+                </Row>
               </Col>
 
               <Col md={6}>
+                <Row>
+                  <Col md={6} xs={12} sm={12}>
+                    <FormGroup>
+                      <Label for="country">Quốc gia (ĐKTT)<Tooltip placement="topLeft" title="Không được để trống trường này"><span className="text-danger">*</span></Tooltip></Label>
+                      <Typeahead
+                        id="basic-typeahead-single"
+                        labelKey="label"
+                        name="country"
+                        onBlur={() => {
+                          let touched = {
+                            country: true
+                          }
+                          formProps.setTouched(Object.assign(formProps.touched, touched))
+                        }}
+                        isInvalid={formProps.touched.country && !!formProps.errors.country}
+                        isValid={formProps.touched.country && !formProps.errors.country}
+                        onChange={(selected) => {
+                          if (Array.isArray(selected) && selected.length) {
+                            let object = {
+                              country: selected[0].label
+                            }
+                            if (selected[0].id === 'VNM') {
+                              object.city = ''
+                            }
+                            formProps.setValues(Object.assign(formProps.values, object))
+                            axios.get("/provinceCity/findByCountry?keySearch=" + selected[0].id).then(response => {
+                              let update = {
+                                cityList: response.data
+                              }
+                              setStudentState(Object.assign(studentState, update));
+                            }).catch(err => {
+                              setStudentState(Object.assign(studentState, {}));
+                            });
+                          }
+                          else {
+                            let object = {
+                              country: ''
+                            }
+                            if (formProps.values.country === 'Việt Nam') {
+                              object.city = ''
+                            }
+                            formProps.setValues(Object.assign(formProps.values, object))
+                          }
+                        }}
+                        options={studentState.countryList}
+                        placeholder="Chọn quốc gia sinh sống..."
+                      />
+                      <FormFeedback>{formProps.touched.country === true ? formProps.errors.country : ""}</FormFeedback>
+                    </FormGroup>
+                  </Col>
+                  <Col md={6} xs={12} sm={12}>
+                    <FormGroup>
+                      <Label for="city">Thành phố/Tỉnh (ĐKTT)<Tooltip placement="topLeft" title="Không được để trống trường này"><span className="text-danger">*</span></Tooltip></Label>
+                      {
+                        formProps.values.country === 'Việt Nam'
+                          ?
+                          <Typeahead
+                            id="basic-typeahead-single"
+                            labelKey="label"
+                            name="city"
+                            onBlur={() => {
+                              let touched = {
+                                city: true
+                              }
+                              formProps.setTouched(Object.assign(formProps.touched, touched))
+                            }}
+                            isInvalid={formProps.touched.city && !!formProps.errors.city}
+                            isValid={formProps.touched.city && !formProps.errors.city}
+                            onChange={(selected) => {
+                              if (Array.isArray(selected) && selected.length) {
+                                let object = {
+                                  city: selected[0].label
+                                }
+                                formProps.setValues(Object.assign(formProps.values, object))
+                                axios.get("/district/findByProvinceCityId?keySearch=" + selected[0].id).then(response => {
+                                  let update = {
+                                    districtList: response.data
+                                  }
+                                  setStudentState(Object.assign(studentState, update));
+                                }).catch(err => {
+                                  setStudentState(Object.assign(studentState, {}));
+                                });
+                              }
+                              else {
+                                let object = {
+                                  city: ''
+                                }
+                                formProps.setValues(Object.assign(formProps.values, object))
+                              }
+                            }}
+                            options={studentState.cityList}
+                            placeholder="Chọn thành phố..."
+                          /> :
+                          <Input
+                            type="text"
+                            name="city"
+                            id="city"
+                            placeholder="Nhập tên thành phố..."
+                            required
+                            onChange={formProps.handleChange}
+                            value={formProps.values.city}
+                            invalid={formProps.touched.city && !!formProps.errors.city}
+                            valid={formProps.touched.city && !formProps.errors.city}
+                            onBlur={formProps.handleBlur}
+                          />
+                      }
+                      <FormFeedback>{formProps.touched.city === true ? formProps.errors.city : ""}</FormFeedback>
+                    </FormGroup>
+                  </Col>
+                </Row>
+                <Row>
+                  <Col md={6} xs={12} sm={12}>
+                    <FormGroup>
+                      <Label for="district">Quận/Huyện(ĐKTT)<Tooltip placement="topLeft" title="Không được để trống trường này"><span className="text-danger">*</span></Tooltip></Label>
+                      {
+                        formProps.values.country === "Việt Nam" ?
+                          <Typeahead
+                            id="basic-typeahead-single"
+                            labelKey="label"
+                            name="district"
+                            onBlur={() => {
+                              let touched = {
+                                district: true
+                              }
+                              formProps.setTouched(Object.assign(formProps.touched, touched))
+                            }}
+                            isInvalid={formProps.touched.district && !!formProps.errors.district}
+                            isValid={formProps.touched.district && !formProps.errors.district}
+                            onChange={(selected) => {
+                              if (Array.isArray(selected) && selected.length) {
+                                let object = {
+                                  district: selected[0].label
+                                }
+                                formProps.setValues(Object.assign(formProps.values, object))
+                                axios.get("/commune/findByDistrictId?keySearch=" + selected[0].id).then(response => {
+                                  let update = {
+                                    communeList: response.data
+                                  }
+                                  setStudentState(Object.assign(studentState, update));
+                                }).catch(err => {
+                                  setStudentState(Object.assign(studentState, {}));
+                                });
+                              }
+                              else {
+                                let object = {
+                                  district: ''
+                                }
+                                formProps.setValues(Object.assign(formProps.values, object))
+                              }
+                            }}
+                            options={studentState.districtList}
+                            placeholder="Chọn quận/huyện..."
+                          /> :
+                          <Input
+                            type="text"
+                            name="district"
+                            id="district"
+                            placeholder="Nhập tên quận/huyện..."
+                            required
+                            onChange={formProps.handleChange}
+                            value={formProps.values.district}
+                            invalid={formProps.touched.district && !!formProps.errors.district}
+                            valid={formProps.touched.district && !formProps.errors.district}
+                            onBlur={formProps.handleBlur}
+                          />
+                      }
+                      <FormFeedback>{formProps.touched.district === true ? formProps.errors.district : ""}</FormFeedback>
+                    </FormGroup>
+                  </Col>
+                  <Col md={6} xs={12} sm={12}>
+                    <FormGroup>
+                      <Label for="commune">Phường/Xã (ĐKTT)<Tooltip placement="topLeft" title="Không được để trống trường này"><span className="text-danger">*</span></Tooltip></Label>
+                      {
+                        formProps.values.country === 'Việt Nam' ?
+                          <Typeahead
+                            id="basic-typeahead-single"
+                            labelKey="label"
+                            name="commune"
+                            onBlur={() => {
+                              let touched = {
+                                commune: true
+                              }
+                              formProps.setTouched(Object.assign(formProps.touched, touched))
+                            }}
+                            isInvalid={formProps.touched.commune && !!formProps.errors.commune}
+                            isValid={formProps.touched.commune && !formProps.errors.commune}
+                            onChange={(selected) => {
+                              if (Array.isArray(selected) && selected.length) {
+                                let object = {
+                                  commune: selected[0].label
+                                }
+                                formProps.setValues(Object.assign(formProps.values, object))
+                              }
+                              else {
+                                let object = {
+                                  commune: ''
+                                }
+                                formProps.setValues(Object.assign(formProps.values, object))
+                              }
 
+                            }}
+                            options={studentState.communeList}
+                            placeholder="Chọn phường/xã..."
+                          /> :
+                          <Input
+                            type="text"
+                            name="commune"
+                            id="commune"
+                            placeholder="Nhập tên phường/xã..."
+                            required
+                            onChange={formProps.handleChange}
+                            value={formProps.values.commune}
+                            invalid={formProps.touched.commune && !!formProps.errors.commune}
+                            valid={formProps.touched.commune && !formProps.errors.commune}
+                            onBlur={formProps.handleBlur}
+                          />
+                      }
+                      <FormFeedback>{formProps.touched.commune === true ? formProps.errors.commune : ""}</FormFeedback>
+                    </FormGroup>
+                  </Col>
+                </Row>
                 <FormGroup>
-                  <Label for="otherAddress">Thôn/Tổ </Label>
+                  <Label for="otherAddress">Địa chỉ cụ thể (ĐKTT)</Label>
                   <Input
                     type="text"
                     name="otherAddress"
@@ -579,148 +839,148 @@ const StudentInsertStepOne = (props) => {
                   />
                   <FormFeedback>{""}</FormFeedback>
                 </FormGroup>
-
-                <FormGroup>
-                  <Label for="religion">Tôn giáo</Label>
+                <Row  >
+                  <Col md={4} xs={12} sm={12}>
+                    <FormGroup>
+                      <Label for="fatherName">Họ và tên (Bố) </Label>
                       <Input
                         type="text"
-                        name="religion"
-                        id="religion"
-                        placeholder="Nhập tôn giáo..."
+                        name="fatherName"
+                        id="fatherName"
+                        placeholder="Họ và tên của bố..."
                         onChange={formProps.handleChange}
-                        value={formProps.values.religion}
                         onBlur={formProps.handleBlur}
+                        value={formProps.values.fatherName}
                       />
-                  <FormFeedback>{""}</FormFeedback>
-                </FormGroup>
+                      <FormFeedback>{""}</FormFeedback>
+                    </FormGroup>
+                  </Col>
+                  <Col md={4} xs={12} sm={12}>
+                    <FormGroup>
+                      <Label for="fatherDateBirth">Năm sinh (Bố)  </Label>
+                      <Input
+                        type="number"
+                        name="fatherDateBirth"
+                        id="fatherDateBirth"
+                        placeholder="Năm sinh của bố..."
+                        onChange={formProps.handleChange}
+                        onBlur={formProps.handleBlur}
+                        value={formProps.values.fatherDateBirth}
+                      />
+                      <FormFeedback>{""}</FormFeedback>
+                    </FormGroup>
+                  </Col>
+                  <Col md={4} xs={12} sm={12}>
+                    <FormGroup>
+                      <Label for="fatherWork">Nghề nghiệp (Bố) </Label>
+                      <Input
+                        type="text"
+                        name="fatherWork"
+                        id="fatherWork"
+                        placeholder="Nghề nghiệp của bố.."
+                        onChange={formProps.handleChange}
+                        onBlur={formProps.handleBlur}
+                        value={formProps.values.fatherWork}
+                      />
+                      <FormFeedback>{""}</FormFeedback>
+                    </FormGroup>
+                  </Col>
+                </Row>
 
-                <FormGroup>
-                  <Label for="fatherName">Họ và tên (Bố) </Label>
-                  <Input
-                    type="text"
-                    name="fatherName"
-                    id="fatherName"
-                    placeholder="Họ và tên của bố..."
-                    onChange={formProps.handleChange}
-                    onBlur={formProps.handleBlur}
-                    value={formProps.values.fatherName}
-                  />
-                  <FormFeedback>{""}</FormFeedback>
-                </FormGroup>
-
-                <FormGroup>
-                  <Label for="fatherDateBirth">Năm sinh (Bố)  </Label>
-                  <Input
-                    type="number"
-                    name="fatherDateBirth"
-                    id="fatherDateBirth"
-                    placeholder="Năm sinh của bố..."
-                    onChange={formProps.handleChange}
-                    onBlur={formProps.handleBlur}
-                    value={formProps.values.fatherDateBirth}
-                  />
-                  <FormFeedback>{""}</FormFeedback>
-                </FormGroup>
-
-                <FormGroup>
-                  <Label for="fatherWork">Nghề nghiệp (Bố) </Label>
-                  <Input
-                    type="text"
-                    name="fatherWork"
-                    id="fatherWork"
-                    placeholder="Nghề nghiệp của bố.."
-                    onChange={formProps.handleChange}
-                    onBlur={formProps.handleBlur}
-                    value={formProps.values.fatherWork}
-                  />
-                  <FormFeedback>{""}</FormFeedback>
-                </FormGroup>
-
-
-                <FormGroup>
-                  <Label for="motherName">Họ và tên (Mẹ)  </Label>
-                  <Input
-                    type="text"
-                    name="motherName"
-                    id="motherName"
-                    placeholder="Họ và tên của mẹ..."
-                    onChange={formProps.handleChange}
-                    onBlur={formProps.handleBlur}
-                    value={formProps.values.motherName}
-                  />
-                  <FormFeedback>{""}</FormFeedback>
-                </FormGroup>
-
-                <FormGroup>
-                  <Label for="motherDateBirth">Năm sinh (Mẹ)  </Label>
-                  <Input
-                    type="number"
-                    name="motherDateBirth"
-                    id="motherDateBirth"
-                    placeholder="Năm sinh của mẹ..."
-                    onChange={formProps.handleChange}
-                    onBlur={formProps.handleBlur}
-                    value={formProps.values.motherDateBirth}
-                  />
-                  <FormFeedback>{""}</FormFeedback>
-                </FormGroup>
-
-                <FormGroup>
-                  <Label for="motherWork">Nghề nghiệp (Mẹ)  </Label>
-                  <Input
-                    type="text"
-                    name="motherWork"
-                    id="motherWork"
-                    placeholder="Nghề nghiệp của mẹ..."
-                    onChange={formProps.handleChange}
-                    onBlur={formProps.handleBlur}
-                    value={formProps.values.motherWork}
-                  />
-                  <FormFeedback>{""}</FormFeedback>
-                </FormGroup>
-
-                <FormGroup>
-                  <Label for="phoneNumber">Số điện thoại cá nhân   </Label>
-                  <Input
-                    type="text"
-                    name="phoneNumber"
-                    id="phoneNumber"
-                    placeholder="Số điện thoại cá nhân..."
-                    onChange={formProps.handleChange}
-                    onBlur={formProps.handleBlur}
-                    value={formProps.values.phoneNumber}
-                  />
-                  <FormFeedback>{""}</FormFeedback>
-                </FormGroup>
-
-                <FormGroup>
-                  <Label for="familyPhoneNumber">Số điện thoại gia đình</Label>
-                  <Input
-                    type="text"
-                    name="familyPhoneNumber"
-                    id="familyPhoneNumber"
-                    placeholder="Số điện thoại gia đình..."
-                    onChange={formProps.handleChange}
-                    onBlur={formProps.handleBlur}
-                    value={formProps.values.familyPhoneNumber}
-                  />
-                  <FormFeedback>{""}</FormFeedback>
-                </FormGroup>
-
-                <FormGroup>
-                  <Label for="email">Địa chỉ email  </Label>
-                  <Input
-                    type="email"
-                    name="email"
-                    id="email"
-                    placeholder="Địa chỉ email..."
-                    onChange={formProps.handleChange}
-                    onBlur={formProps.handleBlur}
-                    value={formProps.values.email}
-                  />
-                  <FormFeedback>{""}</FormFeedback>
-                </FormGroup>
-
+                <Row>
+                  <Col md={4} xs={12} sm={12}>
+                    <FormGroup>
+                      <Label for="motherName">Họ và tên (Mẹ)  </Label>
+                      <Input
+                        type="text"
+                        name="motherName"
+                        id="motherName"
+                        placeholder="Họ và tên của mẹ..."
+                        onChange={formProps.handleChange}
+                        onBlur={formProps.handleBlur}
+                        value={formProps.values.motherName}
+                      />
+                      <FormFeedback>{""}</FormFeedback>
+                    </FormGroup>
+                  </Col>
+                  <Col md={4} xs={12} sm={12}>
+                    <FormGroup>
+                      <Label for="motherDateBirth">Năm sinh (Mẹ)  </Label>
+                      <Input
+                        type="number"
+                        name="motherDateBirth"
+                        id="motherDateBirth"
+                        placeholder="Năm sinh của mẹ..."
+                        onChange={formProps.handleChange}
+                        onBlur={formProps.handleBlur}
+                        value={formProps.values.motherDateBirth}
+                      />
+                      <FormFeedback>{""}</FormFeedback>
+                    </FormGroup>
+                  </Col>
+                  <Col md={4} xs={12} sm={12}>
+                    <FormGroup>
+                      <Label for="motherWork">Nghề nghiệp (Mẹ)  </Label>
+                      <Input
+                        type="text"
+                        name="motherWork"
+                        id="motherWork"
+                        placeholder="Nghề nghiệp của mẹ..."
+                        onChange={formProps.handleChange}
+                        onBlur={formProps.handleBlur}
+                        value={formProps.values.motherWork}
+                      />
+                      <FormFeedback>{""}</FormFeedback>
+                    </FormGroup>
+                  </Col>
+                </Row>
+                <Row>
+                  <Col md={4} xs={12} sm={12}>
+                    <FormGroup>
+                      <Label for="phoneNumber">Số điện thoại cá nhân   </Label>
+                      <Input
+                        type="text"
+                        name="phoneNumber"
+                        id="phoneNumber"
+                        placeholder="Số điện thoại cá nhân..."
+                        onChange={formProps.handleChange}
+                        onBlur={formProps.handleBlur}
+                        value={formProps.values.phoneNumber}
+                      />
+                      <FormFeedback>{""}</FormFeedback>
+                    </FormGroup>
+                  </Col>
+                  <Col md={4} xs={12} sm={12}>
+                    <FormGroup>
+                      <Label for="familyPhoneNumber">Số điện thoại gia đình</Label>
+                      <Input
+                        type="text"
+                        name="familyPhoneNumber"
+                        id="familyPhoneNumber"
+                        placeholder="Số điện thoại gia đình..."
+                        onChange={formProps.handleChange}
+                        onBlur={formProps.handleBlur}
+                        value={formProps.values.familyPhoneNumber}
+                      />
+                      <FormFeedback>{""}</FormFeedback>
+                    </FormGroup>
+                  </Col>
+                  <Col md={4} sm={12} xs={12}>
+                    <FormGroup>
+                      <Label for="email">Địa chỉ email  </Label>
+                      <Input
+                        type="email"
+                        name="email"
+                        id="email"
+                        placeholder="Địa chỉ email..."
+                        onChange={formProps.handleChange}
+                        onBlur={formProps.handleBlur}
+                        value={formProps.values.email}
+                      />
+                      <FormFeedback>{""}</FormFeedback>
+                    </FormGroup>
+                  </Col>
+                </Row>
               </Col>
             </Row>
 
@@ -731,7 +991,7 @@ const StudentInsertStepOne = (props) => {
                 type="primary"
                 htmlType="submit"
                 disabled={formProps.isSubmitting}
-                >
+              >
                 {formProps.isSubmitting ? "Xử lý..." : "Lưu"}
                 <RightOutlined />
               </Button>

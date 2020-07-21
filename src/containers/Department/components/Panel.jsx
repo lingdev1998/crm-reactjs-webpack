@@ -9,7 +9,6 @@ import CloseIcon from 'mdi-react/CloseIcon';
 import MinusIcon from 'mdi-react/MinusIcon';
 import AutorenewIcon from 'mdi-react/AutorenewIcon';
 import LoadingIcon from 'mdi-react/LoadingIcon';
-import PlusIcon from 'mdi-react/PlusIcon';
 
 export default class AlertComponent extends PureComponent {
   static propTypes = {
@@ -89,20 +88,7 @@ export default class AlertComponent extends PureComponent {
           >
             <CardBody className="panel__body" style={{paddingBottom:"0px"}}>
               {refresh ? <div className="panel__refresh"><LoadingIcon /></div> : ''}
-              <div className="panel__btns" style={{right:"35px"}}>
-                <button className="panel__btn" type="button" onClick={this.onCollapse}><MinusIcon /></button>
-                <button className="panel__btn" type="button" onClick={this.onRefresh}><AutorenewIcon /></button>
-                <button className="panel__btn" type="button" onClick={this.onDismiss}><CloseIcon /></button>
-
-              </div>
-              <div className="panel__title">
-                <h5 className="bold-text">
-                  {icon ? <span className={`panel__icon lnr lnr-${icon}`} /> : ''}
-                  {title}
-                  <Badge className="panel__label">{label}</Badge>
-                </h5>
-                <h5 className="subhead">{subhead}</h5>
-              </div>
+ 
               <Collapse isOpen={collapse}>
                 <div className="panel__content">
                   {children}

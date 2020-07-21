@@ -6,6 +6,8 @@ const SIDE_BAR_COLLAPSE = "SIDE_BAR_COLLAPSE"
 const LAYOUT_COLOR = "LAYOUT_COLOR"
 const CUSTOMMIZER = "CUSTOMIZER";
 const RTL = "RTL123456"
+const SIDE_BAR_CATEGORY_GLOBAL_STATE = "SIDE_BAR_CATEGORY_GLOBAL_STATE";
+
 const rtlState = atom({
   key: RTL,
   default:{
@@ -34,4 +36,12 @@ const layoutColorState = atom({
   key: LAYOUT_COLOR,
   default: {className: 'theme-light'}
 });
+
+const sidebarCategoryGlobalState = atom({
+  key:SIDE_BAR_CATEGORY_GLOBAL_STATE,
+  default:{
+    icon: '',
+    isNew: false,
+  }
+})
 export { sideBarShow,sideBarCollapse,layoutColorState,customizerState,rtlState };

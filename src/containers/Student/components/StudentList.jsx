@@ -6,13 +6,13 @@ import { withTranslation } from 'react-i18next';
 import Panel from '../../../shared/components/Panel';
 import { Table, Button, Popconfirm, Tooltip } from 'antd';
 import { Input, Cascader } from 'antd';
-import { DeleteOutlined, EditOutlined, SearchOutlined, DownloadOutlined, PlusSquareOutlined, CloseOutlined } from '@ant-design/icons';
+import { DeleteOutlined, EditOutlined,  DownloadOutlined, PlusSquareOutlined } from '@ant-design/icons';
 import 'antd/dist/antd.css';
 
 const columns = [
   {
     title: 'Mã sinh viên',
-    width: 70,
+    width: "8%",
     dataIndex: 'studentId',
     key: 'studentId',
     render: text => <Tooltip placement="topLeft" title="Click để xem thông tin">
@@ -22,27 +22,28 @@ const columns = [
   },
   {
     title: 'Họ và tên',
-    width: 110,
+    width: "10%",
     dataIndex: 'fullName',
     key: 'fullName',
     fixed: 'left',
   },
 
-  { title: 'Ngày sinh', dataIndex: 'dateBirth', width: 60, key: 'dateBirth' },
+  { title: 'Ngày sinh', dataIndex: 'dateBirth', width: "10%", key: 'dateBirth' },
   {
     title: 'Giới tính',
     dataIndex: 'sex',
-    width: 50,
+    width: "5%",
     key: 'sex',
     render: text => <>{text !== null ? (text === '1' ? "Nữ" : "Nam") : ""}</>,
   },
-  { title: 'Quê quán', dataIndex: 'homeAddress', width: 150, key: 'homeAddress' },
-  { title: 'Số điện thoại', dataIndex: 'phoneNumber', width: 110, key: 'phoneNumber' },
+  { title: 'Quê quán', dataIndex: 'homeAddress', width: "22%", key: 'homeAddress' },
+  { title: 'Số điện thoại', dataIndex: 'phoneNumber', width: "10%", key: 'phoneNumber' },
   {
-    title: '',
+    title: 'Thao tác',
     key: 'operation',
     fixed: 'right',
-    width: 100,
+    width: "10%",
+    align:"center",
     render: () =>
       <>
         <Button type="primary" icon={<EditOutlined />}  >

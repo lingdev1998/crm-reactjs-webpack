@@ -5,22 +5,24 @@ import Layout from '../../Layout/index';
 import { useRecoilState } from 'recoil'
 import { AUTH_TOKEN_KEY } from '../../../config/constants';
 import { authenticationState } from '../../../localState/authenticationState';
+
 export const PrivateRoute = ({ component: Component, ...rest }) => {
+
     const [authentication, setAuthentication] = useRecoilState(authenticationState);
+
     useEffect(() => {
         if (localStorage.getItem(AUTH_TOKEN_KEY)) {
             setAuthentication({ ...authentication, authenticated: true })
         }
         else {
             setAuthentication({ ...authentication, authenticated: false })
-
         }
-
     }, [authentication.authenticated])
+
     return (
         <Route {...rest} render={props => (
             authentication.authenticated === true
-                ? <><Layout /><div className="container__wrap"><Component {...props} /></div>  </>
+                ? <><Layout /><div className="container__wrap"><Component {...props} {...rest} /></div>  </>
                 : <Redirect to={{ pathname: '/login', state: { from: props.location } }} />
         )} />
     )

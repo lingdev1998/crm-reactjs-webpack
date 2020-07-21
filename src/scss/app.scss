@@ -162,7 +162,7 @@ select {
   padding-bottom: 0px !important;
   border: 1px solid #d9d9d9 !important;
   border-radius: 2px !important;
-  z-index: 999 !important;
+  z-index: 1 !important;
 
   input {
     border: none !important;
@@ -181,14 +181,15 @@ select {
   }
 
   .ant-select-selection-placeholder {
-    color: red !important;
+    color: #6C757D !important;
     font-size: small;
-    line-height: 33px;
+    line-height: 33px !important;
+    vertical-align: center;
+    opacity: 1 !important;
   }
 }
 
 .panel__body {
-  min-height: 850px !important;
   background-color: #F0F3F5 !important;
   padding: 0px !important;
 
@@ -202,4 +203,49 @@ select {
   form {
     background-color: white;
   }
+}
+
+
+//top bar left chinh icon
+.topbar__left{
+  div{
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+  }
+}
+.topbar__right{
+  .topbar__collapse{
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+  }
+  .topbar__profile{
+    padding: 13px 5px;
+  }
+}
+
+//tat overflow scroll cua container
+.dashboard{
+  overflow: hidden !important;
+  .card{
+    padding: 0 !important;
+  }
+}
+
+//scroll bar
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey; 
+  border-radius: 5px;
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: grey; 
+  border-radius: 5px;
 }

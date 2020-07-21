@@ -6,7 +6,6 @@ import {
 import { withTranslation } from 'react-i18next';
 import Panel from '../../../shared/components/Panel'; 
 import WizardFormTwo from './InsertComponent/InsertStepOne';
-import WizardFormThree from './InsertComponent/InsertStepTwo';
 import 'antd/dist/antd.css';
 
 
@@ -57,17 +56,7 @@ const InsertStudent = (props) => {
                                             />
                                         </div>
                                     )}
-                                {page === 2
-                                    && (
-                                        <div className="wizard__form-wrapper"  >
 
-                                            <WizardFormThree
-
-
-                                            />
-                                        </div>
-
-                                    )}
                             </CardBody>
                         </Card>
                     </Col>
